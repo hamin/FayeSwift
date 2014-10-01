@@ -1,5 +1,3 @@
-![starscream](http://limitedtoy.com/wp-content/uploads/2014/09/transformers-starscream-wallpaperstarscream-transformers-2-wallpaper---332913-pnx7lnff.jpg)
-
 
 A simple Swift client library for the [Faye](http://faye.jcoglan.com/) publish-subscribe messaging server. FayeObjC is implemented atop the [Starscream](https://github.com/daltoniam/starscream) Swift web socket library and will work on both Mac (pending Xcode 6 Swift update) and iPhone projects.
 

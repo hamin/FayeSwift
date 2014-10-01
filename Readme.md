@@ -27,7 +27,7 @@ After you are connected, we some delegate methods we need to implement.
 
 ### connectedToServer
 
-websocketDidConnect is called as soon as the client connects to the server.
+connectedToServer is called as soon as the client connects to the Faye server.
 
 ```swift
 func connectedToServer() {
@@ -37,7 +37,7 @@ func connectedToServer() {
 
 ### connectionFailed
 
-websocketDidDisconnect is called as soon as the client is disconnected from the server.
+connectionFailed is called when a cleint fails to connect to Faye server either initially or on a retry.
 
 ```swift
 func connectionFailed() {
@@ -47,7 +47,7 @@ func connectionFailed() {
 
 ### disconnectedFromServer
 
-websocketDidWriteError is called when the client gets an error on websocket connection.
+disconnectedFromServer is called as soon as the client is disconnected from the server..
 
 ```swift
 func disconnectedFromServer() {
@@ -57,7 +57,7 @@ func disconnectedFromServer() {
 
 ### didSubscribeToChannel
 
-websocketDidReceiveMessage is called when the client gets a text frame from the connection.
+didSubscribeToChannel is called when the subscribes to a Faye channel.
 
 ```swift
 func didSubscribeToChannel(channel: String) {
@@ -67,7 +67,7 @@ func didSubscribeToChannel(channel: String) {
 
 ### didUnsubscribeFromChannel
 
-websocketDidReceiveData is called when the client gets a binary frame from the connection.
+didUnsubscribeFromChannel is called when the client unsubscribes to a Faye channel.
 
 ```swift
 func didUnsubscribeFromChannel(channel: String) {
@@ -75,11 +75,9 @@ func didUnsubscribeFromChannel(channel: String) {
 }
 ```
 
-The delegate methods give you a simple way to handle data from the server, but how do you send data?
-
 ### subscriptionFailedWithError
 
-The writeData method gives you a simple way to send `NSData` (binary) data to the server.
+The subscriptionFailedWithError method is called when the client fails to subscribe to a Faye channel.
 
 ```swift
 func subscriptionFailedWithError(error: String) {
@@ -89,7 +87,7 @@ func subscriptionFailedWithError(error: String) {
 
 ### messageReceived
 
-The writeString method is the same as writeData, but sends text/string.
+The messageReceived is called when the client receives a message from any Faye channel that it is subscribed to.	
 
 ```swift
 func messageReceived(messageDict: NSDictionary, channel: String) {
@@ -98,6 +96,17 @@ func messageReceived(messageDict: NSDictionary, channel: String) {
    
    self.client?.unsubscribeFromChannel(channel)
 }
+```
+
+The delegate methods give you a simple way to handle data from the server, but how do you publish data to a Faye channel?
+
+
+### sendMessage
+
+You can call sendMessage to send a dicitonary object to a channel
+
+```swift
+client!.sendMessage(["text": textField.text], channel: "/cool")
 ```
 
 ## Example Server

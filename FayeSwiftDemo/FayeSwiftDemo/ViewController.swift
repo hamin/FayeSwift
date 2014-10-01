@@ -36,15 +36,15 @@ class ViewController: UIViewController, UITextFieldDelegate, FayeClientDelegate 
     
     
     func connectedToServer() {
-        println("Connected to faye server")
+        println("Connected to Faye server")
     }
     
     func connectionFailed() {
-        println("VIEW CONTROLLER CONNECTION FAILED!")
+        println("Failed to connect to Faye server!")
     }
     
     func disconnectedFromServer() {
-        println("Disconnected from faye server")
+        println("Disconnected from Faye server")
     }
     
     func didSubscribeToChannel(channel: String) {

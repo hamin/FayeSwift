@@ -1,3 +1,7 @@
+# FayeSwift
+
+![swift](https://raw.githubusercontent.com/hamin/FayeSwift/master/swift-logo.png)
+
 
 A simple Swift client library for the [Faye](http://faye.jcoglan.com/) publish-subscribe messaging server. FayeObjC is implemented atop the [Starscream](https://github.com/daltoniam/starscream) Swift web socket library and will work on both Mac (pending Xcode 6 Swift update) and iPhone projects.
 

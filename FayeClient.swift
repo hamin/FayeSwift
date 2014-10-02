@@ -37,6 +37,9 @@ enum BayeuxChannel : Printable {
 }
 
 
+// MARK: Type Aliasses
+typealias ChannelSubscriptionBlock = (NSDictionary) -> Void
+
 // MARK: FayeClientDelegate Protocol
 @objc protocol FayeClientDelegate{
     optional func messageReceived(messageDict: NSDictionary, channel: String)
@@ -64,6 +67,8 @@ class FayeClient : WebsocketDelegate {
     private var queuedSubscriptions = NSMutableSet()
     private var pendingSubscriptions = NSMutableSet()
     private var openSubscriptions = NSMutableSet()
+    
+    private var channelSubscriptionBlocks = Dictionary<String,ChannelSubscriptionBlock>()
     
     init(aFayeURLString:String, channel:String?) {
         self.fayeURLString = aFayeURLString
@@ -106,9 +111,15 @@ class FayeClient : WebsocketDelegate {
         }
     }
     
+    func subscribeToChannel(channel:String, block:ChannelSubscriptionBlock){
+        self.subscribeToChannel(channel)
+        self.channelSubscriptionBlocks[channel] = block;
+    }
+    
     func unsubscribeFromChannel(channel:String){
         self.queuedSubscriptions.removeObject(channel)
         self.unsubscribe(channel)
+        self.channelSubscriptionBlocks[channel] = nil;
     }
     
     func isSubscribedToChannel(channel:String) -> (Bool){
@@ -227,11 +238,17 @@ private extension FayeClient {
             let chan = messageJSON[0]["channel"].stringValue!
             
             if(self.isSubscribedToChannel(chan)){
-                println("New Message on `channel`")
+                println("New Message on \(channel)")
                 let data: AnyObject! = messageJSON[0]["data"].object
                 
                 if(data != nil){
-                    self.delegate?.messageReceived?(data as NSDictionary, channel: chan)
+                    // Call channel subscription block if there is one
+                    if let channelBlock = self.channelSubscriptionBlocks[channel]{
+                        channelBlock(data as NSDictionary)
+                    }else{
+                        self.delegate?.messageReceived?(data as NSDictionary, channel: chan)
+                    }
+                    
                 }else{
                     println("For some reason data is nil, maybe double posting?!")
                 }

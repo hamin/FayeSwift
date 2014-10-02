@@ -23,7 +23,23 @@ client.delegate = self
 client.connectToServer()
 ```
 
-After you are connected, we some delegate methods we need to implement.
+You can then also subscribe to additional channels either with block handlers like so:
+
+```swift
+let channelBlock:ChannelSubscriptionBlock = {(messageDict) -> Void in
+  let text: AnyObject? = messageDict["text"]
+  println("Here is the Block message: \(text)")
+}
+client.subscribeToChannel("/awesome", block: channelBlock)
+```
+
+or without them letting the delegate handle them like so:
+
+```swift
+self.client.subscribeToChannel("/delegates_still_rock")
+```
+
+After you are connected, there are some optional delegate methods that we can implement.
 
 ### connectedToServer
 
@@ -103,7 +119,7 @@ The delegate methods give you a simple way to handle data from the server, but h
 
 ### sendMessage
 
-You can call sendMessage to send a dicitonary object to a channel
+You can call sendMessage to send a dictionary object to a channel
 
 ```swift
 client.sendMessage(["text": textField.text], channel: "/cool")

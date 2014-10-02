@@ -19,6 +19,12 @@ class ViewController: UIViewController, UITextFieldDelegate, FayeClientDelegate 
         // Do any additional setup after loading the view, typically from a nib.
         client.delegate = self;
         client.connectToServer()
+
+        let channelBlock:ChannelSubscriptionBlock = {(messageDict) -> Void in
+            let text: AnyObject? = messageDict["text"]
+            println("Here is the Block message: \(text)")
+        }
+        client.subscribeToChannel("/awesome", block: channelBlock)
     }
     
     override func didReceiveMemoryWarning() {
@@ -60,7 +66,9 @@ class ViewController: UIViewController, UITextFieldDelegate, FayeClientDelegate 
         let text: AnyObject? = messageDict["text"]
         println("Here is the message: \(text)")
         
-        self.client.unsubscribeFromChannel(channel)
+        
+//        self.client.subscribeToChannel("/newchannelbaby")
+//        self.client.unsubscribeFromChannel(channel)
     }
 
 

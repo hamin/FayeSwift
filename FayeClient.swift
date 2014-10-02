@@ -116,7 +116,7 @@ class FayeClient : WebsocketDelegate {
     }
     
     func webSocketConnected() -> (Bool){
-        return self.webSocket!._isConnected
+        return self.webSocket!.isConnected
     }
 }
 

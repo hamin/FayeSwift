@@ -9,7 +9,7 @@
 import Foundation
 import CoreFoundation
 
-protocol WebsocketDelegate {
+public protocol WebsocketDelegate {
     func websocketDidConnect()
     func websocketDidDisconnect(error: NSError?)
     func websocketDidWriteError(error: NSError?)
@@ -42,6 +42,7 @@ public class Websocket : NSObject, NSStreamDelegate {
         case PolicyViolated         = 1008
         case MessageTooBig          = 1009
     }
+    var optionalProtocols       : Array<String>?
     //Constant Values.
     let headerWSUpgradeName     = "Upgrade"
     let headerWSUpgradeValue    = "websocket"
@@ -49,7 +50,6 @@ public class Websocket : NSObject, NSStreamDelegate {
     let headerWSConnectionName  = "Connection"
     let headerWSConnectionValue = "Upgrade"
     let headerWSProtocolName    = "Sec-WebSocket-Protocol"
-    let headerWSProtocolValue   = "chat, superchat"
     let headerWSVersionName     = "Sec-WebSocket-Version"
     let headerWSVersionValue    = "13"
     let headerWSKeyName         = "Sec-WebSocket-Key"
@@ -71,22 +71,32 @@ public class Websocket : NSObject, NSStreamDelegate {
         var buffer: NSMutableData?
     }
     
-    var delegate: WebsocketDelegate?
-    var _url: NSURL
-    var _inputStream: NSInputStream?
-    var _outputStream: NSOutputStream?
-    var _isRunLoop = false
-    var _isConnected = false
-    var _writeQueue: NSOperationQueue?
-    var _readStack = Array<WSResponse>()
-    var _inputQueue = Array<NSData>()
-    var _fragBuffer: NSData?
-    var headers = Dictionary<String,String>()
+    public var delegate: WebsocketDelegate?
+    private var url: NSURL
+    private var inputStream: NSInputStream?
+    private var outputStream: NSOutputStream?
+    private var isRunLoop = false
+    private var connected = false
+    private var writeQueue: NSOperationQueue?
+    private var readStack = Array<WSResponse>()
+    private var inputQueue = Array<NSData>()
+    private var fragBuffer: NSData?
+    public var headers = Dictionary<String,String>()
+    public var voipEnabled = false
+    public var isConnected :Bool {
+        return connected
+    }
     
     //init the websocket with a url
-    init(url: NSURL) {
-        _url = url
+    public init(url: NSURL) {
+        self.url = url
     }
+    
+    public convenience init(url: NSURL, protocols: Array<String>) {
+        self.init(url: url)
+        optionalProtocols = protocols
+    }
+    
     ///Connect to the websocket server on a background thread
     public func connect() {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT,0), {
@@ -113,14 +123,13 @@ public class Websocket : NSObject, NSStreamDelegate {
     //private method that starts the connection
     private func createHTTPRequest() {
         
-        let str: NSString = _url.absoluteString!
-        let url = CFURLCreateWithString(kCFAllocatorDefault, str, nil)
+        let str: NSString = url.absoluteString!
         let urlRequest = CFHTTPMessageCreateRequest(kCFAllocatorDefault, "GET",
             url, kCFHTTPVersion1_1)
         
-        var port = _url.port
+        var port = url.port
         if port == nil {
-            if _url.scheme == "wss" || _url.scheme == "https" {
+            if url.scheme == "wss" || url.scheme == "https" {
                 port = 443
             } else {
                 port = 80
@@ -128,11 +137,13 @@ public class Websocket : NSObject, NSStreamDelegate {
         }
         self.addHeader(urlRequest, key: headerWSUpgradeName, val: headerWSUpgradeValue)
         self.addHeader(urlRequest, key: headerWSConnectionName, val: headerWSConnectionValue)
-        self.addHeader(urlRequest, key: headerWSProtocolName, val: headerWSProtocolValue)
+        if let protocols = optionalProtocols {
+            self.addHeader(urlRequest, key: headerWSProtocolName, val: ",".join(protocols))
+        }
         self.addHeader(urlRequest, key: headerWSVersionName, val: headerWSVersionValue)
         self.addHeader(urlRequest, key: headerWSKeyName, val: self.generateWebSocketKey())
-        self.addHeader(urlRequest, key: headerOriginName, val: _url.absoluteString!)
-        self.addHeader(urlRequest, key: headerWSHostName, val: "\(_url.host!):\(port!)")
+        self.addHeader(urlRequest, key: headerOriginName, val: url.absoluteString!)
+        self.addHeader(urlRequest, key: headerWSHostName, val: "\(url.host!):\(port!)")
         for (key,value) in headers {
             self.addHeader(urlRequest, key: key, val: value)
         }
@@ -163,29 +174,33 @@ public class Websocket : NSObject, NSStreamDelegate {
     //Start the stream connection and write the data to the output stream
     private func initStreamsWithData(data: NSData, _ port: Int) {
         //higher level API we will cut over to at some point
-        //NSStream.getStreamsToHostWithName(_url.host, port: _url.port.integerValue, inputStream: &_inputStream, outputStream: &_outputStream)
+        //NSStream.getStreamsToHostWithName(url.host, port: url.port.integerValue, inputStream: &inputStream, outputStream: &outputStream)
         
         var readStream: Unmanaged<CFReadStream>?
         var writeStream: Unmanaged<CFWriteStream>?
-        let h: NSString = _url.host!
+        let h: NSString = url.host!
         CFStreamCreatePairWithSocketToHost(nil, h, UInt32(port), &readStream, &writeStream)
-        _inputStream = readStream!.takeUnretainedValue()
-        _outputStream = writeStream!.takeUnretainedValue()
+        inputStream = readStream!.takeUnretainedValue()
+        outputStream = writeStream!.takeUnretainedValue()
         
-        _inputStream!.delegate = self
-        _outputStream!.delegate = self
-        if _url.scheme == "wss" || _url.scheme == "https" {
-            _inputStream!.setProperty(NSStreamSocketSecurityLevelNegotiatedSSL, forKey: NSStreamSocketSecurityLevelKey)
-            _outputStream!.setProperty(NSStreamSocketSecurityLevelNegotiatedSSL, forKey: NSStreamSocketSecurityLevelKey)
+        inputStream!.delegate = self
+        outputStream!.delegate = self
+        if url.scheme == "wss" || url.scheme == "https" {
+            inputStream!.setProperty(NSStreamSocketSecurityLevelNegotiatedSSL, forKey: NSStreamSocketSecurityLevelKey)
+            outputStream!.setProperty(NSStreamSocketSecurityLevelNegotiatedSSL, forKey: NSStreamSocketSecurityLevelKey)
         }
-        _inputStream!.scheduleInRunLoop(NSRunLoop.currentRunLoop(), forMode: NSDefaultRunLoopMode)
-        _outputStream!.scheduleInRunLoop(NSRunLoop.currentRunLoop(), forMode: NSDefaultRunLoopMode)
-        _inputStream!.open()
-        _outputStream!.open()
+        if self.voipEnabled {
+            inputStream!.setProperty(NSStreamNetworkServiceTypeVoIP, forKey: NSStreamNetworkServiceType)
+            outputStream!.setProperty(NSStreamNetworkServiceTypeVoIP, forKey: NSStreamNetworkServiceType)
+        }
+        inputStream!.scheduleInRunLoop(NSRunLoop.currentRunLoop(), forMode: NSDefaultRunLoopMode)
+        outputStream!.scheduleInRunLoop(NSRunLoop.currentRunLoop(), forMode: NSDefaultRunLoopMode)
+        inputStream!.open()
+        outputStream!.open()
         let bytes = UnsafePointer<UInt8>(data.bytes)
-        _outputStream!.write(bytes, maxLength: data.length)
-        _isRunLoop = true
-        while(_isRunLoop) {
+        outputStream!.write(bytes, maxLength: data.length)
+        isRunLoop = true
+        while(isRunLoop) {
             NSRunLoop.currentRunLoop().runMode(NSDefaultRunLoopMode, beforeDate: NSDate.distantFuture() as NSDate)
         }
     }
@@ -193,7 +208,7 @@ public class Websocket : NSObject, NSStreamDelegate {
     func stream(aStream: NSStream!, handleEvent eventCode: NSStreamEvent) {
         
         if eventCode == .HasBytesAvailable {
-            if(aStream == _inputStream) {
+            if(aStream == inputStream) {
                 processInputStream()
             }
         } else if eventCode == .ErrorOccurred {
@@ -208,17 +223,17 @@ public class Websocket : NSObject, NSStreamDelegate {
     }
     //disconnect the stream object
     private func disconnectStream(error: NSError?) {
-        if _writeQueue != nil {
-            _writeQueue!.waitUntilAllOperationsAreFinished()
+        if writeQueue != nil {
+            writeQueue!.waitUntilAllOperationsAreFinished()
         }
-        _inputStream!.removeFromRunLoop(NSRunLoop.currentRunLoop(), forMode: NSDefaultRunLoopMode)
-        _outputStream!.removeFromRunLoop(NSRunLoop.currentRunLoop(), forMode: NSDefaultRunLoopMode)
-        _inputStream!.close()
-        _outputStream!.close()
-        _inputStream = nil
-        _outputStream = nil
-        _isRunLoop = false
-        _isConnected = false
+        inputStream!.removeFromRunLoop(NSRunLoop.currentRunLoop(), forMode: NSDefaultRunLoopMode)
+        outputStream!.removeFromRunLoop(NSRunLoop.currentRunLoop(), forMode: NSDefaultRunLoopMode)
+        inputStream!.close()
+        outputStream!.close()
+        inputStream = nil
+        outputStream = nil
+        isRunLoop = false
+        connected = false
         dispatch_async(dispatch_get_main_queue(),{
             self.workaroundMethod()
             self.delegate?.websocketDidDisconnect(error)
@@ -229,11 +244,11 @@ public class Websocket : NSObject, NSStreamDelegate {
     private func processInputStream() {
         let buf = NSMutableData(capacity: BUFFER_MAX)
         var buffer = UnsafeMutablePointer<UInt8>(buf.bytes)
-        let length = _inputStream!.read(buffer, maxLength: BUFFER_MAX)
+        let length = inputStream!.read(buffer, maxLength: BUFFER_MAX)
         if length > 0 {
-            if !_isConnected {
-                _isConnected = processHTTP(buffer, bufferLen: length)
-                if !_isConnected {
+            if !connected {
+                connected = processHTTP(buffer, bufferLen: length)
+                if !connected {
                     dispatch_async(dispatch_get_main_queue(),{
                         self.workaroundMethod()
                         self.delegate?.websocketDidDisconnect(self.errorWithDetail("Invalid HTTP upgrade", code: 1))
@@ -241,10 +256,10 @@ public class Websocket : NSObject, NSStreamDelegate {
                 }
             } else {
                 var process = false
-                if _inputQueue.count == 0 {
+                if inputQueue.count == 0 {
                     process = true
                 }
-                _inputQueue.append(NSData(bytes: buffer, length: length))
+                inputQueue.append(NSData(bytes: buffer, length: length))
                 if process {
                     dequeueInput()
                 }
@@ -253,18 +268,18 @@ public class Websocket : NSObject, NSStreamDelegate {
     }
     ///dequeue the incoming input so it is processed in order
     private func dequeueInput() {
-        if _inputQueue.count > 0 {
-            let data = _inputQueue[0]
+        if inputQueue.count > 0 {
+            let data = inputQueue[0]
             var work = data
-            if (_fragBuffer != nil) {
-                var combine = NSMutableData(data: _fragBuffer!)
+            if (fragBuffer != nil) {
+                var combine = NSMutableData(data: fragBuffer!)
                 combine.appendData(data)
                 work = combine
-                _fragBuffer = nil
+                fragBuffer = nil
             }
             let buffer = UnsafePointer<UInt8>(work.bytes)
             processRawMessage(buffer, bufferLen: work.length)
-            _inputQueue = _inputQueue.filter{$0 != data}
+            inputQueue = inputQueue.filter{$0 != data}
             dequeueInput()
         }
     }
@@ -319,9 +334,9 @@ public class Websocket : NSObject, NSStreamDelegate {
     
     ///process the websocket data
     private func processRawMessage(buffer: UnsafePointer<UInt8>, bufferLen: Int) {
-        var response = _readStack.last
-        if response != nil && bufferLen < 2 {
-            _fragBuffer = NSData(bytes: buffer, length: bufferLen)
+        var response = readStack.last
+        if response != nil && bufferLen < 2  {
+            fragBuffer = NSData(bytes: buffer, length: bufferLen)
             return
         }
         if response != nil && response!.bytesLeft > 0 {
@@ -381,12 +396,14 @@ public class Websocket : NSObject, NSStreamDelegate {
                     }
                     offset += 2
                 }
-                let len = Int(payloadLen-2)
-                if len > 0 {
-                    let bytes = UnsafePointer<UInt8>((buffer+offset))
-                    var str: NSString? = NSString(data: NSData(bytes: bytes, length: len), encoding: NSUTF8StringEncoding)
-                    if str == nil {
-                        code = CloseCode.ProtocolError.toRaw()
+                if payloadLen > 2 {
+                    let len = Int(payloadLen-2)
+                    if len > 0 {
+                        let bytes = UnsafePointer<UInt8>((buffer+offset))
+                        var str: NSString? = NSString(data: NSData(bytes: bytes, length: len), encoding: NSUTF8StringEncoding)
+                        if str == nil {
+                            code = CloseCode.ProtocolError.toRaw()
+                        }
                     }
                 }
                 writeError(code)
@@ -425,7 +442,7 @@ public class Websocket : NSObject, NSStreamDelegate {
                 }
                 return
             }
-            var response = _readStack.last
+            var response = readStack.last
             if isControlFrame {
                 response = nil //don't append pings
             }
@@ -467,7 +484,7 @@ public class Websocket : NSObject, NSStreamDelegate {
                 response!.frameCount++
                 response!.isFin = isFin > 0 ? true : false
                 if(isNew) {
-                    _readStack.append(response!)
+                    readStack.append(response!)
                 }
                 processResponse(response!)
             }
@@ -484,7 +501,7 @@ public class Websocket : NSObject, NSStreamDelegate {
     ///process the extra of a buffer
     private func processExtra(buffer: UnsafePointer<UInt8>, bufferLen: Int) {
         if bufferLen < 2 {
-            _fragBuffer = NSData(bytes: buffer, length: bufferLen)
+            fragBuffer = NSData(bytes: buffer, length: bufferLen)
         } else {
             processRawMessage(buffer, bufferLen: bufferLen)
         }
@@ -513,7 +530,7 @@ public class Websocket : NSObject, NSStreamDelegate {
                     self.delegate?.websocketDidReceiveData(data)
                 })
             }
-            _readStack.removeLast()
+            readStack.removeLast()
             return true
         }
         return false
@@ -535,14 +552,14 @@ public class Websocket : NSObject, NSStreamDelegate {
     }
     ///used to write things to the stream in a
     private func dequeueWrite(data: NSData, code: OpCode) {
-        if _writeQueue == nil {
-            _writeQueue = NSOperationQueue()
-            _writeQueue!.maxConcurrentOperationCount = 1
+        if writeQueue == nil {
+            writeQueue = NSOperationQueue()
+            writeQueue!.maxConcurrentOperationCount = 1
         }
-        _writeQueue!.addOperationWithBlock {
+        writeQueue!.addOperationWithBlock {
             //stream isn't ready, let's wait
             var tries = 0;
-            while self._outputStream == nil || !self._isConnected {
+            while self.outputStream == nil || !self.connected {
                 if(tries < 5) {
                     sleep(1);
                 } else {
@@ -581,13 +598,13 @@ public class Websocket : NSObject, NSStreamDelegate {
             }
             var total = 0
             while true {
-                if self._outputStream == nil {
+                if self.outputStream == nil {
                     break
                 }
                 let writeBuffer = UnsafePointer<UInt8>(frame.bytes+total)
-                var len = self._outputStream!.write(writeBuffer, maxLength: offset-total)
+                var len = self.outputStream!.write(writeBuffer, maxLength: offset-total)
                 if len < 0 {
-                    self.delegate?.websocketDidDisconnect(self._outputStream!.streamError)
+                    self.delegate?.websocketDidDisconnect(self.outputStream!.streamError)
                     break
                 } else {
                     total += len

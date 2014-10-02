@@ -37,7 +37,7 @@ enum BayeuxChannel : Printable {
 }
 
 
-// MARK: Type Aliasses
+// MARK: Type Aliases
 typealias ChannelSubscriptionBlock = (NSDictionary) -> Void
 
 // MARK: FayeClientDelegate Protocol

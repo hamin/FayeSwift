@@ -80,6 +80,11 @@ class FayeClient : WebsocketDelegate {
         self.connectionInitiated = false
     }
     
+    convenience init(aFayeURLString:String, channel:String, channelBlock:ChannelSubscriptionBlock){
+        self.init(aFayeURLString: aFayeURLString, channel: channel)
+        self.channelSubscriptionBlocks[channel] = channelBlock;
+    }
+    
     func connectToServer(){
         if(self.connectionInitiated != true){
             self.openWebSocketConnection()

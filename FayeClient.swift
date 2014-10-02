@@ -132,10 +132,10 @@ private extension FayeClient {
         
         if(error == nil){
             println("websocket lost connection!")
-            self.delegate?.disconnectedFromServer!()
+            self.delegate?.disconnectedFromServer?()
         }else{
             println("websocket is disconnected: \(error!.localizedDescription)")
-            self.delegate?.connectionFailed!()
+            self.delegate?.connectionFailed?()
         }
         self.connectionInitiated = false
         self.fayeConnected = false
@@ -146,7 +146,7 @@ private extension FayeClient {
             println("websocket write failed: ERROR IS NIL!")
         }else{
             println("websocket write failed: \(error!.localizedDescription)")
-            self.delegate?.fayeClientError!(error!)
+            self.delegate?.fayeClientError?(error!)
         }
     }
     
@@ -176,7 +176,7 @@ private extension FayeClient {
             self.fayeClientId = messageDict["clientId"].stringValue
             if(messageDict["successful"].numberValue == 1){
                 
-                self.delegate?.connectedToServer!()
+                self.delegate?.connectedToServer?()
                 self.fayeConnected = true;
                 self.connect()
                 self.subscribeQueuedSubscriptions()
@@ -198,7 +198,7 @@ private extension FayeClient {
             if(messageDict["successful"].numberValue == 1){
                 self.fayeConnected = false;
                 self.closeWebSocketConnection()
-                self.delegate?.disconnectedFromServer!()
+                self.delegate?.disconnectedFromServer?()
             }else{
                 // OOPS
             }
@@ -211,18 +211,18 @@ private extension FayeClient {
             
             if( success == 1){
                 self.openSubscriptions.addObject(subscription)
-                self.delegate?.didSubscribeToChannel!(subscription)
+                self.delegate?.didSubscribeToChannel?(subscription)
             }else{
                 // Subscribe Failed
                 let error = messageJSON[0]["error"].stringValue as String!
-                self.delegate?.subscriptionFailedWithError!(error)
+                self.delegate?.subscriptionFailedWithError?(error)
             }
         case BayeuxChannel.UNSUBSCRIBE_CHANNEL.description:
             println("UNSUBSCRIBE_CHANNEL")
             
             let subscription = messageJSON[0]["subscription"].stringValue as String!
             self.openSubscriptions.removeObject(subscription)
-            self.delegate?.didUnsubscribeFromChannel!(subscription)
+            self.delegate?.didUnsubscribeFromChannel?(subscription)
         default:
             let chan = messageJSON[0]["channel"].stringValue!
             
@@ -231,7 +231,7 @@ private extension FayeClient {
                 let data: AnyObject! = messageJSON[0]["data"].object
                 
                 if(data != nil){
-                    self.delegate?.messageReceived!(data as NSDictionary, channel: chan)
+                    self.delegate?.messageReceived?(data as NSDictionary, channel: chan)
                 }else{
                     println("For some reason data is nil, maybe double posting?!")
                 }

@@ -12,16 +12,13 @@ class ViewController: UIViewController, UITextFieldDelegate, FayeClientDelegate 
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var textView: UITextView!
     
-    var client:FayeClient?
+    let client:FayeClient = FayeClient(aFayeURLString: "ws://localhost:5222/faye", channel: "/cool")
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
-        client = FayeClient(aFayeURLString: "ws://localhost:5222/faye", channel: "/cool")
-        client!.delegate = self;
-        
-        client!.connectToServer()
+        client.delegate = self;
+        client.connectToServer()
     }
     
     override func didReceiveMemoryWarning() {
@@ -30,7 +27,7 @@ class ViewController: UIViewController, UITextFieldDelegate, FayeClientDelegate 
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        client!.sendMessage(["text": textField.text], channel: "/cool")
+        client.sendMessage(["text": textField.text], channel: "/cool")
         return false;
     }
     
@@ -63,7 +60,7 @@ class ViewController: UIViewController, UITextFieldDelegate, FayeClientDelegate 
         let text: AnyObject? = messageDict["text"]
         println("Here is the message: \(text)")
         
-        self.client?.unsubscribeFromChannel(channel)
+        self.client.unsubscribeFromChannel(channel)
     }
 
 

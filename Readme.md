@@ -19,8 +19,8 @@ You can open a connection to your faye server. Note that `client` is probably be
 
 ```swift
 client = FayeClient(aFayeURLString: "ws://localhost:5222/faye", channel: "/cool")
-client!.delegate = self
-client!.connectToServer()
+client.delegate = self
+client.connectToServer()
 ```
 
 After you are connected, we some delegate methods we need to implement.
@@ -94,7 +94,7 @@ func messageReceived(messageDict: NSDictionary, channel: String) {
    let text: AnyObject? = messageDict["text"]
    println("Here is the message: \(text)")
    
-   self.client?.unsubscribeFromChannel(channel)
+   self.client.unsubscribeFromChannel(channel)
 }
 ```
 
@@ -106,7 +106,7 @@ The delegate methods give you a simple way to handle data from the server, but h
 You can call sendMessage to send a dicitonary object to a channel
 
 ```swift
-client!.sendMessage(["text": textField.text], channel: "/cool")
+client.sendMessage(["text": textField.text], channel: "/cool")
 ```
 
 ## Example Server

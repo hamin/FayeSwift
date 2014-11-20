@@ -53,9 +53,9 @@ typealias ChannelSubscriptionBlock = (NSDictionary) -> Void
 }
 
 // MARK: FayeClient
-class FayeClient : WebsocketDelegate {
+class FayeClient : WebSocketDelegate {
     var fayeURLString:String
-    var webSocket:Websocket?
+    var webSocket:WebSocket?
     var fayeClientId:String?
     var delegate:FayeClientDelegate?
     
@@ -376,7 +376,7 @@ private extension FayeClient {
         if(writeError == nil){
             NSLog("COuldn't parse json")
         }else{
-            var jsonString:NSString = NSString(data: jsonData, encoding:NSUTF8StringEncoding)
+            var jsonString:NSString = NSString(data: jsonData, encoding:NSUTF8StringEncoding)!
             self.webSocket?.writeString(jsonString)
         }
         
@@ -396,7 +396,7 @@ private extension FayeClient {
     func openWebSocketConnection(){
         self.closeWebSocketConnection()
         
-        self.webSocket = Websocket(url: NSURL.URLWithString(self.fayeURLString))
+        self.webSocket = WebSocket(url: NSURL(string:self.fayeURLString)!)
         self.webSocket!.delegate = self;
         self.webSocket!.connect()
         self.connectionInitiated = true
@@ -427,19 +427,19 @@ private extension FayeClient {
         // fromRaw(0) is equivalent to objc 'base64EncodedStringWithOptions:0'
         // Notice the unwrapping given the NSData! optional
         // NSString! returned (optional)
-        let base64Encoded = utf8str?.base64EncodedStringWithOptions(NSDataBase64EncodingOptions.fromRaw(0)!)
+        let base64Encoded = utf8str?.base64EncodedStringWithOptions(NSDataBase64EncodingOptions())
         println("Encoded:  \(base64Encoded)")
         
         // Base64 Decode (go back the other way)
         // Notice the unwrapping given the NSString! optional
         // NSData returned
-        let data = NSData(base64EncodedString: base64Encoded!, options: NSDataBase64DecodingOptions.fromRaw(0)!)
+        let data = NSData(base64EncodedString: base64Encoded!, options: NSDataBase64DecodingOptions())
         
         // Convert back to a string
-        let base64Decoded = NSString(data: data, encoding: NSUTF8StringEncoding)
+        let base64Decoded = NSString(data: data!, encoding: NSUTF8StringEncoding)
         println("Decoded:  \(base64Decoded)")
         
-        return base64Decoded
+        return base64Decoded!
     }
     
     // JSON Helpers
@@ -452,7 +452,7 @@ private extension FayeClient {
         if e != nil {
             return ""
         } else {
-            return NSString(data: jsonData, encoding: NSUTF8StringEncoding)
+            return NSString(data: jsonData, encoding: NSUTF8StringEncoding)!
         }
     }
 }

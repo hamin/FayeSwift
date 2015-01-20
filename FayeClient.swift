@@ -52,12 +52,94 @@ typealias ChannelSubscriptionBlock = (NSDictionary) -> Void
     optional func fayeClientError(error:NSError)
 }
 
+protocol Transport{
+    func writeString(aString:String)
+    func openConnection()
+    func closeConnection()
+}
+
+public protocol TransportDelegate: class{
+    func didConnect()
+    func didFailConenction(error:NSError?)
+    func didDisconnect()
+    func didWriteError(error:NSError?)
+    func didReceiveMessage(text:String)
+}
+
+public class WebsocketTransport: Transport, WebSocketDelegate {
+    var urlString:String?
+    var webSocket:WebSocket?
+    public weak var delegate:TransportDelegate?
+    
+    convenience required public init(url: String) {
+        self.init()
+        self.urlString = url
+    }
+    
+    func openConnection(){
+        self.closeConnection()
+        self.webSocket = WebSocket(url: NSURL(string:self.urlString!)!)
+        self.webSocket!.delegate = self;
+        self.webSocket!.connect()
+    }
+    
+    func closeConnection(){
+        if(self.webSocket != nil){
+            self.webSocket!.delegate = nil
+            self.webSocket!.disconnect()
+            self.webSocket = nil;
+        }
+    }
+    
+    func writeString(aString:String){
+        self.webSocket?.writeString(aString)
+    }
+    
+    public func websocketDidConnect() {
+        println("websocket is connected")
+        self.delegate?.didConnect()
+    }
+    
+    public func websocketDidDisconnect(error: NSError?) {
+        
+        if(error == nil){
+            println("websocket lost connection!")
+            self.delegate?.didDisconnect()
+        }else{
+            println("websocket is disconnected: \(error!.localizedDescription)")
+            self.delegate?.didFailConenction(error)
+        }
+    }
+    
+    public func websocketDidWriteError(error: NSError?) {
+        if(error == nil){
+            println("websocket write failed: ERROR IS NIL!")
+        }else{
+            println("websocket write failed: \(error!.localizedDescription)")
+        }
+        self.delegate?.didWriteError(error)
+    }
+    
+    public func websocketDidReceiveMessage(text: String) {
+        println("got some text: \(text)")
+        self.delegate?.didReceiveMessage(text)
+    }
+    
+    // MARK: TODO
+    public func websocketDidReceiveData(data: NSData) {
+        println("got some data: \(data.length)")
+        //self.socket.writeData(data)
+    }
+}
+
 // MARK: FayeClient
-class FayeClient : WebSocketDelegate {
+class FayeClient : TransportDelegate {
     var fayeURLString:String
     var webSocket:WebSocket?
     var fayeClientId:String?
     var delegate:FayeClientDelegate?
+    var transportDelegate:TransportDelegate?
+    var transport:WebsocketTransport?
     
     private var fayeConnected:Bool?
     private var connectionExtension:NSDictionary?
@@ -74,6 +156,9 @@ class FayeClient : WebSocketDelegate {
         self.fayeURLString = aFayeURLString
         self.fayeConnected = false;
         
+        self.transport = WebsocketTransport(url: aFayeURLString)
+        self.transport!.delegate = self;
+        
         if(channel != nil){
             self.queuedSubscriptions.addObject(channel!)
         }
@@ -87,7 +172,8 @@ class FayeClient : WebSocketDelegate {
     
     func connectToServer(){
         if(self.connectionInitiated != true){
-            self.openWebSocketConnection()
+            self.transport?.openConnection()
+            self.connectionInitiated = true;
         }
     }
     
@@ -137,45 +223,42 @@ class FayeClient : WebSocketDelegate {
 }
 
 // MARK: Websocket Delegate
+// MARK: Transport Delegate
 private extension FayeClient {
-    internal func websocketDidConnect() {
-        println("websocket is connected")
+    internal func didConnect() {
+        println("Transport websocket is connected")
         self.connectionInitiated = false;
         self.handshake()
     }
     
-    internal func websocketDidDisconnect(error: NSError?) {
-        
-        if(error == nil){
-            println("websocket lost connection!")
-            self.delegate?.disconnectedFromServer?()
-        }else{
-            println("websocket is disconnected: \(error!.localizedDescription)")
-            self.delegate?.connectionFailed?()
-        }
+    internal func didDisconnect() {
+        println("Transport websocket lost connection!")
+        self.delegate?.disconnectedFromServer?()
         self.connectionInitiated = false
         self.fayeConnected = false
     }
     
-    internal func websocketDidWriteError(error: NSError?) {
+    internal func didFailConenction(error: NSError?) {
+        println("Transport websocket is disconnected: \(error!.localizedDescription)")
+        self.delegate?.connectionFailed?()
+        self.connectionInitiated = false
+        self.fayeConnected = false
+    }
+    
+    internal func didWriteError(error: NSError?) {
         if(error == nil){
-            println("websocket write failed: ERROR IS NIL!")
+            println("Transport websocket write failed: ERROR IS NIL!")
         }else{
-            println("websocket write failed: \(error!.localizedDescription)")
+            println("Transport websocket write failed: \(error!.localizedDescription)")
             self.delegate?.fayeClientError?(error!)
         }
     }
     
-    internal func websocketDidReceiveMessage(text: String) {
-        println("got some text: \(text)")
+    internal func didReceiveMessage(text: String) {
+        println("Transport got some text: \(text)")
         self.receive(text)
     }
     
-    // MARK: TODO
-    internal func websocketDidReceiveData(data: NSData) {
-        println("got some data: \(data.length)")
-        //self.socket.writeData(data)
-    }
 }
 
 // MARK: Private Bayuex Methods
@@ -213,7 +296,7 @@ private extension FayeClient {
             println("DISCONNECT_CHANNEL")
             if(messageDict["successful"].numberValue == 1){
                 self.fayeConnected = false;
-                self.closeWebSocketConnection()
+                self.transport?.closeConnection()
                 self.delegate?.disconnectedFromServer?()
             }else{
                 // OOPS
@@ -284,7 +367,7 @@ private extension FayeClient {
         dict["supportedConnectionTypes"] = connTypes
         
         let string = JSONStringify(dict)
-        self.webSocket!.writeString(string)
+        self.transport?.writeString(string)
     }
     
     // Bayeux Connect
@@ -295,7 +378,7 @@ private extension FayeClient {
         var dict:[String:AnyObject] = ["channel": BayeuxChannel.CONNECT_CHANNEL.description, "clientId": self.fayeClientId!, "connectionType": "websocket"]
         
         let string = JSONStringify(dict)
-        self.webSocket!.writeString(string)
+        self.transport?.writeString(string)
     }
     
     // Bayeux Disconnect
@@ -304,7 +387,7 @@ private extension FayeClient {
     func disconnect(){
         var dict:[String:AnyObject] = ["channel": BayeuxChannel.DISCONNECT_CHANNEL.description, "clientId": self.fayeClientId!, "connectionType": "websocket"]
         let string = JSONStringify(dict)
-        self.webSocket!.writeString(string)
+        self.transport?.writeString(string)
     }
     
     // Bayeux Subscribe
@@ -316,7 +399,7 @@ private extension FayeClient {
     func subscribe(channel:String){
         var dict:[String:AnyObject] = ["channel": BayeuxChannel.SUBSCRIBE_CHANNEL.description, "clientId": self.fayeClientId!, "subscription": channel]
         let string = JSONStringify(dict)
-        self.webSocket!.writeString(string)
+        self.transport?.writeString(string)
         self.pendingSubscriptions.addObject(channel)
     }
     
@@ -329,7 +412,7 @@ private extension FayeClient {
     func unsubscribe(channel:String){
         var dict:[String:AnyObject] = ["channel": BayeuxChannel.UNSUBSCRIBE_CHANNEL.description, "clientId": self.fayeClientId!, "subscription": channel]
         let string = JSONStringify(dict)
-        self.webSocket!.writeString(string)
+        self.transport?.writeString(string)
     }
     
     // Bayeux Publish
@@ -345,7 +428,7 @@ private extension FayeClient {
             
             var string = JSONStringify(dict)
             println("THIS IS THE PUBSLISH STRING: \(string)")
-            self.webSocket!.writeString(string)
+            self.transport?.writeString(string)
         }else{
             // Faye is not connected
         }
@@ -367,20 +450,16 @@ private extension FayeClient {
     }
     
     func send(message: NSDictionary){
-        
         // Parse JSON
-        
         var writeError:NSError?
         var jsonData:NSData = NSJSONSerialization.dataWithJSONObject(message, options:nil, error: &writeError)!
         
         if(writeError == nil){
-            NSLog("COuldn't parse json")
+            println("COuldn't parse json")
         }else{
             var jsonString:NSString = NSString(data: jsonData, encoding:NSUTF8StringEncoding)!
-            self.webSocket?.writeString(jsonString)
+            self.transport?.writeString(jsonString)
         }
-        
-        
     }
     
     func receive(message: String){
@@ -388,26 +467,6 @@ private extension FayeClient {
         var jsonData = message.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true)
         var json = JSON(data: jsonData!)
         self.parseFayeMessage(json)
-    }
-    
-    /**
-    Websocket Connection helpers
-    */
-    func openWebSocketConnection(){
-        self.closeWebSocketConnection()
-        
-        self.webSocket = WebSocket(url: NSURL(string:self.fayeURLString)!)
-        self.webSocket!.delegate = self;
-        self.webSocket!.connect()
-        self.connectionInitiated = true
-    }
-    
-    func closeWebSocketConnection(){
-        if(self.webSocket != nil){
-            self.webSocket!.delegate = nil
-            self.webSocket!.disconnect()
-            self.webSocket = nil;
-        }
     }
     
     // http://iosdevelopertips.com/swift-code/base64-encode-decode-swift.html

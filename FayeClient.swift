@@ -56,6 +56,7 @@ protocol Transport{
     func writeString(aString:String)
     func openConnection()
     func closeConnection()
+    func isConnected() -> (Bool)
 }
 
 public protocol TransportDelegate: class{
@@ -93,6 +94,10 @@ public class WebsocketTransport: Transport, WebSocketDelegate {
     
     func writeString(aString:String){
         self.webSocket?.writeString(aString)
+    }
+    
+    func isConnected() -> (Bool){
+        return self.webSocket!.isConnected
     }
 
     // MARK: Websocket Delegate
@@ -136,10 +141,8 @@ public class WebsocketTransport: Transport, WebSocketDelegate {
 // MARK: FayeClient
 class FayeClient : TransportDelegate {
     var fayeURLString:String
-    var webSocket:WebSocket?
     var fayeClientId:String?
-    var delegate:FayeClientDelegate?
-    var transportDelegate:TransportDelegate?
+    weak var delegate:FayeClientDelegate?
     var transport:WebsocketTransport?
     
     private var fayeConnected:Bool?
@@ -218,8 +221,8 @@ class FayeClient : TransportDelegate {
         return self.openSubscriptions.containsObject(channel)
     }
     
-    func webSocketConnected() -> (Bool){
-        return self.webSocket!.isConnected
+    func isTransportConnected() -> (Bool){
+        return self.transport!.isConnected()
     }
 }
 

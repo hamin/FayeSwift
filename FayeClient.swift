@@ -94,7 +94,8 @@ public class WebsocketTransport: Transport, WebSocketDelegate {
     func writeString(aString:String){
         self.webSocket?.writeString(aString)
     }
-    
+
+    // MARK: Websocket Delegate
     public func websocketDidConnect() {
         println("websocket is connected")
         self.delegate?.didConnect()
@@ -222,7 +223,7 @@ class FayeClient : TransportDelegate {
     }
 }
 
-// MARK: Websocket Delegate
+
 // MARK: Transport Delegate
 private extension FayeClient {
     internal func didConnect() {

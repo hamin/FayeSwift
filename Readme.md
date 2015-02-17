@@ -1,5 +1,7 @@
 # FayeSwift
 
+[![Join the chat at https://gitter.im/hamin/FayeSwift](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/hamin/FayeSwift?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 ![swift](https://raw.githubusercontent.com/hamin/FayeSwift/master/swift-logo.png)
 
 

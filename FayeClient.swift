@@ -427,7 +427,7 @@ private extension FayeClient {
     // "id": "some unique message id"
     // }
     func publish(data:[String:AnyObject], channel:String){
-        if(self.fayeConnected != nil){
+        if(self.fayeConnected == true){
             var dict:[String:AnyObject] = ["channel": channel, "clientId": self.fayeClientId!, "id": self.nextMessageId(), "data": data]
             
             var string = JSONStringify(dict)

@@ -261,87 +261,94 @@ private extension FayeClient {
     func parseFayeMessage(messageJSON:JSON){
         
         let messageDict = messageJSON[0]
-        let channel = messageDict["channel"].stringValue as String!
-        
-        switch(channel)
+        if let channel = messageDict["channel"].string{
+            
+            switch(channel)
             {
-        case BayeuxChannel.HANDSHAKE_CHANNEL.description:
-            println("HANDSHAKE_CHANNEL")
-            self.fayeClientId = messageDict["clientId"].stringValue
-            if(messageDict["successful"].numberValue == 1){
+            case BayeuxChannel.HANDSHAKE_CHANNEL.description:
+                println("HANDSHAKE_CHANNEL")
+                self.fayeClientId = messageDict["clientId"].stringValue
+                if(messageDict["successful"].int == 1){
+                    
+                    self.delegate?.connectedToServer?()
+                    self.fayeConnected = true;
+                    self.connect()
+                    self.subscribeQueuedSubscriptions()
+                    
+                }else{
+                    // OOPS
+                }
                 
-                self.delegate?.connectedToServer?()
-                self.fayeConnected = true;
-                self.connect()
-                self.subscribeQueuedSubscriptions()
+            case BayeuxChannel.CONNECT_CHANNEL.description:
+                println("CONNECT_CHANNEL")
+                if(messageDict["successful"].int == 1){
+                    self.fayeConnected = true;
+                    self.connect()
+                }else{
+                    // OOPS
+                }
+            case BayeuxChannel.DISCONNECT_CHANNEL.description:
+                println("DISCONNECT_CHANNEL")
+                if(messageDict["successful"].int == 1){
+                    self.fayeConnected = false;
+                    self.transport?.closeConnection()
+                    self.delegate?.disconnectedFromServer?()
+                }else{
+                    // OOPS
+                }
+            case BayeuxChannel.SUBSCRIBE_CHANNEL.description:
+                println("SUBSCRIBE_CHANNEL")
                 
-            }else{
-                // OOPS
-            }
-            
-        case BayeuxChannel.CONNECT_CHANNEL.description:
-            println("CONNECT_CHANNEL")
-            if(messageDict["successful"].numberValue == 1){
-                self.fayeConnected = true;
-                self.connect()
-            }else{
-                // OOPS
-            }
-        case BayeuxChannel.DISCONNECT_CHANNEL.description:
-            println("DISCONNECT_CHANNEL")
-            if(messageDict["successful"].numberValue == 1){
-                self.fayeConnected = false;
-                self.transport?.closeConnection()
-                self.delegate?.disconnectedFromServer?()
-            }else{
-                // OOPS
-            }
-        case BayeuxChannel.SUBSCRIBE_CHANNEL.description:
-            println("SUBSCRIBE_CHANNEL")
-            
-            let subscription = messageJSON[0]["subscription"].stringValue as String!
-            self.pendingSubscriptions.removeObject(subscription)
-            let success = messageJSON[0]["successful"].numberValue as Int!
-            
-            if( success == 1){
-                self.openSubscriptions.addObject(subscription)
-                self.delegate?.didSubscribeToChannel?(subscription)
-            }else{
-                // Subscribe Failed
-                let error = messageJSON[0]["error"].stringValue as String!
-                self.delegate?.subscriptionFailedWithError?(error)
-            }
-        case BayeuxChannel.UNSUBSCRIBE_CHANNEL.description:
-            println("UNSUBSCRIBE_CHANNEL")
-            
-            let subscription = messageJSON[0]["subscription"].stringValue as String!
-            self.openSubscriptions.removeObject(subscription)
-            self.delegate?.didUnsubscribeFromChannel?(subscription)
-        default:
-            let chan = messageJSON[0]["channel"].stringValue!
-            
-            if(self.isSubscribedToChannel(chan)){
-                println("New Message on \(channel)")
-                let data: AnyObject! = messageJSON[0]["data"].object
+                let success = messageJSON[0]["successful"].int
                 
-                if(data != nil){
-                    // Call channel subscription block if there is one
-                    if let channelBlock = self.channelSubscriptionBlocks[channel]{
-                        channelBlock(data as NSDictionary)
+                if( success == 1){
+                    if let subscription = messageJSON[0]["subscription"].string{
+                        self.pendingSubscriptions.removeObject(subscription)
+                        self.openSubscriptions.addObject(subscription)
+                        self.delegate?.didSubscribeToChannel?(subscription)
                     }else{
-                        self.delegate?.messageReceived?(data as NSDictionary, channel: chan)
+                        println("Missing subscription for Subscribe")
+                    }
+                }else{
+                    // Subscribe Failed
+                    if let error = messageJSON[0]["error"].string{
+                        self.delegate?.subscriptionFailedWithError?(error)
+                    }
+                }
+            case BayeuxChannel.UNSUBSCRIBE_CHANNEL.description:
+                println("UNSUBSCRIBE_CHANNEL")
+                
+                if let subscription = messageJSON[0]["subscription"].string{
+                    self.openSubscriptions.removeObject(subscription)
+                    self.delegate?.didUnsubscribeFromChannel?(subscription)
+                }else{
+                    println("Missing subscription for Unsubscribe")
+                }
+            default:
+                if(self.isSubscribedToChannel(channel)){
+                    println("New Message on \(channel)")
+                    
+                    if(messageJSON[0]["data"] != JSON.nullJSON){
+                        // Call channel subscription block if there is one
+                        let data: AnyObject = messageJSON[0]["data"].object
+                        if let channelBlock = self.channelSubscriptionBlocks[channel]{
+                            channelBlock(data as NSDictionary)
+                        }else{
+                            self.delegate?.messageReceived?(data as NSDictionary, channel: channel)
+                        }
+                        
+                    }else{
+                        println("For some reason data is nil, maybe double posting?!")
                     }
                     
                 }else{
-                    println("For some reason data is nil, maybe double posting?!")
+                    println("weird channel")
                 }
-                
-            }else{
-                println("weird channel")
             }
             
+        }else{
+            println("Missing channel")
         }
-        
     }
     
     /**

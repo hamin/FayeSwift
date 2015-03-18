@@ -12,7 +12,7 @@ class ViewController: UIViewController, UITextFieldDelegate, FayeClientDelegate 
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var textView: UITextView!
     
-    let client:FayeClient = FayeClient(aFayeURLString: "ws://localhost:5222/faye", channel: "/cool")
+    let client:FayeClient = FayeClient(aFayeURLString: "ws://192.168.1.11:5222/faye", channel: "/cool")
     
     override func viewDidLoad() {
         super.viewDidLoad()

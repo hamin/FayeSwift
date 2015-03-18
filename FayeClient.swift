@@ -101,12 +101,12 @@ public class WebsocketTransport: Transport, WebSocketDelegate {
     }
 
     // MARK: Websocket Delegate
-    public func websocketDidConnect() {
+    public func websocketDidConnect(socket: WebSocket) {
         println("websocket is connected")
         self.delegate?.didConnect()
     }
     
-    public func websocketDidDisconnect(error: NSError?) {
+    public func websocketDidDisconnect(socket: WebSocket, error: NSError?) {
         
         if(error == nil){
             println("websocket lost connection!")
@@ -117,22 +117,13 @@ public class WebsocketTransport: Transport, WebSocketDelegate {
         }
     }
     
-    public func websocketDidWriteError(error: NSError?) {
-        if(error == nil){
-            println("websocket write failed: ERROR IS NIL!")
-        }else{
-            println("websocket write failed: \(error!.localizedDescription)")
-        }
-        self.delegate?.didWriteError(error)
-    }
-    
-    public func websocketDidReceiveMessage(text: String) {
+    public func websocketDidReceiveMessage(socket: WebSocket, text: String) {
         println("got some text: \(text)")
         self.delegate?.didReceiveMessage(text)
     }
     
     // MARK: TODO
-    public func websocketDidReceiveData(data: NSData) {
+    public func websocketDidReceiveData(socket: WebSocket, data: NSData) {
         println("got some data: \(data.length)")
         //self.socket.writeData(data)
     }

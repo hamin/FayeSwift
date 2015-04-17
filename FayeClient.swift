@@ -178,7 +178,7 @@ class FayeClient : TransportDelegate {
     
     func sendMessage(messageDict: NSDictionary, channel:String){
         
-        self.publish(messageDict as Dictionary, channel: channel)
+        self.publish(messageDict as! Dictionary, channel: channel)
     }
     
     func sendMessage(messageDict:[String:AnyObject], channel:String){
@@ -332,9 +332,9 @@ private extension FayeClient {
                         // Call channel subscription block if there is one
                         let data: AnyObject = messageJSON[0]["data"].object
                         if let channelBlock = self.channelSubscriptionBlocks[channel]{
-                            channelBlock(data as NSDictionary)
+                            channelBlock(data as! NSDictionary)
                         }else{
-                            self.delegate?.messageReceived?(data as NSDictionary, channel: channel)
+                            self.delegate?.messageReceived?(data as! NSDictionary, channel: channel)
                         }
                         
                     }else{
@@ -442,11 +442,11 @@ private extension FayeClient {
     func subscribeQueuedSubscriptions(){
         // if there are any outstanding open subscriptions resubscribe
         if(self.queuedSubscriptions.count > 0){
-            let queue:NSSet = self.queuedSubscriptions.copy() as NSSet
+            let queue:NSSet = self.queuedSubscriptions.copy() as! NSSet
             
             for channel in queue{
                 self.queuedSubscriptions.removeObject(channel)
-                self.subscribe(channel as String)
+                self.subscribe(channel as! String)
             }
         }
     }
@@ -460,7 +460,7 @@ private extension FayeClient {
             println("COuldn't parse json")
         }else{
             var jsonString:NSString = NSString(data: jsonData, encoding:NSUTF8StringEncoding)!
-            self.transport?.writeString(jsonString)
+            self.transport?.writeString(jsonString as String)
         }
     }
     
@@ -500,7 +500,7 @@ private extension FayeClient {
         let base64Decoded = NSString(data: data!, encoding: NSUTF8StringEncoding)
         println("Decoded:  \(base64Decoded)")
         
-        return base64Decoded!
+        return base64Decoded! as String
     }
     
     // JSON Helpers
@@ -513,7 +513,7 @@ private extension FayeClient {
         if e != nil {
             return ""
         } else {
-            return NSString(data: jsonData, encoding: NSUTF8StringEncoding)!
+            return NSString(data: jsonData, encoding: NSUTF8StringEncoding)! as String
         }
     }
 }

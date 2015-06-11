@@ -206,6 +206,8 @@ class FayeClient : TransportDelegate {
         self.queuedSubscriptions.removeObject(channel)
         self.unsubscribe(channel)
         self.channelSubscriptionBlocks[channel] = nil;
+        self.openSubscriptions.removeObject(channel)
+        self.pendingSubscriptions.removeObject(channel)
     }
     
     func isSubscribedToChannel(channel:String) -> (Bool){
@@ -412,9 +414,11 @@ private extension FayeClient {
     // "subscription": "/foo/**"
     // }
     func unsubscribe(channel:String){
-        var dict:[String:AnyObject] = ["channel": BayeuxChannel.UNSUBSCRIBE_CHANNEL.description, "clientId": self.fayeClientId!, "subscription": channel]
-        let string = JSONStringify(dict)
-        self.transport?.writeString(string)
+        if let clientId = self.fayeClientId {
+            var dict:[String:AnyObject] = ["channel": BayeuxChannel.UNSUBSCRIBE_CHANNEL.description, "clientId": clientId, "subscription": channel]
+            let string = JSONStringify(dict)
+            self.transport?.writeString(string)
+        }
     }
     
     // Bayeux Publish

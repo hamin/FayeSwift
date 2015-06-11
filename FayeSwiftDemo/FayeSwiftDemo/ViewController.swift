@@ -25,6 +25,23 @@ class ViewController: UIViewController, UITextFieldDelegate, FayeClientDelegate 
             println("Here is the Block message: \(text)")
         }
         client.subscribeToChannel("/awesome", block: channelBlock)
+        
+        
+        
+        let delayTime = dispatch_time(DISPATCH_TIME_NOW,
+            Int64(3 * Double(NSEC_PER_SEC)))
+        dispatch_after(delayTime, dispatch_get_main_queue()) {
+            println("unsub")
+            self.client.unsubscribeFromChannel("/awesome")
+        }
+        
+        let delayTime2 = dispatch_time(DISPATCH_TIME_NOW,
+            Int64(5 * Double(NSEC_PER_SEC)))
+        dispatch_after(delayTime, dispatch_get_main_queue()) {
+            println("resub")
+            self.client.subscribeToChannel("/awesome", block: channelBlock)
+        }
+        
     }
     
     override func didReceiveMemoryWarning() {

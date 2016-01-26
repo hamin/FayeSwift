@@ -1,0 +1,6 @@
+framework module FayeSwift {
+  umbrella header "FayeSwift-umbrella.h"
+
+  export *
+  module * { export * }
+}

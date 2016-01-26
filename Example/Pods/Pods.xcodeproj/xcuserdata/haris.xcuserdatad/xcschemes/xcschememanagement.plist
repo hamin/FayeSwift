@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SchemeUserState</key>
+	<dict>
+		<key>FayeSwift.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-FayeSwift_Example.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-FayeSwift_Tests.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Starscream.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>SwiftyJSON.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>259498FBDA923366A8452198A57D1F08</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B0F7AB6108413A1758B2F2D999AED350</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D8DDA82807E484CC8E9331F4752FC7E7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F171C03A9A34D854F6CFB14AE8549E37</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F1772C84BE57510CE8756C21202F5091</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+	</dict>
+</dict>
+</plist>

@@ -1,0 +1,12 @@
+source 'https://github.com/CocoaPods/Specs.git'
+use_frameworks!
+
+target 'FayeSwift_Example', :exclusive => true do
+  pod 'FayeSwift', :path => '../'
+end
+
+target 'FayeSwift_Tests', :exclusive => true do
+  pod 'FayeSwift', :path => '../'
+
+  
+end

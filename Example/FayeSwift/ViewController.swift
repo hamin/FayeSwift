@@ -7,7 +7,6 @@
 //
 
 import UIKit
-
 import FayeSwift
 
 class ViewController: UIViewController, UITextFieldDelegate, FayeClientDelegate {
@@ -15,8 +14,11 @@ class ViewController: UIViewController, UITextFieldDelegate, FayeClientDelegate 
   @IBOutlet weak var textField: UITextField!
   @IBOutlet weak var textView: UITextView!
   
-  let client:FayeClient = FayeClient(aFayeURLString: "ws://localhost:5222/faye", channel: "/cool")
+  let client: FayeClient = FayeClient(aFayeURLString: "ws://localhost:5222/faye", channel: "/cool")
   
+  // MARK:
+  // MARK: Lifecycle
+    
   override func viewDidLoad() {
     super.viewDidLoad()
     // Do any additional setup after loading the view, typically from a nib.
@@ -47,18 +49,18 @@ class ViewController: UIViewController, UITextFieldDelegate, FayeClientDelegate 
     
   }
   
-  override func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
-    // Dispose of any resources that can be recreated.
-  }
-  
+  // MARK:
+  // MARK: TextfieldDelegate
+
   func textFieldShouldReturn(textField: UITextField) -> Bool {
     // client.sendMessage(["text": textField.text], channel: "/cool")
     client.sendMessage(["text" : textField.text as! AnyObject], channel: "/cool")
     return false;
   }
   
-  
+  // MARK:
+  // MARK: FayeClientDelegate
+
   func connectedToServer() {
     print("Connected to Faye server")
   }
@@ -89,7 +91,4 @@ class ViewController: UIViewController, UITextFieldDelegate, FayeClientDelegate 
 //        self.client.subscribeToChannel("/newchannelbaby")
 //        self.client.unsubscribeFromChannel(channel)
   }
-
-
 }
-

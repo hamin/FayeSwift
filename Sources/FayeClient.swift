@@ -84,9 +84,9 @@ public protocol TransportDelegate: class{
 internal class WebsocketTransport: Transport, WebSocketDelegate {
   var urlString:String?
   var webSocket:WebSocket?
-  public weak var delegate:TransportDelegate?
+  internal weak var delegate:TransportDelegate?
   
-  convenience required public init(url: String) {
+  convenience required internal init(url: String) {
     self.init()
     self.urlString = url
   }
@@ -115,12 +115,12 @@ internal class WebsocketTransport: Transport, WebSocketDelegate {
   }
   
   // MARK: Websocket Delegate
-  public func websocketDidConnect(socket: WebSocket) {
+  internal func websocketDidConnect(socket: WebSocket) {
     print("websocket is connected")
     self.delegate?.didConnect()
   }
   
-  public func websocketDidDisconnect(socket: WebSocket, error: NSError?) {
+  internal func websocketDidDisconnect(socket: WebSocket, error: NSError?) {
     
     if(error == nil){
       print("websocket lost connection!")
@@ -131,13 +131,13 @@ internal class WebsocketTransport: Transport, WebSocketDelegate {
     }
   }
   
-  public func websocketDidReceiveMessage(socket: WebSocket, text: String) {
+  internal func websocketDidReceiveMessage(socket: WebSocket, text: String) {
     print("got some text: \(text)")
     self.delegate?.didReceiveMessage(text)
   }
   
   // MARK: TODO
-  public func websocketDidReceiveData(socket: WebSocket, data: NSData) {
+  internal func websocketDidReceiveData(socket: WebSocket, data: NSData) {
     print("got some data: \(data.length)")
     //self.socket.writeData(data)
   }
@@ -471,7 +471,7 @@ private extension FayeClient {
   func send(message: NSDictionary){
     // Parse JSON
     do {
-      let jsonData:NSData = try! NSJSONSerialization.dataWithJSONObject(message, options:[])
+      let jsonData:NSData = try NSJSONSerialization.dataWithJSONObject(message, options:[])
       let jsonString:NSString = NSString(data: jsonData, encoding:NSUTF8StringEncoding)!
       self.transport?.writeString(jsonString as String)
     } catch let error as NSError {
@@ -523,10 +523,11 @@ private extension FayeClient {
   // JSON Helpers
   func JSONStringify(jsonObj: AnyObject) -> String {
     do {
-      let jsonData:NSData = try! NSJSONSerialization.dataWithJSONObject(jsonObj, options:NSJSONWritingOptions(rawValue: 0))
+      let jsonData:NSData = try NSJSONSerialization.dataWithJSONObject(jsonObj, options:NSJSONWritingOptions(rawValue: 0))
       return NSString(data: jsonData, encoding: NSUTF8StringEncoding)! as String
     } catch let error as NSError {
       print("[JSONStringify] Couldn't Parse JSON: \(error.localizedDescription)")
+        return ""
     } catch {
       return ""
     }

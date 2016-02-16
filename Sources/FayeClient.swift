@@ -46,8 +46,8 @@ public typealias ChannelSubscriptionBlock = (NSDictionary) -> Void
 public protocol FayeClientDelegate: NSObjectProtocol{
   func messageReceived(messageDict: NSDictionary, channel: String)
   func connectedToServer()
-  func disconnectedFromServer()
-  func connectionFailed()
+  func disconnectedFromServer(error: NSError?)
+  func connectionFailed(error: NSError?)
   func didSubscribeToChannel(channel:String)
   func didUnsubscribeFromChannel(channel:String)
   func subscriptionFailedWithError(error:String)
@@ -57,7 +57,7 @@ public protocol FayeClientDelegate: NSObjectProtocol{
 public extension FayeClientDelegate {
   func messageReceived(messageDict: NSDictionary, channel: String){}
   func connectedToServer(){}
-  func disconnectedFromServer(){}
+  func disconnectedFromServer(error: NSError?=nil){}
   func connectionFailed(){}
   func didSubscribeToChannel(channel:String){}
   func didUnsubscribeFromChannel(channel:String){}
@@ -75,8 +75,8 @@ public protocol Transport{
 
 public protocol TransportDelegate: class{
   func didConnect()
-  func didFailConenction(error:NSError?)
-  func didDisconnect()
+  func didFailConnection(error:NSError?)
+  func didDisconnect(error: NSError?)
   func didWriteError(error:NSError?)
   func didReceiveMessage(text:String)
 }
@@ -84,9 +84,9 @@ public protocol TransportDelegate: class{
 internal class WebsocketTransport: Transport, WebSocketDelegate {
   var urlString:String?
   var webSocket:WebSocket?
-  public weak var delegate:TransportDelegate?
+  internal weak var delegate:TransportDelegate?
   
-  convenience required public init(url: String) {
+  convenience required internal init(url: String) {
     self.init()
     self.urlString = url
   }
@@ -115,29 +115,24 @@ internal class WebsocketTransport: Transport, WebSocketDelegate {
   }
   
   // MARK: Websocket Delegate
-  public func websocketDidConnect(socket: WebSocket) {
-    print("websocket is connected")
+  internal func websocketDidConnect(socket: WebSocket) {
     self.delegate?.didConnect()
   }
   
-  public func websocketDidDisconnect(socket: WebSocket, error: NSError?) {
-    
+  internal func websocketDidDisconnect(socket: WebSocket, error: NSError?) {
     if(error == nil){
-      print("websocket lost connection!")
-      self.delegate?.didDisconnect()
+      self.delegate?.didDisconnect(NSError(domain: "FayeClient lost connecting", code: 1000, userInfo: nil))
     }else{
-      print("websocket is disconnected: \(error!.localizedDescription)")
-      self.delegate?.didFailConenction(error)
+      self.delegate?.didFailConnection(error)
     }
   }
   
-  public func websocketDidReceiveMessage(socket: WebSocket, text: String) {
-    print("got some text: \(text)")
+  internal func websocketDidReceiveMessage(socket: WebSocket, text: String) {
     self.delegate?.didReceiveMessage(text)
   }
   
   // MARK: TODO
-  public func websocketDidReceiveData(socket: WebSocket, data: NSData) {
+  internal func websocketDidReceiveData(socket: WebSocket, data: NSData) {
     print("got some data: \(data.length)")
     //self.socket.writeData(data)
   }
@@ -236,36 +231,31 @@ public class FayeClient : TransportDelegate {
 // MARK: Transport Delegate
 extension FayeClient {
   public func didConnect() {
-    print("Transport websocket is connected")
     self.connectionInitiated = false;
     self.handshake()
   }
   
-  public func didDisconnect() {
-    print("Transport websocket lost connection!")
-    self.delegate?.disconnectedFromServer()
+  public func didDisconnect(error: NSError?) {
+    self.delegate?.disconnectedFromServer(error)
     self.connectionInitiated = false
     self.fayeConnected = false
   }
   
-  public func didFailConenction(error: NSError?) {
-    print("Transport websocket is disconnected: \(error!.localizedDescription)")
-    self.delegate?.connectionFailed()
+  public func didFailConnection(error: NSError?) {
+    self.delegate?.connectionFailed(error)
     self.connectionInitiated = false
     self.fayeConnected = false
   }
   
   public func didWriteError(error: NSError?) {
     if(error == nil){
-      print("Transport websocket write failed: ERROR IS NIL!")
+      self.delegate?.fayeClientError(NSError(domain: "FayeClient failed to write", code: 1000, userInfo: nil))
     }else{
-      print("Transport websocket write failed: \(error!.localizedDescription)")
       self.delegate?.fayeClientError(error!)
     }
   }
   
   public func didReceiveMessage(text: String) {
-    print("Transport got some text: \(text)")
     self.receive(text)
   }
   
@@ -281,7 +271,6 @@ private extension FayeClient {
       switch(channel)
       {
       case BayeuxChannel.HANDSHAKE_CHANNEL.description:
-        print("HANDSHAKE_CHANNEL")
         self.fayeClientId = messageDict["clientId"].stringValue
         if(messageDict["successful"].int == 1){
           
@@ -295,7 +284,6 @@ private extension FayeClient {
         }
         
       case BayeuxChannel.CONNECT_CHANNEL.description:
-        print("CONNECT_CHANNEL")
         if(messageDict["successful"].int == 1){
           self.fayeConnected = true;
           self.connect()
@@ -303,7 +291,6 @@ private extension FayeClient {
           // OOPS
         }
       case BayeuxChannel.DISCONNECT_CHANNEL.description:
-        print("DISCONNECT_CHANNEL")
         if(messageDict["successful"].int == 1){
           self.fayeConnected = false;
           self.transport?.closeConnection()
@@ -312,8 +299,6 @@ private extension FayeClient {
           // OOPS
         }
       case BayeuxChannel.SUBSCRIBE_CHANNEL.description:
-        print("SUBSCRIBE_CHANNEL")
-        
         let success = messageJSON[0]["successful"].int
         
         if( success == 1){
@@ -331,8 +316,6 @@ private extension FayeClient {
           }
         }
       case BayeuxChannel.UNSUBSCRIBE_CHANNEL.description:
-        print("UNSUBSCRIBE_CHANNEL")
-        
         if let subscription = messageJSON[0]["subscription"].string{
           self.openSubscriptions.removeObject(subscription)
           self.delegate?.didUnsubscribeFromChannel(subscription)
@@ -341,8 +324,6 @@ private extension FayeClient {
         }
       default:
         if(self.isSubscribedToChannel(channel)){
-          print("New Message on \(channel)")
-          
           if(messageJSON[0]["data"] != JSON.null){
             // Call channel subscription block if there is one
             let data: AnyObject = messageJSON[0]["data"].object
@@ -471,7 +452,7 @@ private extension FayeClient {
   func send(message: NSDictionary){
     // Parse JSON
     do {
-      let jsonData:NSData = try! NSJSONSerialization.dataWithJSONObject(message, options:[])
+      let jsonData:NSData = try NSJSONSerialization.dataWithJSONObject(message, options:[])
       let jsonString:NSString = NSString(data: jsonData, encoding:NSUTF8StringEncoding)!
       self.transport?.writeString(jsonString as String)
     } catch let error as NSError {
@@ -491,11 +472,12 @@ private extension FayeClient {
   // http://iosdevelopertips.com/swift-code/base64-encode-decode-swift.html
   func nextMessageId() -> String{
     self.messageNumber++
+    
     if(self.messageNumber >= UINT32_MAX){
       messageNumber = 0
     }
+    
     let str = "\(self.messageNumber)"
-    print("Original: \(str)")
     
     // UTF 8 str from original
     // NSData! type returned (optional)
@@ -506,7 +488,6 @@ private extension FayeClient {
     // Notice the unwrapping given the NSData! optional
     // NSString! returned (optional)
     let base64Encoded = utf8str?.base64EncodedStringWithOptions(NSDataBase64EncodingOptions())
-    print("Encoded:  \(base64Encoded)")
     
     // Base64 Decode (go back the other way)
     // Notice the unwrapping given the NSString! optional
@@ -515,7 +496,6 @@ private extension FayeClient {
     
     // Convert back to a string
     let base64Decoded = NSString(data: data!, encoding: NSUTF8StringEncoding)
-    print("Decoded:  \(base64Decoded)")
     
     return base64Decoded! as String
   }
@@ -523,10 +503,11 @@ private extension FayeClient {
   // JSON Helpers
   func JSONStringify(jsonObj: AnyObject) -> String {
     do {
-      let jsonData:NSData = try! NSJSONSerialization.dataWithJSONObject(jsonObj, options:NSJSONWritingOptions(rawValue: 0))
+      let jsonData:NSData = try NSJSONSerialization.dataWithJSONObject(jsonObj, options:NSJSONWritingOptions(rawValue: 0))
       return NSString(data: jsonData, encoding: NSUTF8StringEncoding)! as String
     } catch let error as NSError {
       print("[JSONStringify] Couldn't Parse JSON: \(error.localizedDescription)")
+        return ""
     } catch {
       return ""
     }

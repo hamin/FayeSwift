@@ -127,6 +127,14 @@ public class WebSocket : NSObject, NSStreamDelegate {
     private var fragBuffer: NSData?
     private var certValidated = false
     private var didDisconnect = false
+    private var readyToWrite = false
+    private let mutex = NSLock()
+    private var canDispatch: Bool {
+        mutex.lock()
+        let canWork = readyToWrite
+        mutex.unlock()
+        return canWork
+    }
     //the shared processing queue used for all websocket
     private static let sharedWorkQueue = dispatch_queue_create("com.vluxe.starscream.websocket", DISPATCH_QUEUE_SERIAL)
     
@@ -159,8 +167,8 @@ public class WebSocket : NSObject, NSStreamDelegate {
     public func disconnect(forceTimeout forceTimeout: NSTimeInterval? = nil) {
         switch forceTimeout {
             case .Some(let seconds) where seconds > 0:
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(seconds * Double(NSEC_PER_SEC))), queue) { [unowned self] in
-                    self.disconnectStream(nil)
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(seconds * Double(NSEC_PER_SEC))), queue) { [weak self] in
+                    self?.disconnectStream(nil)
                     }
                 fallthrough
             case .None:
@@ -293,10 +301,24 @@ public class WebSocket : NSObject, NSStreamDelegate {
         CFWriteStreamSetDispatchQueue(outStream, WebSocket.sharedWorkQueue)
         inStream.open()
         outStream.open()
+        
+        self.mutex.lock()
+        self.readyToWrite = true
+        self.mutex.unlock()
+        
         let bytes = UnsafePointer<UInt8>(data.bytes)
-        writeQueue.addOperationWithBlock {
+        var timeout = 5000000 //wait 5 seconds before giving up
+        writeQueue.addOperationWithBlock { [weak self] in
             while !outStream.hasSpaceAvailable {
                 usleep(100) //wait until the socket is ready
+                timeout -= 100
+                if timeout < 0 {
+                    self?.cleanupStream()
+                    self?.doDisconnect(self?.errorWithDetail("write wait timed out", code: 2))
+                    return
+                } else if outStream.streamError != nil {
+                    return //disconnectStream will be called.
+                }
             }
             outStream.write(bytes, maxLength: data.length)
         }
@@ -329,7 +351,18 @@ public class WebSocket : NSObject, NSStreamDelegate {
     }
     //disconnect the stream object
     private func disconnectStream(error: NSError?) {
-        writeQueue.waitUntilAllOperationsAreFinished()
+        if error == nil {
+            writeQueue.waitUntilAllOperationsAreFinished()
+        } else {
+            writeQueue.cancelAllOperations()
+        }
+        cleanupStream()
+        doDisconnect(error)
+    }
+    
+    private func cleanupStream() {
+        outputStream?.delegate = nil
+        inputStream?.delegate = nil
         if let stream = inputStream {
             CFReadStreamSetDispatchQueue(stream, nil)
             stream.close()
@@ -337,10 +370,9 @@ public class WebSocket : NSObject, NSStreamDelegate {
         if let stream = outputStream {
             CFWriteStreamSetDispatchQueue(stream, nil)
             stream.close()
-        }        
+        }
         outputStream = nil
-        certValidated = false
-        doDisconnect(error)
+        inputStream = nil
     }
     
     ///handles the incoming bytes and sending them to the proper processing method
@@ -388,6 +420,7 @@ public class WebSocket : NSObject, NSStreamDelegate {
         switch code {
         case 0:
             connected = true
+            guard canDispatch else {return}
             dispatch_async(queue) { [weak self] in
                 guard let s = self else { return }
                 s.onConnect?()
@@ -578,12 +611,13 @@ public class WebSocket : NSObject, NSStreamDelegate {
                 data = NSData(bytes: UnsafePointer<UInt8>((buffer+offset)), length: Int(len))
             }
             if receivedOpcode == .Pong {
-                dispatch_async(queue) { [weak self] in
-                    guard let s = self else { return }
-                    s.onPong?()
-                    s.pongDelegate?.websocketDidReceivePong(s)
+                if canDispatch {
+                    dispatch_async(queue) { [weak self] in
+                        guard let s = self else { return }
+                        s.onPong?()
+                        s.pongDelegate?.websocketDidReceivePong(s)
+                    }
                 }
-                
                 let step = Int(offset+numericCast(len))
                 let extra = bufferLen-step
                 if extra > 0 {
@@ -667,18 +701,21 @@ public class WebSocket : NSObject, NSStreamDelegate {
                     writeError(CloseCode.Encoding.rawValue)
                     return false
                 }
-
-                dispatch_async(queue) { [weak self] in
-                    guard let s = self else { return }
-                    s.onText?(str! as String)
-                    s.delegate?.websocketDidReceiveMessage(s, text: str! as String)
+                if canDispatch {
+                    dispatch_async(queue) { [weak self] in
+                        guard let s = self else { return }
+                        s.onText?(str! as String)
+                        s.delegate?.websocketDidReceiveMessage(s, text: str! as String)
+                    }
                 }
             } else if response.code == .BinaryFrame {
-                let data = response.buffer! //local copy so it is perverse for writing
-                dispatch_async(queue) { [weak self] in
-                    guard let s = self else { return }
-                    s.onData?(data)
-                    s.delegate?.websocketDidReceiveData(s, data: data)
+                if canDispatch {
+                    let data = response.buffer! //local copy so it is perverse for writing
+                    dispatch_async(queue) { [weak self] in
+                        guard let s = self else { return }
+                        s.onData?(data)
+                        s.delegate?.websocketDidReceiveData(s, data: data)
+                    }
                 }
             }
             readStack.removeLast()
@@ -763,11 +800,19 @@ public class WebSocket : NSObject, NSStreamDelegate {
         guard !didDisconnect else { return }
         didDisconnect = true
         connected = false
+        guard canDispatch else {return}
         dispatch_async(queue) { [weak self] in
             guard let s = self else { return }
             s.onDisconnect?(error)
             s.delegate?.websocketDidDisconnect(s, error: error)
         }
+    }
+    
+    deinit {
+        mutex.lock()
+        readyToWrite = false
+        mutex.unlock()
+        cleanupStream()
     }
     
 }

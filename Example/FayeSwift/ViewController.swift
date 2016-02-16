@@ -14,8 +14,7 @@ class ViewController: UIViewController, UITextFieldDelegate, FayeClientDelegate 
   @IBOutlet weak var textField: UITextField!
   @IBOutlet weak var textView: UITextView!
   
-    // ws://localhost:5222/faye
-  let client: FayeClient = FayeClient(aFayeURLString: "wss://fusion.fusion-universal.com:8080/faye", channel: "/cool")
+  let client: FayeClient = FayeClient(aFayeURLString: "ws://localhost:5222/faye", channel: "/cool")
   
   // MARK:
   // MARK: Lifecycle

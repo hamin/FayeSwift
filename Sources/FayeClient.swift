@@ -140,11 +140,11 @@ internal class WebsocketTransport: Transport, WebSocketDelegate {
 
 // MARK: FayeClient
 public class FayeClient : TransportDelegate {
-  var fayeURLString:String
-  var fayeClientId:String?
+  public var fayeURLString:String
+  public var fayeClientId:String?
   public weak var delegate:FayeClientDelegate?
-  var transport:WebsocketTransport?
-
+  
+  private var transport:WebsocketTransport?
   private var fayeConnected:Bool?
   private var connectionExtension:NSDictionary?
   private var connectionInitiated:Bool?

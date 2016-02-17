@@ -156,11 +156,12 @@ FayeSwift requires at least iOS 7/OSX 10.10 or above.
 
 ## TODOs
 
-- [ ] Cocoapods Integration
-- [ ] Complete Docs
+- [x] Cocoapods Integration
+- [x] Add block handlers
+- [x] Complete Docs
 - [ ] Add Unit Tests
+- [ ] Swift Package Mananger Support
 - [ ] Rethink use of optionals (?)
-- [ ] Add block handlers (?)
 - [ ] Support for a long-polling transport (?)
 
 ## License

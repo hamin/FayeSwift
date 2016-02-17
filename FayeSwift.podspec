@@ -9,14 +9,17 @@
 Pod::Spec.new do |s|
   s.name             = "FayeSwift"
   s.version          = "0.1.0"
-  s.summary          = "A short description of FayeSwift."
+  s.summary          = "A pure Swift Faye (Bayeux) Client"
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
 #   * Try to keep it short, snappy and to the point.
 #   * Write the description between the DESC delimiters below.
-#   * Finally, don't worry about the indent, CocoaPods strips it!  
+#   * Finally, don't worry about the indent, CocoaPods strips it!
   s.description      = <<-DESC
+                        A Pure Swift Client Library for the Faye (Bayeux/Comet) Pub-Sub messaging server.
+                        This client has been tested with the Faye (http://faye.jcoglan.com) implementation of the
+                        Bayeux protocol. Currently only supports Websocket transport.
                        DESC
 
   s.homepage         = "https://github.com/hamin/FayeSwift"
@@ -28,7 +31,7 @@ Pod::Spec.new do |s|
   s.requires_arc = true
   s.osx.deployment_target = "10.9"
   s.ios.deployment_target = "8.0"
-  s.watchos.deployment_target = "2.0"
+  # s.watchos.deployment_target = "2.0"
   s.tvos.deployment_target = "9.0"
 
   #s.source_files = 'Pod/Classes/**/*'

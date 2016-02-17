@@ -75,7 +75,7 @@ public protocol Transport{
 
 public protocol TransportDelegate: class{
   func didConnect()
-  func didFailConenction(error:NSError?)
+  func didFailConnection(error:NSError?)
   func didDisconnect()
   func didWriteError(error:NSError?)
   func didReceiveMessage(text:String)
@@ -116,7 +116,6 @@ internal class WebsocketTransport: Transport, WebSocketDelegate {
 
   // MARK: Websocket Delegate
   internal func websocketDidConnect(socket: WebSocket) {
-    print("websocket is connected")
     self.delegate?.didConnect()
   }
 
@@ -127,7 +126,7 @@ internal class WebsocketTransport: Transport, WebSocketDelegate {
       self.delegate?.didDisconnect()
     }else{
       print("websocket is disconnected: \(error!.localizedDescription)")
-      self.delegate?.didFailConenction(error)
+      self.delegate?.didFailConnection(error)
     }
   }
 
@@ -236,7 +235,6 @@ public class FayeClient : TransportDelegate {
 // MARK: Transport Delegate
 extension FayeClient {
   public func didConnect() {
-    print("Transport websocket is connected")
     self.connectionInitiated = false;
     self.handshake()
   }
@@ -248,7 +246,7 @@ extension FayeClient {
     self.fayeConnected = false
   }
 
-  public func didFailConenction(error: NSError?) {
+  public func didFailConnection(error: NSError?) {
     print("Transport websocket is disconnected: \(error!.localizedDescription)")
     self.delegate?.connectionFailed()
     self.connectionInitiated = false

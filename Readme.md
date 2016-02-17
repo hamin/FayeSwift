@@ -13,7 +13,13 @@ It was heavily inspired by the Objective-C client found here: [FayeObjc](https:/
 
 ### Installation
 
-For now, add the following files to your project: `FayeClient.swift`, `Websocket.swift`, and `SwiftyJSON.swift`.
+FayeSwift is available through [CocoaPods](http://cocoapods.org). To install it, simply add the following line to your Podfile:     
+
+```ruby
+  pod "FayeSwift"
+```
+
+_Swift Package Manager compatability is coming sson_
 
 ### Initializing Client
 

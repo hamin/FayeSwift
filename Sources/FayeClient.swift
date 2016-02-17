@@ -76,7 +76,7 @@ public protocol Transport{
 public protocol TransportDelegate: class{
   func didConnect()
   func didFailConnection(error:NSError?)
-  func didDisconnect()
+  func didDisconnect(error: NSError?)
   func didWriteError(error:NSError?)
   func didReceiveMessage(text:String)
 }
@@ -120,18 +120,14 @@ internal class WebsocketTransport: Transport, WebSocketDelegate {
   }
 
   internal func websocketDidDisconnect(socket: WebSocket, error: NSError?) {
-
     if(error == nil){
-      print("websocket lost connection!")
-      self.delegate?.didDisconnect()
+      self.delegate?.didDisconnect(NSError(error: .LostConnection))
     }else{
-      print("websocket is disconnected: \(error!.localizedDescription)")
       self.delegate?.didFailConnection(error)
     }
   }
 
   internal func websocketDidReceiveMessage(socket: WebSocket, text: String) {
-    print("got some text: \(text)")
     self.delegate?.didReceiveMessage(text)
   }
 
@@ -239,31 +235,23 @@ extension FayeClient {
     self.handshake()
   }
 
-  public func didDisconnect() {
-    print("Transport websocket lost connection!")
+  public func didDisconnect(error: NSError?) {
     self.delegate?.disconnectedFromServer()
     self.connectionInitiated = false
     self.fayeConnected = false
   }
 
   public func didFailConnection(error: NSError?) {
-    print("Transport websocket is disconnected: \(error!.localizedDescription)")
     self.delegate?.connectionFailed()
     self.connectionInitiated = false
     self.fayeConnected = false
   }
 
   public func didWriteError(error: NSError?) {
-    if(error == nil){
-      print("Transport websocket write failed: ERROR IS NIL!")
-    }else{
-      print("Transport websocket write failed: \(error!.localizedDescription)")
-      self.delegate?.fayeClientError(error!)
-    }
+    self.delegate?.fayeClientError(error ?? NSError(error: .TransportWrite))    
   }
 
   public func didReceiveMessage(text: String) {
-    print("Transport got some text: \(text)")
     self.receive(text)
   }
 
@@ -279,7 +267,6 @@ private extension FayeClient {
       switch(channel)
       {
       case BayeuxChannel.HANDSHAKE_CHANNEL.description:
-        print("HANDSHAKE_CHANNEL")
         self.fayeClientId = messageDict["clientId"].stringValue
         if(messageDict["successful"].int == 1){
 
@@ -293,7 +280,6 @@ private extension FayeClient {
         }
 
       case BayeuxChannel.CONNECT_CHANNEL.description:
-        print("CONNECT_CHANNEL")
         if(messageDict["successful"].int == 1){
           self.fayeConnected = true;
           self.connect()
@@ -301,7 +287,6 @@ private extension FayeClient {
           // OOPS
         }
       case BayeuxChannel.DISCONNECT_CHANNEL.description:
-        print("DISCONNECT_CHANNEL")
         if(messageDict["successful"].int == 1){
           self.fayeConnected = false;
           self.transport?.closeConnection()
@@ -310,8 +295,6 @@ private extension FayeClient {
           // OOPS
         }
       case BayeuxChannel.SUBSCRIBE_CHANNEL.description:
-        print("SUBSCRIBE_CHANNEL")
-
         let success = messageJSON[0]["successful"].int
 
         if( success == 1){
@@ -329,8 +312,6 @@ private extension FayeClient {
           }
         }
       case BayeuxChannel.UNSUBSCRIBE_CHANNEL.description:
-        print("UNSUBSCRIBE_CHANNEL")
-
         if let subscription = messageJSON[0]["subscription"].string{
           self.openSubscriptions.removeObject(subscription)
           self.delegate?.didUnsubscribeFromChannel(subscription)
@@ -339,8 +320,6 @@ private extension FayeClient {
         }
       default:
         if(self.isSubscribedToChannel(channel)){
-          print("New Message on \(channel)")
-
           if(messageJSON[0]["data"] != JSON.null){
             // Call channel subscription block if there is one
             let data: AnyObject = messageJSON[0]["data"].object
@@ -493,7 +472,6 @@ private extension FayeClient {
       messageNumber = 0
     }
     let str = "\(self.messageNumber)"
-    print("Original: \(str)")
 
     // UTF 8 str from original
     // NSData! type returned (optional)
@@ -504,7 +482,6 @@ private extension FayeClient {
     // Notice the unwrapping given the NSData! optional
     // NSString! returned (optional)
     let base64Encoded = utf8str?.base64EncodedStringWithOptions(NSDataBase64EncodingOptions())
-    print("Encoded:  \(base64Encoded)")
 
     // Base64 Decode (go back the other way)
     // Notice the unwrapping given the NSString! optional
@@ -513,7 +490,6 @@ private extension FayeClient {
 
     // Convert back to a string
     let base64Decoded = NSString(data: data!, encoding: NSUTF8StringEncoding)
-    print("Decoded:  \(base64Decoded)")
 
     return base64Decoded! as String
   }

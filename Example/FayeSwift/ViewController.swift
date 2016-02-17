@@ -7,7 +7,6 @@
 //
 
 import UIKit
-
 import FayeSwift
 
 class ViewController: UIViewController, UITextFieldDelegate, FayeClientDelegate {
@@ -15,6 +14,7 @@ class ViewController: UIViewController, UITextFieldDelegate, FayeClientDelegate 
   @IBOutlet weak var textField: UITextField!
   @IBOutlet weak var textView: UITextView!
   
+  /// Example FayeClient
   let client:FayeClient = FayeClient(aFayeURLString: "ws://localhost:5222/faye", channel: "/cool")
   
   override func viewDidLoad() {
@@ -67,15 +67,15 @@ class ViewController: UIViewController, UITextFieldDelegate, FayeClientDelegate 
   }
   
   func didSubscribeToChannel(channel: String) {
-    print("subscribed to channel \(channel)")
+    print("Subscribed to channel \(channel)")
   }
   
   func didUnsubscribeFromChannel(channel: String) {
-    print("UNsubscribed from channel \(channel)")
+    print("Unsubscribed from channel \(channel)")
   }
   
   func subscriptionFailedWithError(error: String) {
-    print("SUBSCRIPTION FAILED!!!!")
+    print("Subscription failed")
   }
   
   func messageReceived(messageDict: NSDictionary, channel: String) {

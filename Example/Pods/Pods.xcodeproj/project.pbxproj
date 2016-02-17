@@ -24,6 +24,7 @@
 		C120FD7E7730F7B2CBE9AE82C32A2025 /* SSLSecurity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A444149F18F886FD0A1E23B45D6671 /* SSLSecurity.swift */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		C924D77076DD0B85DE38D93F6D09361B /* Starscream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E94F4BAAE418F28A0730CC56D7FACFF /* Starscream.framework */; };
 		CF3C815427C32948D42D7D7748DC81A1 /* SwiftyJSON-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DCD25231745CBB7A0DE8AE144F32C35 /* SwiftyJSON-dummy.m */; };
+		D5142ACB1C74931E00622C44 /* NSError+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5142ACA1C74931E00622C44 /* NSError+Helper.swift */; };
 		D7AD1CA221F811429F2397EA408725EE /* Pods-FayeSwift_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DCE2224000629085D044E4A5FDB2710 /* Pods-FayeSwift_Tests-dummy.m */; };
 		E17F2E2D9A8FE236916AA8F3B5F02A8F /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0813DA1F91E6465D940389B245DB41E4 /* SwiftyJSON.swift */; };
 		EA183AF116D9067CDF9A5EF14FD8FBAA /* FayeClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68B46D54A88A9E061CC95ED5879C5CB /* FayeClient.swift */; };
@@ -135,6 +136,7 @@
 		CFB3E404A66EE13E14582416D200A72C /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D26B5E2282A330BE919FE4EFDFB738B3 /* Pods-FayeSwift_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-FayeSwift_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		D47E6B74B427A4904D75990D1C34E829 /* Starscream-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Starscream-umbrella.h"; sourceTree = "<group>"; };
+		D5142ACA1C74931E00622C44 /* NSError+Helper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSError+Helper.swift"; sourceTree = "<group>"; };
 		D97CF598701325B6B933A5EE31D58366 /* FayeSwift.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = "sourcecode.module-map"; path = FayeSwift.modulemap; sourceTree = "<group>"; };
 		E4E07C18061452192A8755C57422BE93 /* Pods-FayeSwift_Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-FayeSwift_Tests-frameworks.sh"; sourceTree = "<group>"; };
 		E6671F9532A947F40918CF9A0D44F70F /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -368,6 +370,7 @@
 			isa = PBXGroup;
 			children = (
 				E68B46D54A88A9E061CC95ED5879C5CB /* FayeClient.swift */,
+				D5142ACA1C74931E00622C44 /* NSError+Helper.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -573,6 +576,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D5142ACB1C74931E00622C44 /* NSError+Helper.swift in Sources */,
 				EA183AF116D9067CDF9A5EF14FD8FBAA /* FayeClient.swift in Sources */,
 				FCAA884AE40C15F5271F02911FAB43F1 /* FayeSwift-dummy.m in Sources */,
 			);

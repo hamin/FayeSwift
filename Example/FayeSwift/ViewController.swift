@@ -54,31 +54,31 @@ class ViewController: UIViewController, UITextFieldDelegate, FayeClientDelegate 
   // MARK:
   // MARK: TextfieldDelegate
   
-  func connectedToServer() {
+  func connectedtoser(client: FayeClient) {
     print("Connected to Faye server")
   }
   
-  func connectionFailed() {
+  func connectionFailed(client: FayeClient) {
     print("Failed to connect to Faye server!")
   }
   
-  func disconnectedFromServer() {
+  func disconnectedFromServer(client: FayeClient) {
     print("Disconnected from Faye server")
   }
   
-  func didSubscribeToChannel(channel: String) {
+  func didSubscribeToChannel(client: FayeClient, channel: String) {
     print("Subscribed to channel \(channel)")
   }
   
-  func didUnsubscribeFromChannel(channel: String) {
+  func didUnsubscribeFromChannel(client: FayeClient, channel: String) {
     print("Unsubscribed from channel \(channel)")
   }
   
-  func subscriptionFailedWithError(error: String) {
+  func subscriptionFailedWithError(client: FayeClient, error: String) {
     print("Subscription failed")
   }
   
-  func messageReceived(messageDict: NSDictionary, channel: String) {
+  func messageReceived(client: FayeClient, messageDict: NSDictionary, channel: String) {
     let text: AnyObject? = messageDict["text"]
     print("Here is the message: \(text)")
 //        self.client.subscribeToChannel("/newchannelbaby")

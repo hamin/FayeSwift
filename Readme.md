@@ -54,7 +54,7 @@ After you are connected, there are some optional delegate methods that we can im
 connectedToServer is called as soon as the client connects to the Faye server.
 
 ```swift
-func connectedToServer() {
+func connectedToServer(client: FayeClient) {
    println("Connected to Faye server")
 }
 ```
@@ -64,7 +64,7 @@ func connectedToServer() {
 connectionFailed is called when a cleint fails to connect to Faye server either initially or on a retry.
 
 ```swift
-func connectionFailed() {
+func connectionFailed(client: FayeClient) {
    println("Failed to connect to Faye server!")
 }
 ```
@@ -74,7 +74,7 @@ func connectionFailed() {
 disconnectedFromServer is called as soon as the client is disconnected from the server..
 
 ```swift
-func disconnectedFromServer() {
+func disconnectedFromServer(client: FayeClient) {
    println("Disconnected from Faye server")
 }
 ```
@@ -84,7 +84,7 @@ func disconnectedFromServer() {
 didSubscribeToChannel is called when the subscribes to a Faye channel.
 
 ```swift
-func didSubscribeToChannel(channel: String) {
+func didSubscribeToChannel(client: FayeClient, channel: String) {
    println("subscribed to channel \(channel)")
 }
 ```
@@ -94,7 +94,7 @@ func didSubscribeToChannel(channel: String) {
 didUnsubscribeFromChannel is called when the client unsubscribes to a Faye channel.
 
 ```swift
-func didUnsubscribeFromChannel(channel: String) {
+func didUnsubscribeFromChannel(client: FayeClient, channel: String) {
    println("UNsubscribed from channel \(channel)")
 }
 ```
@@ -104,7 +104,7 @@ func didUnsubscribeFromChannel(channel: String) {
 The subscriptionFailedWithError method is called when the client fails to subscribe to a Faye channel.
 
 ```swift
-func subscriptionFailedWithError(error: String) {
+func subscriptionFailedWithError(client: FayeClient, error: String) {
    println("SUBSCRIPTION FAILED!!!!")
 }
 ```
@@ -114,7 +114,7 @@ func subscriptionFailedWithError(error: String) {
 The messageReceived is called when the client receives a message from any Faye channel that it is subscribed to.	
 
 ```swift
-func messageReceived(messageDict: NSDictionary, channel: String) {
+func messageReceived(client: FayeClient, messageDict: NSDictionary, channel: String) {
    let text: AnyObject? = messageDict["text"]
    println("Here is the message: \(text)")
    

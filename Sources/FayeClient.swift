@@ -262,7 +262,7 @@ private extension FayeClient {
   func parseFayeMessage(messageJSON:JSON){
 
     let messageDict = messageJSON[0]
-    if let channel = messageDict["channel"].string{
+    if let channel = messageDict["channel"].string {
 
       switch(channel)
       {
@@ -298,7 +298,7 @@ private extension FayeClient {
         let success = messageJSON[0]["successful"].int
 
         if( success == 1){
-          if let subscription = messageJSON[0]["subscription"].string{
+          if let subscription = messageJSON[0]["subscription"].string {
             self.pendingSubscriptions.removeObject(subscription)
             self.openSubscriptions.addObject(subscription)
             self.delegate?.didSubscribeToChannel(self, channel: subscription)
@@ -312,7 +312,7 @@ private extension FayeClient {
           }
         }
       case BayeuxChannel.UNSUBSCRIBE_CHANNEL.description:
-        if let subscription = messageJSON[0]["subscription"].string{
+        if let subscription = messageJSON[0]["subscription"].string {
           self.openSubscriptions.removeObject(subscription)
           self.delegate?.didUnsubscribeFromChannel(self, channel: subscription)
         }else{
@@ -323,7 +323,7 @@ private extension FayeClient {
           if(messageJSON[0]["data"] != JSON.null){
             // Call channel subscription block if there is one
             let data: AnyObject = messageJSON[0]["data"].object
-            if let channelBlock = self.channelSubscriptionBlocks[channel]{
+            if let channelBlock = self.channelSubscriptionBlocks[channel] {
               channelBlock(data as! NSDictionary)
             }else{
               self.delegate?.messageReceived(self, messageDict: data as! NSDictionary, channel: channel)
@@ -360,8 +360,9 @@ private extension FayeClient {
     dict["minimumVersion"] = "1.0beta"
     dict["supportedConnectionTypes"] = connTypes
 
-    let string = JSONStringify(dict)
-    self.transport?.writeString(string)
+    if let string = JSON(dict).rawString() {
+      self.transport?.writeString(string)
+    }
   }
 
   // Bayeux Connect
@@ -371,8 +372,9 @@ private extension FayeClient {
   func connect(){
     let dict:[String:AnyObject] = ["channel": BayeuxChannel.CONNECT_CHANNEL.description, "clientId": self.fayeClientId!, "connectionType": "websocket"]
 
-    let string = JSONStringify(dict)
-    self.transport?.writeString(string)
+    if let string = JSON(dict).rawString() {
+      self.transport?.writeString(string)
+    }
   }
 
   // Bayeux Disconnect
@@ -380,8 +382,9 @@ private extension FayeClient {
   // "clientId": "Un1q31d3nt1f13r"
   func disconnect(){
     let dict:[String:AnyObject] = ["channel": BayeuxChannel.DISCONNECT_CHANNEL.description, "clientId": self.fayeClientId!, "connectionType": "websocket"]
-    let string = JSONStringify(dict)
-    self.transport?.writeString(string)
+    if let string = JSON(dict).rawString() {
+      self.transport?.writeString(string)
+    }
   }
 
   // Bayeux Subscribe
@@ -392,9 +395,10 @@ private extension FayeClient {
   // }
   func subscribe(channel:String){
     let dict:[String:AnyObject] = ["channel": BayeuxChannel.SUBSCRIBE_CHANNEL.description, "clientId": self.fayeClientId!, "subscription": channel]
-    let string = JSONStringify(dict)
-    self.transport?.writeString(string)
-    self.pendingSubscriptions.addObject(channel)
+    if let string = JSON(dict).rawString() {
+      self.transport?.writeString(string)
+      self.pendingSubscriptions.addObject(channel)
+    }
   }
 
   // Bayeux Unsubscribe
@@ -406,8 +410,9 @@ private extension FayeClient {
   func unsubscribe(channel:String){
     if let clientId = self.fayeClientId {
       let dict:[String:AnyObject] = ["channel": BayeuxChannel.UNSUBSCRIBE_CHANNEL.description, "clientId": clientId, "subscription": channel]
-      let string = JSONStringify(dict)
-      self.transport?.writeString(string)
+      if let string = JSON(dict).rawString() {
+        self.transport?.writeString(string)
+      }
     }
   }
 
@@ -422,9 +427,10 @@ private extension FayeClient {
     if(self.fayeConnected == true){
       let dict:[String:AnyObject] = ["channel": channel, "clientId": self.fayeClientId!, "id": self.nextMessageId(), "data": data]
 
-      let string = JSONStringify(dict)
-      print("THIS IS THE PUBSLISH STRING: \(string)")
-      self.transport?.writeString(string)
+      if let string = JSON(dict).rawString() {
+        print("THIS IS THE PUBSLISH STRING: \(string)")
+        self.transport?.writeString(string)
+      }
     }else{
       // Faye is not connected
     }
@@ -447,14 +453,8 @@ private extension FayeClient {
 
   func send(message: NSDictionary){
     // Parse JSON
-    do {
-      let jsonData:NSData = try NSJSONSerialization.dataWithJSONObject(message, options:[])
-      let jsonString:NSString = NSString(data: jsonData, encoding:NSUTF8StringEncoding)!
-      self.transport?.writeString(jsonString as String)
-    } catch let error as NSError {
-      print("[Send Message] Couldn't Parse JSON: \(error.localizedDescription)")
-    } catch {
-      print("[Send Message]: Unknown error")
+    if let string = JSON(message).rawString() {
+      self.transport?.writeString(string)
     }
   }
 
@@ -492,18 +492,5 @@ private extension FayeClient {
     let base64Decoded = NSString(data: data!, encoding: NSUTF8StringEncoding)
 
     return base64Decoded! as String
-  }
-
-  // JSON Helpers
-  func JSONStringify(jsonObj: AnyObject) -> String {
-    do {
-      let jsonData:NSData = try NSJSONSerialization.dataWithJSONObject(jsonObj, options:NSJSONWritingOptions(rawValue: 0))
-      return NSString(data: jsonData, encoding: NSUTF8StringEncoding)! as String
-    } catch let error as NSError {
-      print("[JSONStringify] Couldn't Parse JSON: \(error.localizedDescription)")
-      return error.localizedDescription
-    } catch {
-      return ""
-    }
   }
 }

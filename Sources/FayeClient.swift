@@ -35,9 +35,9 @@ public class FayeClient : TransportDelegate {
   private var connectionInitiated:Bool?
   private var messageNumber:UInt32 = 0
 
-  private var queuedSubscriptions = NSMutableSet()
-  private var pendingSubscriptions = NSMutableSet()
-  private var openSubscriptions = NSMutableSet()
+  private var queuedSubscriptions = Set<String>()
+  private var pendingSubscriptions = Set<String>()
+  private var openSubscriptions = Set<String>()
 
   private var channelSubscriptionBlocks = Dictionary<String,ChannelSubscriptionBlock>()
 
@@ -49,7 +49,7 @@ public class FayeClient : TransportDelegate {
     self.transport!.delegate = self;
 
     if let chan = channel {
-      self.queuedSubscriptions.addObject(chan)
+      self.queuedSubscriptions.insert(chan)
     }
     self.connectionInitiated = false
   }
@@ -79,14 +79,14 @@ public class FayeClient : TransportDelegate {
   }
 
   public func subscribeToChannel(channel:String) {
-    if self.isSubscribedToChannel(channel) || self.pendingSubscriptions.containsObject(channel) {
+    if self.isSubscribedToChannel(channel) || self.pendingSubscriptions.contains(channel) {
       return
     }
 
     if self.fayeConnected == true {
       self.subscribe(channel)
     } else {
-      self.queuedSubscriptions.addObject(channel)
+      self.queuedSubscriptions.insert(channel)
     }
   }
 
@@ -96,15 +96,15 @@ public class FayeClient : TransportDelegate {
   }
 
   public func unsubscribeFromChannel(channel:String) {
-    self.queuedSubscriptions.removeObject(channel)
+    self.queuedSubscriptions.remove(channel)
     self.unsubscribe(channel)
     self.channelSubscriptionBlocks[channel] = nil;
-    self.openSubscriptions.removeObject(channel)
-    self.pendingSubscriptions.removeObject(channel)
+    self.openSubscriptions.remove(channel)
+    self.pendingSubscriptions.remove(channel)
   }
 
   public func isSubscribedToChannel(channel:String) -> (Bool) {
-    return self.openSubscriptions.containsObject(channel)
+    return self.openSubscriptions.contains(channel)
   }
 
   public func isTransportConnected() -> (Bool) {
@@ -181,8 +181,8 @@ private extension FayeClient {
         case .Subscribe:
           if let success = messageJSON[0]["successful"].int where success == 1 {
             if let subscription = messageJSON[0]["subscription"].string {
-              self.pendingSubscriptions.removeObject(subscription)
-              self.openSubscriptions.addObject(subscription)
+              self.pendingSubscriptions.remove(subscription)
+              self.openSubscriptions.insert(subscription)
               self.delegate?.didSubscribeToChannel(self, channel: subscription)
             } else {
               print("Missing subscription for Subscribe")
@@ -195,7 +195,7 @@ private extension FayeClient {
           }
         case .Unsubscibe:
           if let subscription = messageJSON[0]["subscription"].string {
-            self.openSubscriptions.removeObject(subscription)
+            self.openSubscriptions.remove(subscription)
             self.delegate?.didUnsubscribeFromChannel(self, channel: subscription)
           } else {
             print("Missing subscription for Unsubscribe")
@@ -275,7 +275,7 @@ private extension FayeClient {
     let dict:[String:AnyObject] = ["channel": BayeuxChannel.Subscribe.rawValue, "clientId": self.fayeClientId!, "subscription": channel]
     if let string = JSON(dict).rawString() {
       self.transport?.writeString(string)
-      self.pendingSubscriptions.addObject(channel)
+      self.pendingSubscriptions.insert(channel)
     }
   }
 
@@ -319,11 +319,9 @@ private extension FayeClient {
 private extension FayeClient {
   func subscribeQueuedSubscriptions() {
     // if there are any outstanding open subscriptions resubscribe
-    if let queue:NSSet = self.queuedSubscriptions.copy() as? NSSet where self.queuedSubscriptions.count > 0 {
-      for channel in queue {
-        self.queuedSubscriptions.removeObject(channel)
-        self.subscribe(channel as! String)
-      }
+    for channel in self.queuedSubscriptions {
+      self.subscribe(channel)
+      self.queuedSubscriptions.remove(channel)
     }
   }
 

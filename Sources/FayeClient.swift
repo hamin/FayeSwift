@@ -20,11 +20,11 @@ extension String {
 
 // MARK: BayuexChannel Messages
 enum BayeuxChannel : String {
-  case HANDSHAKE_CHANNEL = "/meta/handshake";
-  case CONNECT_CHANNEL = "/meta/connect";
-  case DISCONNECT_CHANNEL = "/meta/disconnect";
-  case SUBSCRIBE_CHANNEL = "/meta/subscribe";
-  case UNSUBSCRIBE_CHANNEL = "/meta/unsubscribe";
+  case Handshake = "/meta/handshake";
+  case Connect = "/meta/connect";
+  case Disconnect = "/meta/disconnect";
+  case Subscribe = "/meta/subscribe";
+  case Unsubscibe = "/meta/unsubscribe";
 }
 
 
@@ -256,7 +256,7 @@ private extension FayeClient {
       // Handle Meta Channels
       if let metaChannel = BayeuxChannel(rawValue: channel) {
         switch(metaChannel) {
-        case .HANDSHAKE_CHANNEL:
+        case .Handshake:
           self.fayeClientId = messageDict["clientId"].stringValue
           if messageDict["successful"].int == 1 {
             self.delegate?.connectedToServer(self)
@@ -267,14 +267,14 @@ private extension FayeClient {
           } else {
             // OOPS
           }
-        case .CONNECT_CHANNEL:
+        case .Connect:
           if messageDict["successful"].int == 1 {
             self.fayeConnected = true;
             self.connect()
           } else {
             // OOPS
           }
-        case .DISCONNECT_CHANNEL:
+        case .Disconnect:
           if messageDict["successful"].int == 1 {
             self.fayeConnected = false;
             self.transport?.closeConnection()
@@ -282,7 +282,7 @@ private extension FayeClient {
           } else {
             // OOPS
           }
-        case .SUBSCRIBE_CHANNEL:
+        case .Subscribe:
           if let success = messageJSON[0]["successful"].int where success == 1 {
             if let subscription = messageJSON[0]["subscription"].string {
               self.pendingSubscriptions.removeObject(subscription)
@@ -297,7 +297,7 @@ private extension FayeClient {
               self.delegate?.subscriptionFailedWithError(self, error: error)
             }
           }
-        case .UNSUBSCRIBE_CHANNEL:
+        case .Unsubscibe:
           if let subscription = messageJSON[0]["subscription"].string {
             self.openSubscriptions.removeObject(subscription)
             self.delegate?.didUnsubscribeFromChannel(self, channel: subscription)
@@ -339,7 +339,7 @@ private extension FayeClient {
   func handshake() {
     let connTypes:NSArray = ["long-polling", "callback-polling", "iframe", "websocket"]
     var dict = [String: AnyObject]()
-    dict["channel"] = BayeuxChannel.HANDSHAKE_CHANNEL.rawValue
+    dict["channel"] = BayeuxChannel.Handshake.rawValue
     dict["version"] = "1.0"
     dict["minimumVersion"] = "1.0beta"
     dict["supportedConnectionTypes"] = connTypes
@@ -354,7 +354,7 @@ private extension FayeClient {
   // "clientId": "Un1q31d3nt1f13r",
   // "connectionType": "long-polling"
   func connect() {
-    let dict:[String:AnyObject] = ["channel": BayeuxChannel.CONNECT_CHANNEL.rawValue, "clientId": self.fayeClientId!, "connectionType": "websocket"]
+    let dict:[String:AnyObject] = ["channel": BayeuxChannel.Connect.rawValue, "clientId": self.fayeClientId!, "connectionType": "websocket"]
 
     if let string = JSON(dict).rawString() {
       self.transport?.writeString(string)
@@ -365,7 +365,7 @@ private extension FayeClient {
   // "channel": "/meta/disconnect",
   // "clientId": "Un1q31d3nt1f13r"
   func disconnect() {
-    let dict:[String:AnyObject] = ["channel": BayeuxChannel.DISCONNECT_CHANNEL.rawValue, "clientId": self.fayeClientId!, "connectionType": "websocket"]
+    let dict:[String:AnyObject] = ["channel": BayeuxChannel.Disconnect.rawValue, "clientId": self.fayeClientId!, "connectionType": "websocket"]
     if let string = JSON(dict).rawString() {
       self.transport?.writeString(string)
     }
@@ -378,7 +378,7 @@ private extension FayeClient {
   // "subscription": "/foo/**"
   // }
   func subscribe(channel:String) {
-    let dict:[String:AnyObject] = ["channel": BayeuxChannel.SUBSCRIBE_CHANNEL.rawValue, "clientId": self.fayeClientId!, "subscription": channel]
+    let dict:[String:AnyObject] = ["channel": BayeuxChannel.Subscribe.rawValue, "clientId": self.fayeClientId!, "subscription": channel]
     if let string = JSON(dict).rawString() {
       self.transport?.writeString(string)
       self.pendingSubscriptions.addObject(channel)
@@ -393,7 +393,7 @@ private extension FayeClient {
   // }
   func unsubscribe(channel:String) {
     if let clientId = self.fayeClientId {
-      let dict:[String:AnyObject] = ["channel": BayeuxChannel.UNSUBSCRIBE_CHANNEL.rawValue, "clientId": clientId, "subscription": channel]
+      let dict:[String:AnyObject] = ["channel": BayeuxChannel.Unsubscibe.rawValue, "clientId": clientId, "subscription": channel]
       if let string = JSON(dict).rawString() {
         self.transport?.writeString(string)
       }

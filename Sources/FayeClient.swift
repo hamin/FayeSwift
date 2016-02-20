@@ -19,23 +19,12 @@ extension String {
 
 
 // MARK: BayuexChannel Messages
-enum BayeuxChannel : CustomStringConvertible {
-  case HANDSHAKE_CHANNEL;
-  case CONNECT_CHANNEL;
-  case DISCONNECT_CHANNEL;
-  case SUBSCRIBE_CHANNEL;
-  case UNSUBSCRIBE_CHANNEL;
-
-  var description : String {
-    switch self {
-      // Use Internationalization, as appropriate.
-    case .HANDSHAKE_CHANNEL: return "/meta/handshake";
-    case .CONNECT_CHANNEL: return "/meta/connect";
-    case .DISCONNECT_CHANNEL: return "/meta/disconnect";
-    case .SUBSCRIBE_CHANNEL: return "/meta/subscribe";
-    case .UNSUBSCRIBE_CHANNEL: return "/meta/unsubscribe";
-    }
-  }
+enum BayeuxChannel : String {
+  case HANDSHAKE_CHANNEL = "/meta/handshake";
+  case CONNECT_CHANNEL = "/meta/connect";
+  case DISCONNECT_CHANNEL = "/meta/disconnect";
+  case SUBSCRIBE_CHANNEL = "/meta/subscribe";
+  case UNSUBSCRIBE_CHANNEL = "/meta/unsubscribe";
 }
 
 
@@ -43,7 +32,7 @@ enum BayeuxChannel : CustomStringConvertible {
 public typealias ChannelSubscriptionBlock = (NSDictionary) -> Void
 
 // MARK: FayeClientDelegate Protocol
-public protocol FayeClientDelegate: NSObjectProtocol{
+public protocol FayeClientDelegate: NSObjectProtocol {
   func messageReceived(client:FayeClient, messageDict: NSDictionary, channel: String)
   func connectedToServer(client:FayeClient)
   func disconnectedFromServer(client:FayeClient)
@@ -66,14 +55,14 @@ public extension FayeClientDelegate {
 }
 
 
-public protocol Transport{
+public protocol Transport {
   func writeString(aString:String)
   func openConnection()
   func closeConnection()
   func isConnected() -> (Bool)
 }
 
-public protocol TransportDelegate: class{
+public protocol TransportDelegate: class {
   func didConnect()
   func didFailConnection(error:NSError?)
   func didDisconnect(error: NSError?)
@@ -91,26 +80,26 @@ internal class WebsocketTransport: Transport, WebSocketDelegate {
     self.urlString = url
   }
 
-  func openConnection(){
+  func openConnection() {
     self.closeConnection()
     self.webSocket = WebSocket(url: NSURL(string:self.urlString!)!)
     self.webSocket!.delegate = self;
     self.webSocket!.connect()
   }
 
-  func closeConnection(){
-    if(self.webSocket != nil){
+  func closeConnection() {
+    if self.webSocket != nil {
       self.webSocket!.delegate = nil
       self.webSocket!.disconnect()
       self.webSocket = nil;
     }
   }
 
-  func writeString(aString:String){
+  func writeString(aString:String) {
     self.webSocket?.writeString(aString)
   }
 
-  func isConnected() -> (Bool){
+  func isConnected() -> (Bool) {
     return self.webSocket!.isConnected
   }
 
@@ -120,9 +109,9 @@ internal class WebsocketTransport: Transport, WebSocketDelegate {
   }
 
   internal func websocketDidDisconnect(socket: WebSocket, error: NSError?) {
-    if(error == nil){
+    if error == nil {
       self.delegate?.didDisconnect(NSError(error: .LostConnection))
-    }else{
+    } else {
       self.delegate?.didFailConnection(error)
     }
   }
@@ -163,54 +152,54 @@ public class FayeClient : TransportDelegate {
     self.transport = WebsocketTransport(url: aFayeURLString)
     self.transport!.delegate = self;
 
-    if(channel != nil){
-      self.queuedSubscriptions.addObject(channel!)
+    if let chan = channel {
+      self.queuedSubscriptions.addObject(chan)
     }
     self.connectionInitiated = false
   }
 
-  public convenience init(aFayeURLString:String, channel:String, channelBlock:ChannelSubscriptionBlock){
+  public convenience init(aFayeURLString:String, channel:String, channelBlock:ChannelSubscriptionBlock) {
     self.init(aFayeURLString: aFayeURLString, channel: channel)
     self.channelSubscriptionBlocks[channel] = channelBlock;
   }
 
-  public func connectToServer(){
-    if(self.connectionInitiated != true){
+  public func connectToServer() {
+    if self.connectionInitiated != true {
       self.transport?.openConnection()
       self.connectionInitiated = true;
     }
   }
 
-  public func disconnectFromServer(){
+  public func disconnectFromServer() {
     self.disconnect()
   }
 
-  public func sendMessage(messageDict: NSDictionary, channel:String){
+  public func sendMessage(messageDict: NSDictionary, channel:String) {
     self.publish(messageDict as! Dictionary, channel: channel)
   }
 
-  public func sendMessage(messageDict:[String:AnyObject], channel:String){
+  public func sendMessage(messageDict:[String:AnyObject], channel:String) {
     self.publish(messageDict, channel: channel)
   }
 
-  public func subscribeToChannel(channel:String){
-    if(self.isSubscribedToChannel(channel) || self.pendingSubscriptions.containsObject(channel) ){
+  public func subscribeToChannel(channel:String) {
+    if self.isSubscribedToChannel(channel) || self.pendingSubscriptions.containsObject(channel) {
       return
     }
 
-    if(self.fayeConnected == true){
+    if self.fayeConnected == true {
       self.subscribe(channel)
-    }else{
+    } else {
       self.queuedSubscriptions.addObject(channel)
     }
   }
 
-  public func subscribeToChannel(channel:String, block:ChannelSubscriptionBlock){
+  public func subscribeToChannel(channel:String, block:ChannelSubscriptionBlock) {
     self.subscribeToChannel(channel)
     self.channelSubscriptionBlocks[channel] = block;
   }
 
-  public func unsubscribeFromChannel(channel:String){
+  public func unsubscribeFromChannel(channel:String) {
     self.queuedSubscriptions.removeObject(channel)
     self.unsubscribe(channel)
     self.channelSubscriptionBlocks[channel] = nil;
@@ -218,11 +207,11 @@ public class FayeClient : TransportDelegate {
     self.pendingSubscriptions.removeObject(channel)
   }
 
-  public func isSubscribedToChannel(channel:String) -> (Bool){
+  public func isSubscribedToChannel(channel:String) -> (Bool) {
     return self.openSubscriptions.containsObject(channel)
   }
 
-  public func isTransportConnected() -> (Bool){
+  public func isTransportConnected() -> (Bool) {
     return self.transport!.isConnected()
   }
 }
@@ -259,86 +248,81 @@ extension FayeClient {
 
 // MARK: Private Bayuex Methods
 private extension FayeClient {
-  func parseFayeMessage(messageJSON:JSON){
 
+  func parseFayeMessage(messageJSON:JSON) {
     let messageDict = messageJSON[0]
     if let channel = messageDict["channel"].string {
 
-      switch(channel)
-      {
-      case BayeuxChannel.HANDSHAKE_CHANNEL.description:
-        self.fayeClientId = messageDict["clientId"].stringValue
-        if(messageDict["successful"].int == 1){
+      // Handle Meta Channels
+      if let metaChannel = BayeuxChannel(rawValue: channel) {
+        switch(metaChannel) {
+        case .HANDSHAKE_CHANNEL:
+          self.fayeClientId = messageDict["clientId"].stringValue
+          if messageDict["successful"].int == 1 {
+            self.delegate?.connectedToServer(self)
+            self.fayeConnected = true;
+            self.connect()
+            self.subscribeQueuedSubscriptions()
 
-          self.delegate?.connectedToServer(self)
-          self.fayeConnected = true;
-          self.connect()
-          self.subscribeQueuedSubscriptions()
-
-        }else{
-          // OOPS
-        }
-
-      case BayeuxChannel.CONNECT_CHANNEL.description:
-        if(messageDict["successful"].int == 1){
-          self.fayeConnected = true;
-          self.connect()
-        }else{
-          // OOPS
-        }
-      case BayeuxChannel.DISCONNECT_CHANNEL.description:
-        if(messageDict["successful"].int == 1){
-          self.fayeConnected = false;
-          self.transport?.closeConnection()
-          self.delegate?.disconnectedFromServer(self)
-        }else{
-          // OOPS
-        }
-      case BayeuxChannel.SUBSCRIBE_CHANNEL.description:
-        let success = messageJSON[0]["successful"].int
-
-        if( success == 1){
+          } else {
+            // OOPS
+          }
+        case .CONNECT_CHANNEL:
+          if messageDict["successful"].int == 1 {
+            self.fayeConnected = true;
+            self.connect()
+          } else {
+            // OOPS
+          }
+        case .DISCONNECT_CHANNEL:
+          if messageDict["successful"].int == 1 {
+            self.fayeConnected = false;
+            self.transport?.closeConnection()
+            self.delegate?.disconnectedFromServer(self)
+          } else {
+            // OOPS
+          }
+        case .SUBSCRIBE_CHANNEL:
+          if let success = messageJSON[0]["successful"].int where success == 1 {
+            if let subscription = messageJSON[0]["subscription"].string {
+              self.pendingSubscriptions.removeObject(subscription)
+              self.openSubscriptions.addObject(subscription)
+              self.delegate?.didSubscribeToChannel(self, channel: subscription)
+            } else {
+              print("Missing subscription for Subscribe")
+            }
+          } else {
+            // Subscribe Failed
+            if let error = messageJSON[0]["error"].string {
+              self.delegate?.subscriptionFailedWithError(self, error: error)
+            }
+          }
+        case .UNSUBSCRIBE_CHANNEL:
           if let subscription = messageJSON[0]["subscription"].string {
-            self.pendingSubscriptions.removeObject(subscription)
-            self.openSubscriptions.addObject(subscription)
-            self.delegate?.didSubscribeToChannel(self, channel: subscription)
-          }else{
-            print("Missing subscription for Subscribe")
-          }
-        }else{
-          // Subscribe Failed
-          if let error = messageJSON[0]["error"].string{
-            self.delegate?.subscriptionFailedWithError(self, error: error)
+            self.openSubscriptions.removeObject(subscription)
+            self.delegate?.didUnsubscribeFromChannel(self, channel: subscription)
+          } else {
+            print("Missing subscription for Unsubscribe")
           }
         }
-      case BayeuxChannel.UNSUBSCRIBE_CHANNEL.description:
-        if let subscription = messageJSON[0]["subscription"].string {
-          self.openSubscriptions.removeObject(subscription)
-          self.delegate?.didUnsubscribeFromChannel(self, channel: subscription)
-        }else{
-          print("Missing subscription for Unsubscribe")
-        }
-      default:
-        if(self.isSubscribedToChannel(channel)){
-          if(messageJSON[0]["data"] != JSON.null){
-            // Call channel subscription block if there is one
+      } else {
+        // Handle Client Channel
+        if self.isSubscribedToChannel(channel) {
+          if messageJSON[0]["data"] != JSON.null {
             let data: AnyObject = messageJSON[0]["data"].object
             if let channelBlock = self.channelSubscriptionBlocks[channel] {
               channelBlock(data as! NSDictionary)
-            }else{
+            } else {
               self.delegate?.messageReceived(self, messageDict: data as! NSDictionary, channel: channel)
             }
-
-          }else{
+          } else {
             print("For some reason data is nil, maybe double posting?!")
           }
-
-        }else{
+        } else {
           print("weird channel")
         }
       }
-
-    }else{
+    } else {
       print("Missing channel")
     }
   }
@@ -355,7 +339,7 @@ private extension FayeClient {
   func handshake() {
     let connTypes:NSArray = ["long-polling", "callback-polling", "iframe", "websocket"]
     var dict = [String: AnyObject]()
-    dict["channel"] = BayeuxChannel.HANDSHAKE_CHANNEL.description
+    dict["channel"] = BayeuxChannel.HANDSHAKE_CHANNEL.rawValue
     dict["version"] = "1.0"
     dict["minimumVersion"] = "1.0beta"
     dict["supportedConnectionTypes"] = connTypes
@@ -369,8 +353,8 @@ private extension FayeClient {
   // "channel": "/meta/connect",
   // "clientId": "Un1q31d3nt1f13r",
   // "connectionType": "long-polling"
-  func connect(){
-    let dict:[String:AnyObject] = ["channel": BayeuxChannel.CONNECT_CHANNEL.description, "clientId": self.fayeClientId!, "connectionType": "websocket"]
+  func connect() {
+    let dict:[String:AnyObject] = ["channel": BayeuxChannel.CONNECT_CHANNEL.rawValue, "clientId": self.fayeClientId!, "connectionType": "websocket"]
 
     if let string = JSON(dict).rawString() {
       self.transport?.writeString(string)
@@ -380,8 +364,8 @@ private extension FayeClient {
   // Bayeux Disconnect
   // "channel": "/meta/disconnect",
   // "clientId": "Un1q31d3nt1f13r"
-  func disconnect(){
-    let dict:[String:AnyObject] = ["channel": BayeuxChannel.DISCONNECT_CHANNEL.description, "clientId": self.fayeClientId!, "connectionType": "websocket"]
+  func disconnect() {
+    let dict:[String:AnyObject] = ["channel": BayeuxChannel.DISCONNECT_CHANNEL.rawValue, "clientId": self.fayeClientId!, "connectionType": "websocket"]
     if let string = JSON(dict).rawString() {
       self.transport?.writeString(string)
     }
@@ -393,8 +377,8 @@ private extension FayeClient {
   // "clientId": "Un1q31d3nt1f13r",
   // "subscription": "/foo/**"
   // }
-  func subscribe(channel:String){
-    let dict:[String:AnyObject] = ["channel": BayeuxChannel.SUBSCRIBE_CHANNEL.description, "clientId": self.fayeClientId!, "subscription": channel]
+  func subscribe(channel:String) {
+    let dict:[String:AnyObject] = ["channel": BayeuxChannel.SUBSCRIBE_CHANNEL.rawValue, "clientId": self.fayeClientId!, "subscription": channel]
     if let string = JSON(dict).rawString() {
       self.transport?.writeString(string)
       self.pendingSubscriptions.addObject(channel)
@@ -407,9 +391,9 @@ private extension FayeClient {
   // "clientId": "Un1q31d3nt1f13r",
   // "subscription": "/foo/**"
   // }
-  func unsubscribe(channel:String){
+  func unsubscribe(channel:String) {
     if let clientId = self.fayeClientId {
-      let dict:[String:AnyObject] = ["channel": BayeuxChannel.UNSUBSCRIBE_CHANNEL.description, "clientId": clientId, "subscription": channel]
+      let dict:[String:AnyObject] = ["channel": BayeuxChannel.UNSUBSCRIBE_CHANNEL.rawValue, "clientId": clientId, "subscription": channel]
       if let string = JSON(dict).rawString() {
         self.transport?.writeString(string)
       }
@@ -423,15 +407,15 @@ private extension FayeClient {
   // "data": "some application string or JSON encoded object",
   // "id": "some unique message id"
   // }
-  func publish(data:[String:AnyObject], channel:String){
-    if(self.fayeConnected == true){
+  func publish(data:[String:AnyObject], channel:String) {
+    if self.fayeConnected == true {
       let dict:[String:AnyObject] = ["channel": channel, "clientId": self.fayeClientId!, "id": self.nextMessageId(), "data": data]
 
       if let string = JSON(dict).rawString() {
         print("THIS IS THE PUBSLISH STRING: \(string)")
         self.transport?.writeString(string)
       }
-    }else{
+    } else {
       // Faye is not connected
     }
   }
@@ -439,36 +423,35 @@ private extension FayeClient {
 
 // MARK: Private Internal methods
 private extension FayeClient {
-  func subscribeQueuedSubscriptions(){
+  func subscribeQueuedSubscriptions() {
     // if there are any outstanding open subscriptions resubscribe
-    if(self.queuedSubscriptions.count > 0){
-      let queue:NSSet = self.queuedSubscriptions.copy() as! NSSet
-
-      for channel in queue{
+    if let queue:NSSet = self.queuedSubscriptions.copy() as? NSSet where self.queuedSubscriptions.count > 0 {
+      for channel in queue {
         self.queuedSubscriptions.removeObject(channel)
         self.subscribe(channel as! String)
       }
     }
   }
 
-  func send(message: NSDictionary){
+  func send(message: NSDictionary) {
     // Parse JSON
     if let string = JSON(message).rawString() {
       self.transport?.writeString(string)
     }
   }
 
-  func receive(message: String){
+  func receive(message: String) {
     // Parse JSON
-    let jsonData = message.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true)
-    let json = JSON(data: jsonData!)
-    self.parseFayeMessage(json)
+    if let jsonData = message.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false) {
+      let json = JSON(data: jsonData)
+      self.parseFayeMessage(json)
+    }
   }
 
   // http://iosdevelopertips.com/swift-code/base64-encode-decode-swift.html
   func nextMessageId() -> String{
     self.messageNumber++
-    if(self.messageNumber >= UINT32_MAX){
+    if self.messageNumber >= UINT32_MAX {
       messageNumber = 0
     }
     let str = "\(self.messageNumber)"

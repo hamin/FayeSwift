@@ -7,16 +7,7 @@
 //
 
 import Foundation
-import Starscream
 import SwiftyJSON
-
-// MARK: Custom Extensions
-extension String {
-  subscript (i: Int) -> String {
-    return String(Array(self.characters)[i])
-  }
-}
-
 
 // MARK: BayuexChannel Messages
 enum BayeuxChannel : String {
@@ -31,101 +22,6 @@ enum BayeuxChannel : String {
 // MARK: Type Aliases
 public typealias ChannelSubscriptionBlock = (NSDictionary) -> Void
 
-// MARK: FayeClientDelegate Protocol
-public protocol FayeClientDelegate: NSObjectProtocol {
-  func messageReceived(client:FayeClient, messageDict: NSDictionary, channel: String)
-  func connectedToServer(client:FayeClient)
-  func disconnectedFromServer(client:FayeClient)
-  func connectionFailed(client:FayeClient)
-  func didSubscribeToChannel(client:FayeClient, channel:String)
-  func didUnsubscribeFromChannel(client:FayeClient, channel:String)
-  func subscriptionFailedWithError(client:FayeClient, error:String)
-  func fayeClientError(client:FayeClient, error:NSError)
-}
-
-public extension FayeClientDelegate {
-  func messageReceived(client:FayeClient, messageDict: NSDictionary, channel: String){}
-  func connectedToServer(client:FayeClient){}
-  func disconnectedFromServer(client:FayeClient){}
-  func connectionFailed(client:FayeClient){}
-  func didSubscribeToChannel(client:FayeClient, channel:String){}
-  func didUnsubscribeFromChannel(client:FayeClient, channel:String){}
-  func subscriptionFailedWithError(client:FayeClient, error:String){}
-  func fayeClientError(client:FayeClient, error:NSError){}
-}
-
-
-public protocol Transport {
-  func writeString(aString:String)
-  func openConnection()
-  func closeConnection()
-  func isConnected() -> (Bool)
-}
-
-public protocol TransportDelegate: class {
-  func didConnect()
-  func didFailConnection(error:NSError?)
-  func didDisconnect(error: NSError?)
-  func didWriteError(error:NSError?)
-  func didReceiveMessage(text:String)
-}
-
-internal class WebsocketTransport: Transport, WebSocketDelegate {
-  var urlString:String?
-  var webSocket:WebSocket?
-  internal weak var delegate:TransportDelegate?
-
-  convenience required internal init(url: String) {
-    self.init()
-    self.urlString = url
-  }
-
-  func openConnection() {
-    self.closeConnection()
-    self.webSocket = WebSocket(url: NSURL(string:self.urlString!)!)
-    self.webSocket!.delegate = self;
-    self.webSocket!.connect()
-  }
-
-  func closeConnection() {
-    if self.webSocket != nil {
-      self.webSocket!.delegate = nil
-      self.webSocket!.disconnect()
-      self.webSocket = nil;
-    }
-  }
-
-  func writeString(aString:String) {
-    self.webSocket?.writeString(aString)
-  }
-
-  func isConnected() -> (Bool) {
-    return self.webSocket!.isConnected
-  }
-
-  // MARK: Websocket Delegate
-  internal func websocketDidConnect(socket: WebSocket) {
-    self.delegate?.didConnect()
-  }
-
-  internal func websocketDidDisconnect(socket: WebSocket, error: NSError?) {
-    if error == nil {
-      self.delegate?.didDisconnect(NSError(error: .LostConnection))
-    } else {
-      self.delegate?.didFailConnection(error)
-    }
-  }
-
-  internal func websocketDidReceiveMessage(socket: WebSocket, text: String) {
-    self.delegate?.didReceiveMessage(text)
-  }
-
-  // MARK: TODO
-  internal func websocketDidReceiveData(socket: WebSocket, data: NSData) {
-    print("got some data: \(data.length)")
-    //self.socket.writeData(data)
-  }
-}
 
 // MARK: FayeClient
 public class FayeClient : TransportDelegate {
@@ -331,11 +227,11 @@ private extension FayeClient {
    Bayeux messages
    */
 
-   // Bayeux Handshake
-   // "channel": "/meta/handshake",
-   // "version": "1.0",
-   // "minimumVersion": "1.0beta",
-   // "supportedConnectionTypes": ["long-polling", "callback-polling", "iframe", "websocket]
+  // Bayeux Handshake
+  // "channel": "/meta/handshake",
+  // "version": "1.0",
+  // "minimumVersion": "1.0beta",
+  // "supportedConnectionTypes": ["long-polling", "callback-polling", "iframe", "websocket]
   func handshake() {
     let connTypes:NSArray = ["long-polling", "callback-polling", "iframe", "websocket"]
     var dict = [String: AnyObject]()
@@ -372,11 +268,9 @@ private extension FayeClient {
   }
 
   // Bayeux Subscribe
-  // {
   // "channel": "/meta/subscribe",
   // "clientId": "Un1q31d3nt1f13r",
   // "subscription": "/foo/**"
-  // }
   func subscribe(channel:String) {
     let dict:[String:AnyObject] = ["channel": BayeuxChannel.Subscribe.rawValue, "clientId": self.fayeClientId!, "subscription": channel]
     if let string = JSON(dict).rawString() {
@@ -448,32 +342,11 @@ private extension FayeClient {
     }
   }
 
-  // http://iosdevelopertips.com/swift-code/base64-encode-decode-swift.html
   func nextMessageId() -> String{
-    self.messageNumber++
+    self.messageNumber += 1
     if self.messageNumber >= UINT32_MAX {
       messageNumber = 0
     }
-    let str = "\(self.messageNumber)"
-
-    // UTF 8 str from original
-    // NSData! type returned (optional)
-    let utf8str = str.dataUsingEncoding(NSUTF8StringEncoding)
-
-    // Base64 encode UTF 8 string
-    // fromRaw(0) is equivalent to objc 'base64EncodedStringWithOptions:0'
-    // Notice the unwrapping given the NSData! optional
-    // NSString! returned (optional)
-    let base64Encoded = utf8str?.base64EncodedStringWithOptions(NSDataBase64EncodingOptions())
-
-    // Base64 Decode (go back the other way)
-    // Notice the unwrapping given the NSString! optional
-    // NSData returned
-    let data = NSData(base64EncodedString: base64Encoded!, options: NSDataBase64DecodingOptions())
-
-    // Convert back to a string
-    let base64Decoded = NSString(data: data!, encoding: NSUTF8StringEncoding)
-
-    return base64Decoded! as String
+    return "\(self.messageNumber)".encodedString()
   }
 }

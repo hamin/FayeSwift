@@ -13,7 +13,6 @@ public enum FayeSocketError {
 }
 
 public extension NSError {
-
     // MARK:
     // MARK: Error
     

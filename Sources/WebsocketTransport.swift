@@ -39,7 +39,7 @@ internal class WebsocketTransport: Transport, WebSocketDelegate {
   }
   
   func isConnected() -> (Bool) {
-    return self.webSocket!.isConnected
+    return self.webSocket?.isConnected ?? false
   }
   
   // MARK: Websocket Delegate

@@ -13,11 +13,12 @@ public enum FayeSocketError {
 }
 
 public extension NSError {
+    
     // MARK:
     // MARK: Error
     
     /// Helper to create a error object for faye realted issues
     convenience init(error: FayeSocketError) {
-        self.init(domain: "", code: 10000, userInfo: nil)
+        self.init(domain: "com.hamin.fayeswift", code: 10000, userInfo: nil)
     }
 }

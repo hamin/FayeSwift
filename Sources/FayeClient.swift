@@ -10,14 +10,37 @@ import Foundation
 import SwiftyJSON
 
 // MARK: BayuexChannel Messages
-enum BayeuxChannel : String {
-  case Handshake = "/meta/handshake";
-  case Connect = "/meta/connect";
-  case Disconnect = "/meta/disconnect";
-  case Subscribe = "/meta/subscribe";
-  case Unsubscibe = "/meta/unsubscribe";
+public enum BayeuxChannel: String {
+    case Handshake = "/meta/handshake"
+    case Connect = "/meta/connect"
+    case Disconnect = "/meta/disconnect"
+    case Subscribe = "/meta/subscribe"
+    case Unsubscibe = "/meta/unsubscribe"
 }
 
+// MARK: Bayuex Parameters
+public enum Bayeux: String {
+    case Channel = "channel"
+    case Version = "version"
+    case ClientId = "clientId"
+    case ConnectionType = "connectionType"
+    case Data = "data"
+    case Subscription = "subscription"
+    case Id = "id"
+    case MinimumVersion = "minimumVersion"
+    case SupportedConnectionTypes = "supportedConnectionTypes"
+    case Successful = "successful"
+    case Error = "error"
+
+}
+
+// MARK: Bayuex Connection Type
+public enum BayeuxConnection: String {
+    case LongPolling = "long-polling"
+    case Callback = "callback-polling"
+    case iFrame = "iframe"
+    case WebSocket = "websocket"
+}
 
 // MARK: Type Aliases
 public typealias ChannelSubscriptionBlock = (NSDictionary) -> Void
@@ -31,13 +54,13 @@ public class FayeClient : TransportDelegate {
   
   private var transport:WebsocketTransport?
   private var fayeConnected:Bool?
-  private var connectionExtension:NSDictionary?
+  
   private var connectionInitiated:Bool?
   private var messageNumber:UInt32 = 0
 
-  private var queuedSubscriptions = Set<String>()
-  private var pendingSubscriptions = Set<String>()
-  private var openSubscriptions = Set<String>()
+  private var queuedSubscriptions = Array<FayeSubscriptionModel>()
+  private var pendingSubscriptions = Array<FayeSubscriptionModel>()
+  private var openSubscriptions = Array<FayeSubscriptionModel>()
 
   private var channelSubscriptionBlocks = Dictionary<String,ChannelSubscriptionBlock>()
 
@@ -48,9 +71,10 @@ public class FayeClient : TransportDelegate {
     self.transport = WebsocketTransport(url: aFayeURLString)
     self.transport!.delegate = self;
 
-    if let chan = channel {
-      self.queuedSubscriptions.insert(chan)
+    if let channel = channel {
+      self.queuedSubscriptions.append(FayeSubscriptionModel(subscription: channel, clientId: fayeClientId))
     }
+    
     self.connectionInitiated = false
   }
 
@@ -78,33 +102,36 @@ public class FayeClient : TransportDelegate {
     self.publish(messageDict, channel: channel)
   }
 
-  public func subscribeToChannel(channel:String) {
-    if self.isSubscribedToChannel(channel) || self.pendingSubscriptions.contains(channel) {
-      return
+  public func subscribeToChannel(model:FayeSubscriptionModel, block:ChannelSubscriptionBlock?=nil) -> Bool {
+    if self.isSubscribedToChannel(model.subscription) || self.pendingSubscriptions.contains({ $0 == model }) {
+      return false
     }
-
-    if self.fayeConnected == true {
-      self.subscribe(channel)
-    } else {
-      self.queuedSubscriptions.insert(channel)
+    
+    self.fayeConnected == true ? self.subscribe(model) : self.queuedSubscriptions.append(model)
+    
+    if let block = block {
+      self.channelSubscriptionBlocks[model.subscription] = block;
     }
+    
+    return true
   }
-
-  public func subscribeToChannel(channel:String, block:ChannelSubscriptionBlock) {
-    self.subscribeToChannel(channel)
-    self.channelSubscriptionBlocks[channel] = block;
+    
+  public func subscribeToChannel(channel:String, block:ChannelSubscriptionBlock?=nil) {
+    subscribeToChannel(FayeSubscriptionModel(subscription: channel, clientId: fayeClientId), block: block)
   }
-
+    
   public func unsubscribeFromChannel(channel:String) {
-    self.queuedSubscriptions.remove(channel)
+    removeChannelFromQueuedSubscriptions(channel)
+    
     self.unsubscribe(channel)
     self.channelSubscriptionBlocks[channel] = nil;
-    self.openSubscriptions.remove(channel)
-    self.pendingSubscriptions.remove(channel)
+    
+    removeChannelFromOpenSubscriptions(channel)
+    removeChannelFromPendingSubscriptions(channel)
   }
 
   public func isSubscribedToChannel(channel:String) -> (Bool) {
-    return self.openSubscriptions.contains(channel)
+    return self.openSubscriptions.contains { $0.subscription == channel }
   }
 
   public func isTransportConnected() -> (Bool) {
@@ -147,14 +174,14 @@ private extension FayeClient {
 
   func parseFayeMessage(messageJSON:JSON) {
     let messageDict = messageJSON[0]
-    if let channel = messageDict["channel"].string {
+    if let channel = messageDict[Bayeux.Channel.rawValue].string {
 
       // Handle Meta Channels
       if let metaChannel = BayeuxChannel(rawValue: channel) {
         switch(metaChannel) {
         case .Handshake:
-          self.fayeClientId = messageDict["clientId"].stringValue
-          if messageDict["successful"].int == 1 {
+          self.fayeClientId = messageDict[Bayeux.ClientId.rawValue].stringValue
+          if messageDict[Bayeux.Successful.rawValue].int == 1 {
             self.delegate?.connectedToServer(self)
             self.fayeConnected = true;
             self.connect()
@@ -164,14 +191,14 @@ private extension FayeClient {
             // OOPS
           }
         case .Connect:
-          if messageDict["successful"].int == 1 {
+          if messageDict[Bayeux.Successful.rawValue].int == 1 {
             self.fayeConnected = true;
             self.connect()
           } else {
             // OOPS
           }
         case .Disconnect:
-          if messageDict["successful"].int == 1 {
+          if messageDict[Bayeux.Successful.rawValue].int == 1 {
             self.fayeConnected = false;
             self.transport?.closeConnection()
             self.delegate?.disconnectedFromServer(self)
@@ -179,23 +206,24 @@ private extension FayeClient {
             // OOPS
           }
         case .Subscribe:
-          if let success = messageJSON[0]["successful"].int where success == 1 {
-            if let subscription = messageJSON[0]["subscription"].string {
-              self.pendingSubscriptions.remove(subscription)
-              self.openSubscriptions.insert(subscription)
+          if let success = messageJSON[0][Bayeux.Successful.rawValue].int where success == 1 {
+            if let subscription = messageJSON[0][Bayeux.Subscription.rawValue].string {
+              removeChannelFromPendingSubscriptions(subscription)
+              
+              self.openSubscriptions.append(FayeSubscriptionModel(subscription: subscription, clientId: fayeClientId))
               self.delegate?.didSubscribeToChannel(self, channel: subscription)
             } else {
               print("Missing subscription for Subscribe")
             }
           } else {
             // Subscribe Failed
-            if let error = messageJSON[0]["error"].string {
+            if let error = messageJSON[0][Bayeux.Error.rawValue].string {
               self.delegate?.subscriptionFailedWithError(self, error: error)
             }
           }
         case .Unsubscibe:
-          if let subscription = messageJSON[0]["subscription"].string {
-            self.openSubscriptions.remove(subscription)
+          if let subscription = messageJSON[0][Bayeux.Subscription.rawValue].string {
+            removeChannelFromOpenSubscriptions(subscription)
             self.delegate?.didUnsubscribeFromChannel(self, channel: subscription)
           } else {
             print("Missing subscription for Unsubscribe")
@@ -204,8 +232,8 @@ private extension FayeClient {
       } else {
         // Handle Client Channel
         if self.isSubscribedToChannel(channel) {
-          if messageJSON[0]["data"] != JSON.null {
-            let data: AnyObject = messageJSON[0]["data"].object
+          if messageJSON[0][Bayeux.Data.rawValue] != JSON.null {
+            let data: AnyObject = messageJSON[0][Bayeux.Data.rawValue].object
             if let channelBlock = self.channelSubscriptionBlocks[channel] {
               channelBlock(data as! NSDictionary)
             } else {
@@ -233,12 +261,12 @@ private extension FayeClient {
   // "minimumVersion": "1.0beta",
   // "supportedConnectionTypes": ["long-polling", "callback-polling", "iframe", "websocket]
   func handshake() {
-    let connTypes:NSArray = ["long-polling", "callback-polling", "iframe", "websocket"]
+    let connTypes:NSArray = [BayeuxConnection.LongPolling.rawValue, BayeuxConnection.Callback.rawValue, BayeuxConnection.iFrame.rawValue, BayeuxConnection.WebSocket.rawValue]
     var dict = [String: AnyObject]()
-    dict["channel"] = BayeuxChannel.Handshake.rawValue
-    dict["version"] = "1.0"
-    dict["minimumVersion"] = "1.0beta"
-    dict["supportedConnectionTypes"] = connTypes
+    dict[Bayeux.Channel.rawValue] = BayeuxChannel.Handshake.rawValue
+    dict[Bayeux.Version.rawValue] = "1.0"
+    dict[Bayeux.MinimumVersion.rawValue] = "1.0beta"
+    dict[Bayeux.SupportedConnectionTypes.rawValue] = connTypes
 
     if let string = JSON(dict).rawString() {
       self.transport?.writeString(string)
@@ -250,7 +278,7 @@ private extension FayeClient {
   // "clientId": "Un1q31d3nt1f13r",
   // "connectionType": "long-polling"
   func connect() {
-    let dict:[String:AnyObject] = ["channel": BayeuxChannel.Connect.rawValue, "clientId": self.fayeClientId!, "connectionType": "websocket"]
+    let dict:[String:AnyObject] = [Bayeux.Channel.rawValue: BayeuxChannel.Connect.rawValue, Bayeux.ClientId.rawValue: self.fayeClientId!, Bayeux.ConnectionType.rawValue: BayeuxConnection.WebSocket.rawValue]
 
     if let string = JSON(dict).rawString() {
       self.transport?.writeString(string)
@@ -261,7 +289,7 @@ private extension FayeClient {
   // "channel": "/meta/disconnect",
   // "clientId": "Un1q31d3nt1f13r"
   func disconnect() {
-    let dict:[String:AnyObject] = ["channel": BayeuxChannel.Disconnect.rawValue, "clientId": self.fayeClientId!, "connectionType": "websocket"]
+    let dict:[String:AnyObject] = [Bayeux.Channel.rawValue: BayeuxChannel.Disconnect.rawValue, Bayeux.ClientId.rawValue: self.fayeClientId!, Bayeux.ConnectionType.rawValue: BayeuxConnection.WebSocket.rawValue]
     if let string = JSON(dict).rawString() {
       self.transport?.writeString(string)
     }
@@ -271,11 +299,19 @@ private extension FayeClient {
   // "channel": "/meta/subscribe",
   // "clientId": "Un1q31d3nt1f13r",
   // "subscription": "/foo/**"
-  func subscribe(channel:String) {
-    let dict:[String:AnyObject] = ["channel": BayeuxChannel.Subscribe.rawValue, "clientId": self.fayeClientId!, "subscription": channel]
-    if let string = JSON(dict).rawString() {
-      self.transport?.writeString(string)
-      self.pendingSubscriptions.insert(channel)
+  func subscribe(model:FayeSubscriptionModel) {
+    do {
+        let json = try model.jsonString()
+        
+        self.transport?.writeString(json)
+        self.pendingSubscriptions.append(model)
+    } catch FayeSubscriptionModelError.ConversationError {
+        
+    } catch FayeSubscriptionModelError.ClientIdNotValid where fayeClientId?.characters.count > 0 {
+        model.clientId = fayeClientId
+        subscribe(model)
+    } catch {
+        
     }
   }
 
@@ -287,7 +323,7 @@ private extension FayeClient {
   // }
   func unsubscribe(channel:String) {
     if let clientId = self.fayeClientId {
-      let dict:[String:AnyObject] = ["channel": BayeuxChannel.Unsubscibe.rawValue, "clientId": clientId, "subscription": channel]
+      let dict:[String:AnyObject] = [Bayeux.Channel.rawValue: BayeuxChannel.Unsubscibe.rawValue, Bayeux.ClientId.rawValue: clientId, Bayeux.Subscription.rawValue: channel]
       if let string = JSON(dict).rawString() {
         self.transport?.writeString(string)
       }
@@ -303,7 +339,7 @@ private extension FayeClient {
   // }
   func publish(data:[String:AnyObject], channel:String) {
     if self.fayeConnected == true {
-      let dict:[String:AnyObject] = ["channel": channel, "clientId": self.fayeClientId!, "id": self.nextMessageId(), "data": data]
+      let dict:[String:AnyObject] = [Bayeux.Channel.rawValue: channel, Bayeux.ClientId.rawValue: self.fayeClientId!, Bayeux.Id.rawValue: self.nextMessageId(), Bayeux.Data.rawValue: data]
 
       if let string = JSON(dict).rawString() {
         print("THIS IS THE PUBSLISH STRING: \(string)")
@@ -321,7 +357,7 @@ private extension FayeClient {
     // if there are any outstanding open subscriptions resubscribe
     for channel in self.queuedSubscriptions {
       self.subscribe(channel)
-      self.queuedSubscriptions.remove(channel)
+      removeChannelFromQueuedSubscriptions(channel.subscription)
     }
   }
 
@@ -340,11 +376,29 @@ private extension FayeClient {
     }
   }
 
-  func nextMessageId() -> String{
+  func nextMessageId() -> String {
     self.messageNumber += 1
     if self.messageNumber >= UINT32_MAX {
       messageNumber = 0
     }
     return "\(self.messageNumber)".encodedString()
+  }
+    
+  private func removeChannelFromQueuedSubscriptions(channel: String) {
+    for (idx, element) in self.queuedSubscriptions.enumerate() where element.subscription == channel {
+      self.queuedSubscriptions.removeAtIndex(idx)
+    }
+  }
+
+  private func removeChannelFromPendingSubscriptions(channel: String) {
+    for (idx, element) in self.pendingSubscriptions.enumerate() where element.subscription == channel {
+      self.pendingSubscriptions.removeAtIndex(idx)
+    }
+  }
+
+  private func removeChannelFromOpenSubscriptions(channel: String) {
+    for (idx, element) in self.openSubscriptions.enumerate() where element.subscription == channel {
+      self.openSubscriptions.removeAtIndex(idx)
+    }
   }
 }

@@ -71,6 +71,12 @@ bayeux.getClient().subscribe('/cool', function(message){
   console.log(JSON.stringify(message));
 });
 
+bayeux.getClient().subscribe('/awesome', function(message){
+  console.log("OMG NEW AWESOME MESSAGE CAME ***********");
+  console.log(JSON.stringify(message));
+});
+
+
 server.listen(5222);
 console.log("Started Faye Server");
 

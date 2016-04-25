@@ -27,6 +27,7 @@
 		A07DDD4070D07F0518CC9913F4C9E2D6 /* NSError+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = B61129D4F667E387188D25F633E0B629 /* NSError+Helper.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		A9DB76C98B77BAC9C5FB4172E70966EB /* Starscream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E94F4BAAE418F28A0730CC56D7FACFF /* Starscream.framework */; };
 		C5681A6362FFDCE2DECBDEE5BFBC907C /* Starscream-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C6718FA411202146721CBD6539BA6A /* Starscream-dummy.m */; };
+		D5766AF41CCE103900222792 /* FayeSubscriptionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5766AF31CCE103900222792 /* FayeSubscriptionModel.swift */; };
 		D7AD1CA221F811429F2397EA408725EE /* Pods-FayeSwift_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DCE2224000629085D044E4A5FDB2710 /* Pods-FayeSwift_Tests-dummy.m */; };
 		E5F282A8CE41FC1844203FB427A39226 /* WebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D64F48FA18233694918281C87E0266 /* WebSocket.swift */; settings = {COMPILER_FLAGS = "-fno-objc-arc -w -Xanalyzer -analyzer-disable-all-checks"; }; };
 		F1C91701EDE25A8DF650080551A1EE5F /* Starscream-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = D47E6B74B427A4904D75990D1C34E829 /* Starscream-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -144,6 +145,7 @@
 		D26B5E2282A330BE919FE4EFDFB738B3 /* Pods-FayeSwift_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-FayeSwift_Tests.debug.xcconfig"; sourceTree = "<group>"; };
 		D33279C9153C75C4AD5A47272F4E6BA8 /* FayeSwift-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "FayeSwift-dummy.m"; sourceTree = "<group>"; };
 		D47E6B74B427A4904D75990D1C34E829 /* Starscream-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Starscream-umbrella.h"; sourceTree = "<group>"; };
+		D5766AF31CCE103900222792 /* FayeSubscriptionModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FayeSubscriptionModel.swift; sourceTree = "<group>"; };
 		E09B4B87B5F08505B3484854BDF5F693 /* FayeClient.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FayeClient.swift; sourceTree = "<group>"; };
 		E4E07C18061452192A8755C57422BE93 /* Pods-FayeSwift_Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-FayeSwift_Tests-frameworks.sh"; sourceTree = "<group>"; };
 		E6671F9532A947F40918CF9A0D44F70F /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -274,6 +276,7 @@
 			isa = PBXGroup;
 			children = (
 				E09B4B87B5F08505B3484854BDF5F693 /* FayeClient.swift */,
+				D5766AF31CCE103900222792 /* FayeSubscriptionModel.swift */,
 				A031FE4B914D5D75EED52D5B6438B92F /* FayeClientDelegate.swift */,
 				B61129D4F667E387188D25F633E0B629 /* NSError+Helper.swift */,
 				F802A9E96DB8EBC2F1E349E2B2CD7D0A /* StringExtensions.swift */,
@@ -589,6 +592,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				172D87FC5B15E2E05E643DD1188F953D /* FayeClient.swift in Sources */,
+				D5766AF41CCE103900222792 /* FayeSubscriptionModel.swift in Sources */,
 				71A71AB65AF6D4590B241277504532F1 /* FayeClientDelegate.swift in Sources */,
 				FF0CA1F99F12CC1A9B852F6601921D99 /* FayeSwift-dummy.m in Sources */,
 				A07DDD4070D07F0518CC9913F4C9E2D6 /* NSError+Helper.swift in Sources */,

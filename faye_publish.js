@@ -5,3 +5,6 @@ var faye = require('faye'),
 faye.Logging.logLevel = 'debug';
 
 client.publish("/cool", {"text": "ok from server nice stuff"})
+client.publish("/awesome", {"text": "awesome from server nice stuff"})
+
+console.log("Message sent!";

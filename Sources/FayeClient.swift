@@ -116,8 +116,8 @@ public class FayeClient : TransportDelegate {
     return true
   }
     
-  public func subscribeToChannel(channel:String, block:ChannelSubscriptionBlock?=nil) {
-    subscribeToChannel(FayeSubscriptionModel(subscription: channel, clientId: fayeClientId), block: block)
+  public func subscribeToChannel(channel:String, block:ChannelSubscriptionBlock?=nil) -> Bool {
+    return subscribeToChannel(FayeSubscriptionModel(subscription: channel, clientId: fayeClientId), block: block)
   }
     
   public func unsubscribeFromChannel(channel:String) {

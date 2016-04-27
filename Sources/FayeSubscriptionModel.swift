@@ -63,7 +63,7 @@ public class FayeSubscriptionModel {
     // MARK: Helper
     
     ///  Create dictionary of model object, Subclasses should override method to return custom model
-    public func toDictionary() throws -> [String: String] {
+    public func toDictionary() throws -> [String: AnyObject] {
         guard let clientId = clientId else {
             throw FayeSubscriptionModelError.ClientIdNotValid
         }

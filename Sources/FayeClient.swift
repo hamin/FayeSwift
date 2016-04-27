@@ -385,20 +385,27 @@ private extension FayeClient {
   }
     
   private func removeChannelFromQueuedSubscriptions(channel: String) {
-    for (idx, element) in self.queuedSubscriptions.enumerate() where element.subscription == channel {
-      self.queuedSubscriptions.removeAtIndex(idx)
+    let index = self.queuedSubscriptions.indexOf { $0.subscription == channel }
+    
+    if let index = index {
+        self.queuedSubscriptions.removeAtIndex(index)
     }
+    
   }
 
   private func removeChannelFromPendingSubscriptions(channel: String) {
-    for (idx, element) in self.pendingSubscriptions.enumerate() where element.subscription == channel {
-      self.pendingSubscriptions.removeAtIndex(idx)
+    let index = self.pendingSubscriptions.indexOf { $0.subscription == channel }
+    
+    if let index = index {
+        self.pendingSubscriptions.removeAtIndex(index)
     }
   }
 
   private func removeChannelFromOpenSubscriptions(channel: String) {
-    for (idx, element) in self.openSubscriptions.enumerate() where element.subscription == channel {
-      self.openSubscriptions.removeAtIndex(idx)
+    let index = self.openSubscriptions.indexOf { $0.subscription == channel }
+    
+    if let index = index {
+        self.openSubscriptions.removeAtIndex(index)
     }
   }
 }

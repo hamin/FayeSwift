@@ -104,7 +104,7 @@ func didUnsubscribeFromChannel(client: FayeClient, channel: String) {
 The subscriptionFailedWithError method is called when the client fails to subscribe to a Faye channel.
 
 ```swift
-func subscriptionFailedWithError(client: FayeClient, error: String) {
+func subscriptionFailedWithError(client: FayeClient, error: subscriptionError) {
    println("SUBSCRIPTION FAILED!!!!")
 }
 ```

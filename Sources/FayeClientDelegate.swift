@@ -8,6 +8,10 @@
 
 import Foundation
 
+public enum subscriptionError: ErrorType {
+    case error(subscription: String, error: String)
+}
+
 // MARK: FayeClientDelegate Protocol
 public protocol FayeClientDelegate: NSObjectProtocol {
   func messageReceived(client:FayeClient, messageDict: NSDictionary, channel: String)
@@ -16,7 +20,7 @@ public protocol FayeClientDelegate: NSObjectProtocol {
   func connectionFailed(client:FayeClient)
   func didSubscribeToChannel(client:FayeClient, channel:String)
   func didUnsubscribeFromChannel(client:FayeClient, channel:String)
-  func subscriptionFailedWithError(client:FayeClient, error:String)
+  func subscriptionFailedWithError(client:FayeClient, error:subscriptionError)
   func fayeClientError(client:FayeClient, error:NSError)
 }
 
@@ -27,6 +31,6 @@ public extension FayeClientDelegate {
   func connectionFailed(client:FayeClient){}
   func didSubscribeToChannel(client:FayeClient, channel:String){}
   func didUnsubscribeFromChannel(client:FayeClient, channel:String){}
-  func subscriptionFailedWithError(client:FayeClient, error:String){}
+  func subscriptionFailedWithError(client:FayeClient, error:subscriptionError){}
   func fayeClientError(client:FayeClient, error:NSError){}
 }

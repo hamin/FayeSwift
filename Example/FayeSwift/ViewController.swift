@@ -79,7 +79,7 @@ class ViewController: UIViewController, UITextFieldDelegate, FayeClientDelegate 
     print("Unsubscribed from channel \(channel)")
   }
   
-  func subscriptionFailedWithError(client: FayeClient, error: String) {
+  func subscriptionFailedWithError(client: FayeClient, error: subscriptionError) {
     print("Subscription failed")
   }
   

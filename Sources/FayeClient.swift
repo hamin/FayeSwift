@@ -217,8 +217,11 @@ private extension FayeClient {
             }
           } else {
             // Subscribe Failed
-            if let error = messageJSON[0][Bayeux.Error.rawValue].string {
-              self.delegate?.subscriptionFailedWithError(self, error: error)
+            if let error = messageJSON[0][Bayeux.Error.rawValue].string,
+            subscription = messageJSON[0][Bayeux.Subscription.rawValue].string {
+              self.delegate?.subscriptionFailedWithError(
+                self,
+                error: subscriptionError.error(subscription: subscription, error: error))
             }
           }
         case .Unsubscibe:

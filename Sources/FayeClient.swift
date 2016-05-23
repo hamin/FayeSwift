@@ -48,7 +48,14 @@ public typealias ChannelSubscriptionBlock = (NSDictionary) -> Void
 
 // MARK: FayeClient
 public class FayeClient : TransportDelegate {
-  public var fayeURLString:String
+  public var fayeURLString:String {
+    didSet {
+      if let transport = self.transport {
+        transport.urlString = fayeURLString
+      }
+    }
+  }
+    
   public var fayeClientId:String?
   public weak var delegate:FayeClientDelegate?
   
@@ -243,7 +250,7 @@ private extension FayeClient {
               self.delegate?.messageReceived(self, messageDict: data as! NSDictionary, channel: channel)
             }
           } else {
-            print("For some reason data is nil, maybe double posting?!")
+            print("For some reason data is nil, maybe double posting?")
           }
         } else {
           print("weird channel")

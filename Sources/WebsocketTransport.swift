@@ -22,15 +22,18 @@ internal class WebsocketTransport: Transport, WebSocketDelegate {
   func openConnection() {
     self.closeConnection()
     self.webSocket = WebSocket(url: NSURL(string:self.urlString!)!)
-    self.webSocket!.delegate = self;
-    self.webSocket!.connect()
+    
+    if let webSocket = self.webSocket {
+      webSocket.delegate = self;
+      webSocket.connect()
+    }
   }
   
   func closeConnection() {
-    if self.webSocket != nil {
-      self.webSocket!.delegate = nil
-      self.webSocket!.disconnect()
-      self.webSocket = nil;
+    if let webSocket = self.webSocket {
+      webSocket.delegate = nil
+      webSocket.disconnect()
+      self.webSocket = nil
     }
   }
   

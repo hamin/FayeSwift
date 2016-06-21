@@ -15,6 +15,7 @@ public enum FayeSubscriptionState {
     case Subscribed(FayeSubscriptionModel)
     case Queued(FayeSubscriptionModel)
     case SubscribingTo(FayeSubscriptionModel)
+    case Unknown(FayeSubscriptionModel)
 }
 
 // MARK: BayuexChannel Messages

@@ -9,6 +9,14 @@
 import Foundation
 import SwiftyJSON
 
+// MARK: Subscription State
+public enum FayeSubscriptionState {
+    case Pending(FayeSubscriptionModel)
+    case Subscribed(FayeSubscriptionModel)
+    case Queued(FayeSubscriptionModel)
+    case SubscribingTo(FayeSubscriptionModel)
+}
+
 // MARK: BayuexChannel Messages
 public enum BayeuxChannel: String {
     case Handshake = "/meta/handshake"
@@ -31,7 +39,6 @@ public enum Bayeux: String {
     case SupportedConnectionTypes = "supportedConnectionTypes"
     case Successful = "successful"
     case Error = "error"
-
 }
 
 // MARK: Bayuex Connection Type
@@ -109,21 +116,31 @@ public class FayeClient : TransportDelegate {
     self.publish(messageDict, channel: channel)
   }
 
-  public func subscribeToChannel(model:FayeSubscriptionModel, block:ChannelSubscriptionBlock?=nil) -> Bool {
-    if self.isSubscribedToChannel(model.subscription) || self.pendingSubscriptions.contains({ $0 == model }) {
-      return false
+  public func subscribeToChannel(model:FayeSubscriptionModel, block:ChannelSubscriptionBlock?=nil) -> FayeSubscriptionState {
+    guard !self.isSubscribedToChannel(model.subscription) else {
+      return .Subscribed(model)
     }
     
-    self.fayeConnected == true ? self.subscribe(model) : self.queuedSubscriptions.append(model)
+    guard !self.pendingSubscriptions.contains({ $0 == model }) else {
+      return .Pending(model)
+    }
     
     if let block = block {
       self.channelSubscriptionBlocks[model.subscription] = block;
     }
     
-    return true
+    if self.fayeConnected == false {
+      self.queuedSubscriptions.append(model)
+        
+      return .Queued(model)
+    }
+    
+    self.subscribe(model)
+    
+    return .SubscribingTo(model)
   }
     
-  public func subscribeToChannel(channel:String, block:ChannelSubscriptionBlock?=nil) -> Bool {
+  public func subscribeToChannel(channel:String, block:ChannelSubscriptionBlock?=nil) -> FayeSubscriptionState {
     return subscribeToChannel(FayeSubscriptionModel(subscription: channel, clientId: fayeClientId), block: block)
   }
     
@@ -137,11 +154,11 @@ public class FayeClient : TransportDelegate {
     removeChannelFromPendingSubscriptions(channel)
   }
 
-  public func isSubscribedToChannel(channel:String) -> (Bool) {
+  public func isSubscribedToChannel(channel:String) -> Bool {
     return self.openSubscriptions.contains { $0.subscription == channel }
   }
 
-  public func isTransportConnected() -> (Bool) {
+  public func isTransportConnected() -> Bool {
     return self.transport!.isConnected()
   }
 }
@@ -388,34 +405,50 @@ private extension FayeClient {
 
   func nextMessageId() -> String {
     self.messageNumber += 1
+    
     if self.messageNumber >= UINT32_MAX {
       messageNumber = 0
     }
+    
     return "\(self.messageNumber)".encodedString()
   }
-    
-  private func removeChannelFromQueuedSubscriptions(channel: String) {
+
+  // MARK:
+  // MARK: Subscriptions
+  
+  private func removeChannelFromQueuedSubscriptions(channel: String) -> Bool {
     let index = self.queuedSubscriptions.indexOf { $0.subscription == channel }
     
     if let index = index {
-        self.queuedSubscriptions.removeAtIndex(index)
+      self.queuedSubscriptions.removeAtIndex(index)
+        
+      return true
     }
     
+    return false
   }
 
-  private func removeChannelFromPendingSubscriptions(channel: String) {
+  private func removeChannelFromPendingSubscriptions(channel: String) -> Bool {
     let index = self.pendingSubscriptions.indexOf { $0.subscription == channel }
     
     if let index = index {
-        self.pendingSubscriptions.removeAtIndex(index)
+      self.pendingSubscriptions.removeAtIndex(index)
+        
+      return true
     }
+    
+    return false
   }
 
-  private func removeChannelFromOpenSubscriptions(channel: String) {
+  private func removeChannelFromOpenSubscriptions(channel: String) -> Bool {
     let index = self.openSubscriptions.indexOf { $0.subscription == channel }
     
     if let index = index {
-        self.openSubscriptions.removeAtIndex(index)
+      self.openSubscriptions.removeAtIndex(index)
+        
+      return true
     }
+    
+    return false
   }
 }

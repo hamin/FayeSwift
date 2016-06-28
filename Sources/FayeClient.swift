@@ -79,6 +79,18 @@ public class FayeClient : TransportDelegate {
 
   private var channelSubscriptionBlocks = Dictionary<String,ChannelSubscriptionBlock>()
 
+  private lazy var pendingSubscriptionSchedule: NSTimer = {
+        let timer = NSTimer.scheduledTimerWithTimeInterval(
+            45,
+            target: self,
+            selector: #selector(pendingSubscriptionsAction(_:)),
+            userInfo: nil, 
+            repeats: true
+        )
+        
+        return timer
+    }()
+    
   public init(aFayeURLString:String, channel:String?) {
     self.fayeURLString = aFayeURLString
     self.fayeConnected = false;
@@ -97,7 +109,11 @@ public class FayeClient : TransportDelegate {
     self.init(aFayeURLString: aFayeURLString, channel: channel)
     self.channelSubscriptionBlocks[channel] = channelBlock;
   }
-
+  
+  deinit {
+    pendingSubscriptionSchedule.invalidate()
+  }
+    
   public func connectToServer() {
     if self.connectionInitiated != true {
       self.transport?.openConnection()
@@ -218,7 +234,7 @@ private extension FayeClient {
             self.fayeConnected = true;
             self.connect()
             self.subscribeQueuedSubscriptions()
-
+            pendingSubscriptionSchedule.valid
           } else {
             // OOPS
           }
@@ -396,6 +412,13 @@ private extension FayeClient {
     }
   }
 
+  func resubscribeToPendingSubscriptions() {
+    for channel in pendingSubscriptions {
+      removeChannelFromPendingSubscriptions(channel.subscription)
+      subscribe(channel)
+    }
+  }
+
   func send(message: NSDictionary) {
     // Parse JSON
     if let string = JSON(message).rawString() {
@@ -458,5 +481,17 @@ private extension FayeClient {
     }
     
     return false
+  }
+    
+  // MARK: Private - Timer Action
+  @objc
+  func pendingSubscriptionsAction(timer: NSTimer) {
+    guard fayeConnected == true && pendingSubscriptions.isEmpty == false else {
+      return
+    }
+    
+    resubscribeToPendingSubscriptions()
+    
+    print("resubscribing to all pending subscriptions")
   }
 }

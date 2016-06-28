@@ -32,8 +32,6 @@ class ViewController: UIViewController, UITextFieldDelegate, FayeClientDelegate 
     }
     client.subscribeToChannel("/awesome", block: channelBlock)
     
-    
-    
     let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(5 * Double(NSEC_PER_SEC)))
     dispatch_after(delayTime, dispatch_get_main_queue()) {
       self.client.unsubscribeFromChannel("/awesome")
@@ -42,8 +40,12 @@ class ViewController: UIViewController, UITextFieldDelegate, FayeClientDelegate 
     dispatch_after(delayTime, dispatch_get_main_queue()) {
       let model = FayeSubscriptionModel(subscription: "/awesome", clientId: nil)
         
-      self.client.subscribeToChannel(model, block: { (messages) in
+      self.client.subscribeToChannel(model, block: { [unowned self] messages in
         print("awesome response: \(messages)")
+        
+        self.client.sendPing("Ping".dataUsingEncoding(NSUTF8StringEncoding)!, completion: {
+          print("got pong")
+        })
       })
     }
   }

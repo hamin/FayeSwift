@@ -116,6 +116,10 @@ public class FayeClient : TransportDelegate {
   public func sendMessage(messageDict:[String:AnyObject], channel:String) {
     self.publish(messageDict, channel: channel)
   }
+    
+  public func sendPing(data: NSData, completion: (() -> ())?) {
+    self.transport?.sendPing(data, completion: completion)
+  }
 
   public func subscribeToChannel(model:FayeSubscriptionModel, block:ChannelSubscriptionBlock?=nil) -> FayeSubscriptionState {
     guard !self.isSubscribedToChannel(model.subscription) else {

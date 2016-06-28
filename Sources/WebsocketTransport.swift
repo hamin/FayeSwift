@@ -42,6 +42,10 @@ internal class WebsocketTransport: Transport, WebSocketDelegate, WebSocketPongDe
     self.webSocket?.writeString(aString)
   }
   
+  func sendPing(data: NSData, completion: (() -> ())? = nil) {
+    self.webSocket?.writePing(data, completion: completion)
+  }
+  
   func isConnected() -> (Bool) {
     return self.webSocket?.isConnected ?? false
   }

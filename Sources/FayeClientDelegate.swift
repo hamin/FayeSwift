@@ -15,6 +15,7 @@ public enum subscriptionError: ErrorType {
 // MARK: FayeClientDelegate Protocol
 public protocol FayeClientDelegate: NSObjectProtocol {
   func messageReceived(client:FayeClient, messageDict: NSDictionary, channel: String)
+  func pongReceived(client:FayeClient)
   func connectedToServer(client:FayeClient)
   func disconnectedFromServer(client:FayeClient)
   func connectionFailed(client:FayeClient)
@@ -26,6 +27,7 @@ public protocol FayeClientDelegate: NSObjectProtocol {
 
 public extension FayeClientDelegate {
   func messageReceived(client:FayeClient, messageDict: NSDictionary, channel: String){}
+  func pongReceived(client:FayeClient){}
   func connectedToServer(client:FayeClient){}
   func disconnectedFromServer(client:FayeClient){}
   func connectionFailed(client:FayeClient){}

@@ -9,7 +9,7 @@
 import Foundation
 import Starscream
 
-internal class WebsocketTransport: Transport, WebSocketDelegate {
+internal class WebsocketTransport: Transport, WebSocketDelegate, WebSocketPongDelegate {
   var urlString:String?
   var webSocket:WebSocket?
   internal weak var delegate:TransportDelegate?
@@ -24,7 +24,8 @@ internal class WebsocketTransport: Transport, WebSocketDelegate {
     self.webSocket = WebSocket(url: NSURL(string:self.urlString!)!)
     
     if let webSocket = self.webSocket {
-      webSocket.delegate = self;
+      webSocket.delegate = self
+      webSocket.pongDelegate = self
       webSocket.connect()
     }
   }
@@ -66,5 +67,10 @@ internal class WebsocketTransport: Transport, WebSocketDelegate {
   internal func websocketDidReceiveData(socket: WebSocket, data: NSData) {
     print("got some data: \(data.length)")
     //self.socket.writeData(data)
+  }
+
+  // MARK: WebSocket Pong Delegate
+  internal func websocketDidReceivePong(socket: WebSocket) {
+    self.delegate?.didReceivePong()
   }
 }

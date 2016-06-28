@@ -87,4 +87,8 @@ class ViewController: UIViewController, UITextFieldDelegate, FayeClientDelegate 
     let text: AnyObject? = messageDict["text"]
     print("Here is the message: \(text)")
   }
+  
+  func pongReceived(client: FayeClient) {
+    print("pong")
+  }
 }

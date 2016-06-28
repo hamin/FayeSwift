@@ -19,4 +19,5 @@ public protocol TransportDelegate: class {
   func didDisconnect(error: NSError?)
   func didWriteError(error:NSError?)
   func didReceiveMessage(text:String)
+  func didReceivePong()
 }

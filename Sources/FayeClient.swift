@@ -191,7 +191,10 @@ extension FayeClient {
   public func didReceiveMessage(text: String) {
     self.receive(text)
   }
-
+    
+  public func didReceivePong() {
+    self.delegate?.pongReceived(self)
+  }
 }
 
 // MARK: Private Bayuex Methods

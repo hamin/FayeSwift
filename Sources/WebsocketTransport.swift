@@ -16,6 +16,7 @@ internal class WebsocketTransport: Transport, WebSocketDelegate, WebSocketPongDe
   
   convenience required internal init(url: String) {
     self.init()
+    
     self.urlString = url
   }
   
@@ -27,10 +28,14 @@ internal class WebsocketTransport: Transport, WebSocketDelegate, WebSocketPongDe
       webSocket.delegate = self
       webSocket.pongDelegate = self
       webSocket.connect()
+        
+      print("Faye: Opening connection")
     }
   }
   
   func closeConnection() {
+    print("Faye: Closing connection")
+    
     if let webSocket = self.webSocket {
       webSocket.delegate = nil
       webSocket.disconnect()

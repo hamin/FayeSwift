@@ -118,6 +118,8 @@ public class FayeClient : TransportDelegate {
     if self.connectionInitiated != true {
       self.transport?.openConnection()
       self.connectionInitiated = true;
+    } else {
+        print("Faye: Connection established")
     }
   }
 

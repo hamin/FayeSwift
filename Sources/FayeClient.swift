@@ -290,11 +290,16 @@ private extension FayeClient {
         if self.isSubscribedToChannel(channel) {
           if messageJSON[0][Bayeux.Data.rawValue] != JSON.null {
             let data: AnyObject = messageJSON[0][Bayeux.Data.rawValue].object
+            
             if let channelBlock = self.channelSubscriptionBlocks[channel] {
               channelBlock(data as! NSDictionary)
-            } else {
-              self.delegate?.messageReceived(self, messageDict: data as! NSDictionary, channel: channel)
             }
+            
+            self.delegate?.messageReceived(
+              self,
+              messageDict: data as! NSDictionary,
+              channel: channel
+            )
           } else {
             print("For some reason data is nil, maybe double posting?")
           }

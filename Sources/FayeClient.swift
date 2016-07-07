@@ -68,7 +68,13 @@ public class FayeClient : TransportDelegate {
   public weak var delegate:FayeClientDelegate?
   
   private var transport:WebsocketTransport?
-  private var fayeConnected:Bool?
+  private var fayeConnected:Bool? {
+    didSet {
+      if fayeConnected == false {
+        addExistingOpenSubscriptionsToPending()
+      }
+    }
+  }
   
   private var connectionInitiated:Bool?
   private var messageNumber:UInt32 = 0
@@ -428,6 +434,14 @@ private extension FayeClient {
       subscribe(channel)
     }
   }
+    
+  func addExistingOpenSubscriptionsToPending() {
+    self.pendingSubscriptions.appendContentsOf(self.openSubscriptions)
+    self.openSubscriptions.removeAll(keepCapacity: true)
+    
+    self.pendingSubscriptions.appendContentsOf(self.queuedSubscriptions)
+    self.queuedSubscriptions.removeAll()
+  }
 
   func send(message: NSDictionary) {
     // Parse JSON
@@ -502,6 +516,6 @@ private extension FayeClient {
     
     resubscribeToPendingSubscriptions()
     
-    print("resubscribing to all pending subscriptions")
+    print("Faye: Resubscribing to all pending subscriptions")
   }
 }

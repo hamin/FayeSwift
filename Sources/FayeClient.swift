@@ -71,7 +71,7 @@ public class FayeClient : TransportDelegate {
   private var fayeConnected:Bool? {
     didSet {
       if fayeConnected == false {
-        addExistingOpenSubscriptionsToPending()
+        addExistingOpenSubscriptionsToQueued()
       }
     }
   }
@@ -435,12 +435,12 @@ private extension FayeClient {
     }
   }
     
-  func addExistingOpenSubscriptionsToPending() {
-    self.pendingSubscriptions.appendContentsOf(self.openSubscriptions)
+  func addExistingOpenSubscriptionsToQueued() {
+    self.queuedSubscriptions.appendContentsOf(self.openSubscriptions)
     self.openSubscriptions.removeAll(keepCapacity: true)
     
-    self.pendingSubscriptions.appendContentsOf(self.queuedSubscriptions)
-    self.queuedSubscriptions.removeAll()
+    self.queuedSubscriptions.appendContentsOf(self.pendingSubscriptions)
+    self.pendingSubscriptions.removeAll()
   }
 
   func send(message: NSDictionary) {

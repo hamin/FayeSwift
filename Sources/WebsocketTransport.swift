@@ -38,7 +38,7 @@ internal class WebsocketTransport: Transport, WebSocketDelegate, WebSocketPongDe
     
     if let webSocket = self.webSocket {
       webSocket.delegate = nil
-      webSocket.disconnect()
+      webSocket.disconnect(forceTimeout: 0)
       self.webSocket = nil
     }
   }

@@ -346,7 +346,7 @@ private extension FayeClient {
   // "clientId": "Un1q31d3nt1f13r",
   // "connectionType": "long-polling"
   func connect() {
-    let dict:[String:AnyObject] = [Bayeux.Channel.rawValue: BayeuxChannel.Connect.rawValue, Bayeux.ClientId.rawValue: self.fayeClientId!, Bayeux.ConnectionType.rawValue: BayeuxConnection.WebSocket.rawValue]
+    let dict:[String:AnyObject] = [Bayeux.Channel.rawValue: BayeuxChannel.Connect.rawValue, Bayeux.ClientId.rawValue: self.fayeClientId!, Bayeux.ConnectionType.rawValue: BayeuxConnection.WebSocket.rawValue, "advice": ["timeout": 0]]
 
     if let string = JSON(dict).rawString() {
       self.transport?.writeString(string)

@@ -86,17 +86,16 @@ public class FayeClient : TransportDelegate {
   private var channelSubscriptionBlocks = Dictionary<String,ChannelSubscriptionBlock>()
 
   private lazy var pendingSubscriptionSchedule: NSTimer = {
-        let timer = NSTimer.scheduledTimerWithTimeInterval(
+        return NSTimer.scheduledTimerWithTimeInterval(
             45,
             target: self,
             selector: #selector(pendingSubscriptionsAction(_:)),
             userInfo: nil, 
             repeats: true
         )
-        
-        return timer
     }()
-    
+
+  // MARK: Init
   public init(aFayeURLString:String, channel:String?) {
     self.fayeURLString = aFayeURLString
     self.fayeConnected = false;
@@ -299,6 +298,8 @@ private extension FayeClient {
             
             if let channelBlock = self.channelSubscriptionBlocks[channel] {
               channelBlock(data as! NSDictionary)
+            } else {
+                print("Faye: Failed to get channel block for : \(channel)")
             }
             
             self.delegate?.messageReceived(
@@ -310,7 +311,7 @@ private extension FayeClient {
             print("For some reason data is nil, maybe double posting?")
           }
         } else {
-          print("weird channel")
+          print("weird channel that not been set to subscribed")
         }
       }
     } else {
@@ -423,15 +424,15 @@ private extension FayeClient {
   func subscribeQueuedSubscriptions() {
     // if there are any outstanding open subscriptions resubscribe
     for channel in self.queuedSubscriptions {
-      subscribe(channel)
       removeChannelFromQueuedSubscriptions(channel.subscription)
+      subscribeToChannel(channel)
     }
   }
 
   func resubscribeToPendingSubscriptions() {
     for channel in pendingSubscriptions {
       removeChannelFromPendingSubscriptions(channel.subscription)
-      subscribe(channel)
+      subscribeToChannel(channel)
     }
   }
     

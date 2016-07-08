@@ -367,7 +367,7 @@ private extension FayeClient {
   // "channel": "/meta/subscribe",
   // "clientId": "Un1q31d3nt1f13r",
   // "subscription": "/foo/**"
-  func subscribe(model:FayeSubscriptionModel) {
+  func subscribe(var model:FayeSubscriptionModel) {
     do {
         let json = try model.jsonString()
         

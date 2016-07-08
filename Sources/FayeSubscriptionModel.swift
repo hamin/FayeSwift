@@ -18,7 +18,7 @@ public enum FayeSubscriptionModelError: ErrorType {
 // MARK: FayeSubscriptionModel
 
 ///  Subscription Model
-public class FayeSubscriptionModel {
+public struct FayeSubscriptionModel {
     
     /// Subscription URL
     public let subscription: String

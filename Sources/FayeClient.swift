@@ -423,7 +423,7 @@ private extension FayeClient {
   func subscribeQueuedSubscriptions() {
     // if there are any outstanding open subscriptions resubscribe
     for channel in self.queuedSubscriptions {
-      self.subscribe(channel)
+      subscribe(channel)
       removeChannelFromQueuedSubscriptions(channel.subscription)
     }
   }
@@ -436,11 +436,15 @@ private extension FayeClient {
   }
     
   func addExistingOpenSubscriptionsToQueued() {
-    self.queuedSubscriptions.appendContentsOf(self.openSubscriptions)
-    self.openSubscriptions.removeAll(keepCapacity: true)
+    if !self.openSubscriptions.isEmpty {
+      self.queuedSubscriptions.appendContentsOf(self.openSubscriptions)
+      self.openSubscriptions.removeAll(keepCapacity: true)
+    }
     
-    self.queuedSubscriptions.appendContentsOf(self.pendingSubscriptions)
-    self.pendingSubscriptions.removeAll()
+    if !self.pendingSubscriptions.isEmpty {
+      self.queuedSubscriptions.appendContentsOf(self.pendingSubscriptions)
+      self.pendingSubscriptions.removeAll()
+    }
   }
 
   func send(message: NSDictionary) {

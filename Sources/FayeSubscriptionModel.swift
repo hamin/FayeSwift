@@ -80,7 +80,7 @@ public class FayeSubscriptionModel {
 extension FayeSubscriptionModel: CustomStringConvertible {
     
     public var description: String {
-        return "subscription: \(self.subscription), channel: \(self.channel.rawValue), clientId: \(self.clientId)"
+        return "\(String(self)): \(try? self.toDictionary())"
     }
 }
 

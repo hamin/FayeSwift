@@ -80,7 +80,7 @@ public class FayeSubscriptionModel {
 extension FayeSubscriptionModel: CustomStringConvertible {
     
     public var description: String {
-        return "\(String(self)): \(try? self.toDictionary())"
+        return "FayeSubscriptionModel: \(try? self.toDictionary())"
     }
 }
 

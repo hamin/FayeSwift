@@ -74,6 +74,16 @@ public class FayeSubscriptionModel {
     }
 }
 
+// MARK: 
+// MARK: Description
+
+extension FayeSubscriptionModel: CustomStringConvertible {
+    
+    public var description: String {
+        return "subscription: \(self.subscription), channel: \(self.channel.rawValue), clientId: \(self.clientId)"
+    }
+}
+
 // MARK:
 // MARK: Equatable
 

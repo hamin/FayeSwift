@@ -26,7 +26,7 @@ public class FayeSubscriptionModel {
     /// Channel type for request
     public let channel: BayeuxChannel
     
-    /// Uniqle client id
+    /// Uniqle client id for socket
     public var clientId: String?
     
     /// Model must conform to Hashable

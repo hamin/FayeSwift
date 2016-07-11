@@ -330,6 +330,7 @@ private extension FayeClient {
   // "supportedConnectionTypes": ["long-polling", "callback-polling", "iframe", "websocket]
   func handshake() {
     let connTypes:NSArray = [BayeuxConnection.LongPolling.rawValue, BayeuxConnection.Callback.rawValue, BayeuxConnection.iFrame.rawValue, BayeuxConnection.WebSocket.rawValue]
+    
     var dict = [String: AnyObject]()
     dict[Bayeux.Channel.rawValue] = BayeuxChannel.Handshake.rawValue
     dict[Bayeux.Version.rawValue] = "1.0"
@@ -446,6 +447,9 @@ private extension FayeClient {
       self.queuedSubscriptions.appendContentsOf(self.pendingSubscriptions)
       self.pendingSubscriptions.removeAll()
     }
+    
+    // reconnecting to socket creates a new ID
+    self.queuedSubscriptions.forEach({ $0.clientId = nil })
   }
 
   func send(message: NSDictionary) {

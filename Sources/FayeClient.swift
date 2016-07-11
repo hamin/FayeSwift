@@ -515,7 +515,9 @@ private extension FayeClient {
   // MARK: Private - Timer Action
   @objc
   func pendingSubscriptionsAction(timer: NSTimer) {
-    guard fayeConnected == true && pendingSubscriptions.isEmpty == false else {
+    guard fayeConnected == true else {
+      print("Faye: Failed to resubscribe to pending, socket disconnected!!")
+      
       return
     }
     

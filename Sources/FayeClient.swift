@@ -71,7 +71,7 @@ public class FayeClient : TransportDelegate {
   private var fayeConnected:Bool? {
     didSet {
       if fayeConnected == false {
-        addExistingOpenSubscriptionsToQueued()
+        unsubscribeAllSubscriptions()
       }
     }
   }
@@ -437,19 +437,10 @@ private extension FayeClient {
     }
   }
     
-  func addExistingOpenSubscriptionsToQueued() {
-    if !self.openSubscriptions.isEmpty {
-      self.queuedSubscriptions.appendContentsOf(self.openSubscriptions)
-      self.openSubscriptions.removeAll(keepCapacity: true)
-    }
+  func unsubscribeAllSubscriptions() {
+    let all = queuedSubscriptions + openSubscriptions + pendingSubscriptions
     
-    if !self.pendingSubscriptions.isEmpty {
-      self.queuedSubscriptions.appendContentsOf(self.pendingSubscriptions)
-      self.pendingSubscriptions.removeAll()
-    }
-    
-    // reconnecting to socket creates a new ID
-    self.queuedSubscriptions.forEach({ $0.clientId = nil })
+    all.forEach({ unsubscribeFromChannel($0.subscription) })
   }
 
   func send(message: NSDictionary) {

@@ -129,6 +129,8 @@ public class FayeClient : TransportDelegate {
   }
 
   public func disconnectFromServer() {
+    unsubscribeAllSubscriptions()
+    
     self.disconnect()
   }
 

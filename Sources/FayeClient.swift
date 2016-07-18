@@ -270,7 +270,7 @@ private extension FayeClient {
               self.openSubscriptions.append(FayeSubscriptionModel(subscription: subscription, clientId: fayeClientId))
               self.delegate?.didSubscribeToChannel(self, channel: subscription)
             } else {
-              print("Missing subscription for Subscribe")
+              print("Faye: Missing subscription for Subscribe")
             }
           } else {
             // Subscribe Failed
@@ -289,7 +289,7 @@ private extension FayeClient {
             removeChannelFromOpenSubscriptions(subscription)
             self.delegate?.didUnsubscribeFromChannel(self, channel: subscription)
           } else {
-            print("Missing subscription for Unsubscribe")
+            print("Faye: Missing subscription for Unsubscribe")
           }
         }
       } else {
@@ -310,14 +310,14 @@ private extension FayeClient {
               channel: channel
             )
           } else {
-            print("For some reason data is nil, maybe double posting?")
+            print("Faye: For some reason data is nil for channel: \(channel)")
           }
         } else {
-          print("weird channel that not been set to subscribed")
+          print("Faye: Weird channel that not been set to subscribed: \(channel)")
         }
       }
     } else {
-      print("Missing channel")
+      print("Faye: Missing channel for \(messageDict)")
     }
   }
 
@@ -413,7 +413,7 @@ private extension FayeClient {
       let dict:[String:AnyObject] = [Bayeux.Channel.rawValue: channel, Bayeux.ClientId.rawValue: self.fayeClientId!, Bayeux.Id.rawValue: self.nextMessageId(), Bayeux.Data.rawValue: data]
 
       if let string = JSON(dict).rawString() {
-        print("THIS IS THE PUBSLISH STRING: \(string)")
+        print("Faye: Publish string: \(string)")
         self.transport?.writeString(string)
       }
     } else {
@@ -433,6 +433,8 @@ private extension FayeClient {
   }
 
   func resubscribeToPendingSubscriptions() {
+    print("Faye: Resubscribing to all pending(\(pendingSubscriptions.count)) subscriptions")
+    
     for channel in pendingSubscriptions {
       removeChannelFromPendingSubscriptions(channel.subscription)
       subscribeToChannel(channel)
@@ -513,13 +515,11 @@ private extension FayeClient {
   @objc
   func pendingSubscriptionsAction(timer: NSTimer) {
     guard fayeConnected == true else {
-      print("Faye: Failed to resubscribe to pending, socket disconnected!!")
+      print("Faye: Failed to resubscribe to all pending channels, socket disconnected")
       
       return
     }
     
     resubscribeToPendingSubscriptions()
-    
-    print("Faye: Resubscribing to all pending subscriptions")
   }
 }

@@ -74,7 +74,7 @@ internal class WebsocketTransport: Transport, WebSocketDelegate, WebSocketPongDe
   
   // MARK: TODO
   internal func websocketDidReceiveData(socket: WebSocket, data: NSData) {
-    print("got some data: \(data.length)")
+    print("Faye: Received data: \(data.length)")
     //self.socket.writeData(data)
   }
 

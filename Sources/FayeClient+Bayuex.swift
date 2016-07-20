@@ -54,7 +54,7 @@ extension FayeClient {
     // "minimumVersion": "1.0beta",
     // "supportedConnectionTypes": ["long-polling", "callback-polling", "iframe", "websocket]
     func handshake() {
-        dispatch_async(writeOperationQueue) { [unowned self] in
+        dispatch_sync(writeOperationQueue) { [unowned self] in
             let connTypes:NSArray = [BayeuxConnection.LongPolling.rawValue, BayeuxConnection.Callback.rawValue, BayeuxConnection.iFrame.rawValue, BayeuxConnection.WebSocket.rawValue]
             
             var dict = [String: AnyObject]()
@@ -74,7 +74,7 @@ extension FayeClient {
     // "clientId": "Un1q31d3nt1f13r",
     // "connectionType": "long-polling"
     func connect() {
-        dispatch_async(writeOperationQueue) { [unowned self] in
+        dispatch_sync(writeOperationQueue) { [unowned self] in
             let dict:[String:AnyObject] = [Bayeux.Channel.rawValue: BayeuxChannel.Connect.rawValue, Bayeux.ClientId.rawValue: self.fayeClientId!, Bayeux.ConnectionType.rawValue: BayeuxConnection.WebSocket.rawValue, "advice": ["timeout": 0]]
             
             if let string = JSON(dict).rawString() {
@@ -87,7 +87,7 @@ extension FayeClient {
     // "channel": "/meta/disconnect",
     // "clientId": "Un1q31d3nt1f13r"
     func disconnect() {
-        dispatch_async(writeOperationQueue) { [unowned self] in
+        dispatch_sync(writeOperationQueue) { [unowned self] in
             let dict:[String:AnyObject] = [Bayeux.Channel.rawValue: BayeuxChannel.Disconnect.rawValue, Bayeux.ClientId.rawValue: self.fayeClientId!, Bayeux.ConnectionType.rawValue: BayeuxConnection.WebSocket.rawValue]
             if let string = JSON(dict).rawString() {
                 self.transport?.writeString(string)
@@ -125,7 +125,7 @@ extension FayeClient {
     // "subscription": "/foo/**"
     // }
     func unsubscribe(channel:String) {
-        dispatch_async(writeOperationQueue) { [unowned self] in
+        dispatch_sync(writeOperationQueue) { [unowned self] in
             if let clientId = self.fayeClientId {
                 let dict:[String:AnyObject] = [Bayeux.Channel.rawValue: BayeuxChannel.Unsubscibe.rawValue, Bayeux.ClientId.rawValue: clientId, Bayeux.Subscription.rawValue: channel]
                 
@@ -144,13 +144,19 @@ extension FayeClient {
     // "id": "some unique message id"
     // }
     func publish(data:[String:AnyObject], channel:String) {
-        dispatch_async(writeOperationQueue) { [unowned self] in
-            if self.fayeConnected == true {
-                let dict:[String:AnyObject] = [Bayeux.Channel.rawValue: channel, Bayeux.ClientId.rawValue: self.fayeClientId!, Bayeux.Id.rawValue: self.nextMessageId(), Bayeux.Data.rawValue: data]
+        dispatch_async(writeOperationQueue) { [weak self] in
+            if let clientId = self?.fayeClientId, messageId = self?.nextMessageId()
+                where self?.fayeConnected == true {
+                let dict:[String:AnyObject] = [
+                    Bayeux.Channel.rawValue: channel,
+                    Bayeux.ClientId.rawValue: clientId,
+                    Bayeux.Id.rawValue: messageId,
+                    Bayeux.Data.rawValue: data
+                ]
                 
                 if let string = JSON(dict).rawString() {
                     print("Faye: Publish string: \(string)")
-                    self.transport?.writeString(string)
+                    self?.transport?.writeString(string)
                 }
             }
         }

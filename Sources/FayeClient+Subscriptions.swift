@@ -70,6 +70,9 @@ extension FayeClient {
     // MARK: Subscriptions
     
     func removeChannelFromQueuedSubscriptions(channel: String) -> Bool {
+        objc_sync_enter(self.queuedSubscriptions)
+        defer { objc_sync_exit(self.queuedSubscriptions) }
+        
         let index = self.queuedSubscriptions.indexOf { $0.subscription == channel }
         
         if let index = index {
@@ -82,6 +85,9 @@ extension FayeClient {
     }
     
     func removeChannelFromPendingSubscriptions(channel: String) -> Bool {
+        objc_sync_enter(self.pendingSubscriptions)
+        defer { objc_sync_exit(self.pendingSubscriptions) }
+        
         let index = self.pendingSubscriptions.indexOf { $0.subscription == channel }
         
         if let index = index {
@@ -94,6 +100,9 @@ extension FayeClient {
     }
     
     func removeChannelFromOpenSubscriptions(channel: String) -> Bool {
+        objc_sync_enter(self.pendingSubscriptions)
+        defer { objc_sync_exit(self.pendingSubscriptions) }
+        
         let index = self.openSubscriptions.indexOf { $0.subscription == channel }
         
         if let index = index {

@@ -51,7 +51,7 @@ public class FayeClient : TransportDelegate {
   var pendingSubscriptions = Array<FayeSubscriptionModel>()
   var openSubscriptions = Array<FayeSubscriptionModel>()
 
-  var channelSubscriptionBlocks = Dictionary<String,ChannelSubscriptionBlock>()
+  var channelSubscriptionBlocks = Dictionary<String, ChannelSubscriptionBlock>()
 
   lazy var pendingSubscriptionSchedule: NSTimer = {
         return NSTimer.scheduledTimerWithTimeInterval(

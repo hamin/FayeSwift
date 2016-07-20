@@ -63,7 +63,7 @@ public class FayeClient : TransportDelegate {
         )
     }()
 
-  let readOperationQueue = dispatch_queue_create("com.hamin.fayeclient.read", DISPATCH_QUEUE_CONCURRENT)
+  let readOperationQueue = dispatch_queue_create("com.hamin.fayeclient.read", DISPATCH_QUEUE_SERIAL)
   let writeOperationQueue = dispatch_queue_create("com.hamin.fayeclient.write", DISPATCH_QUEUE_CONCURRENT)
     
   // MARK: Init

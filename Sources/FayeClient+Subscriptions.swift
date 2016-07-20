@@ -47,7 +47,7 @@ extension FayeClient {
     }
     
     func receive(message: String) {
-        dispatch_async(readOperationQueue) { [unowned self] in
+        dispatch_sync(readOperationQueue) { [unowned self] in
             if let jsonData = message.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false) {
                 let json = JSON(data: jsonData)
                 

@@ -100,7 +100,7 @@ extension FayeClient {
     // "clientId": "Un1q31d3nt1f13r",
     // "subscription": "/foo/**"
     func subscribe(var model:FayeSubscriptionModel) {
-        dispatch_async(writeOperationQueue) { [unowned self] in
+        dispatch_sync(writeOperationQueue) { [unowned self] in
             do {
                 let json = try model.jsonString()
                 
@@ -144,7 +144,7 @@ extension FayeClient {
     // "id": "some unique message id"
     // }
     func publish(data:[String:AnyObject], channel:String) {
-        dispatch_async(writeOperationQueue) { [weak self] in
+        dispatch_sync(writeOperationQueue) { [weak self] in
             if let clientId = self?.fayeClientId, messageId = self?.nextMessageId()
                 where self?.fayeConnected == true {
                 let dict:[String:AnyObject] = [

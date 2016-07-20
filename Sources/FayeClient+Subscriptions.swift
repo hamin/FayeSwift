@@ -11,6 +11,7 @@ import SwiftyJSON
 
 // MARK: Private Internal methods
 extension FayeClient {
+    
     func subscribeQueuedSubscriptions() {
         // if there are any outstanding open subscriptions resubscribe
         for channel in self.queuedSubscriptions {
@@ -34,18 +35,24 @@ extension FayeClient {
         all.forEach({ unsubscribeFromChannel($0.subscription) })
     }
     
+    // MARK:
+    // MARK: Send/Receive
+
     func send(message: NSDictionary) {
-        // Parse JSON
-        if let string = JSON(message).rawString() {
-            self.transport?.writeString(string)
+        dispatch_async(writeOperationQueue) { [unowned self] in
+            if let string = JSON(message).rawString() {
+                self.transport?.writeString(string)
+            }
         }
     }
     
     func receive(message: String) {
-        // Parse JSON
-        if let jsonData = message.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false) {
-            let json = JSON(data: jsonData)
-            self.parseFayeMessage(json)
+        dispatch_async(readOperationQueue) { [unowned self] in
+            if let jsonData = message.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false) {
+                let json = JSON(data: jsonData)
+                
+                self.parseFayeMessage(json)
+            }
         }
     }
     

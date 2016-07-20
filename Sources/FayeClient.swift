@@ -63,6 +63,9 @@ public class FayeClient : TransportDelegate {
         )
     }()
 
+  let readOperationQueue = dispatch_queue_create("com.hamin.fayeclient.read", DISPATCH_QUEUE_CONCURRENT)
+  let writeOperationQueue = dispatch_queue_create("com.hamin.fayeclient.write", DISPATCH_QUEUE_CONCURRENT)
+    
   // MARK: Init
   public init(aFayeURLString:String, channel:String?) {
     self.fayeURLString = aFayeURLString
@@ -74,8 +77,6 @@ public class FayeClient : TransportDelegate {
     if let channel = channel {
       self.queuedSubscriptions.append(FayeSubscriptionModel(subscription: channel, clientId: fayeClientId))
     }
-    
-    self.connectionInitiated = false
   }
 
   public convenience init(aFayeURLString:String, channel:String, channelBlock:ChannelSubscriptionBlock) {
@@ -87,7 +88,6 @@ public class FayeClient : TransportDelegate {
     pendingSubscriptionSchedule.invalidate()
   }
 
-  
   // MARK: Client
   public func connectToServer() {
     if self.connectionInitiated != true {
@@ -113,7 +113,9 @@ public class FayeClient : TransportDelegate {
   }
     
   public func sendPing(data: NSData, completion: (() -> ())?) {
-    self.transport?.sendPing(data, completion: completion)
+    dispatch_async(writeOperationQueue) { [unowned self] in
+      self.transport?.sendPing(data, completion: completion)
+    }
   }
 
   public func subscribeToChannel(model:FayeSubscriptionModel, block:ChannelSubscriptionBlock?=nil) -> FayeSubscriptionState {
@@ -141,7 +143,10 @@ public class FayeClient : TransportDelegate {
   }
     
   public func subscribeToChannel(channel:String, block:ChannelSubscriptionBlock?=nil) -> FayeSubscriptionState {
-    return subscribeToChannel(FayeSubscriptionModel(subscription: channel, clientId: fayeClientId), block: block)
+    return subscribeToChannel(
+        FayeSubscriptionModel(subscription: channel, clientId: fayeClientId),
+        block: block
+    )
   }
     
   public func unsubscribeFromChannel(channel:String) {

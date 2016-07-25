@@ -8,13 +8,16 @@
 
 import Foundation
 
-extension FayeClient {
+public extension FayeClient {
     
     // MARK: Helper
+    
+    ///  Validate whatever a subscription has been subscribed correctly 
     public func isSubscribedToChannel(channel:String) -> Bool {
         return self.openSubscriptions.contains { $0.subscription == channel }
     }
     
+    ///  Validate faye transport is connected
     public func isTransportConnected() -> Bool {
         return self.transport!.isConnected()
     }

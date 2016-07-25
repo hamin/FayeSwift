@@ -39,6 +39,7 @@ public enum Bayeux: String {
     case SupportedConnectionTypes = "supportedConnectionTypes"
     case Successful = "successful"
     case Error = "error"
+    case Advice = "advice"
 }
 
 // MARK: Private Bayuex Methods
@@ -75,7 +76,7 @@ extension FayeClient {
     // "connectionType": "long-polling"
     func connect() {
         dispatch_sync(writeOperationQueue) { [unowned self] in
-            let dict:[String:AnyObject] = [Bayeux.Channel.rawValue: BayeuxChannel.Connect.rawValue, Bayeux.ClientId.rawValue: self.fayeClientId!, Bayeux.ConnectionType.rawValue: BayeuxConnection.WebSocket.rawValue, "advice": ["timeout": 0]]
+            let dict:[String:AnyObject] = [Bayeux.Channel.rawValue: BayeuxChannel.Connect.rawValue, Bayeux.ClientId.rawValue: self.fayeClientId!, Bayeux.ConnectionType.rawValue: BayeuxConnection.WebSocket.rawValue, Bayeux.Advice.rawValue: ["timeout": self.timeOut]]
             
             if let string = JSON(dict).rawString() {
                 self.transport?.writeString(string)

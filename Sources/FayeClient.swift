@@ -63,14 +63,18 @@ public class FayeClient : TransportDelegate {
         )
     }()
 
+  /// Default in 10 seconds
+  let timeOut: Int
+
   let readOperationQueue = dispatch_queue_create("com.hamin.fayeclient.read", DISPATCH_QUEUE_SERIAL)
   let writeOperationQueue = dispatch_queue_create("com.hamin.fayeclient.write", DISPATCH_QUEUE_CONCURRENT)
     
   // MARK: Init
-  public init(aFayeURLString:String, channel:String?) {
+  public init(aFayeURLString:String, channel:String?, timeoutAdvice:Int=10000) {
     self.fayeURLString = aFayeURLString
     self.fayeConnected = false;
-
+    self.timeOut = timeoutAdvice
+    
     self.transport = WebsocketTransport(url: aFayeURLString)
     self.transport!.delegate = self;
 

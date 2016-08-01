@@ -21,11 +21,13 @@ extension FayeClient {
     }
     
     func resubscribeToPendingSubscriptions() {
-        print("Faye: Resubscribing to all pending(\(pendingSubscriptions.count)) subscriptions")
-        
-        for channel in pendingSubscriptions {
-            removeChannelFromPendingSubscriptions(channel.subscription)
-            subscribeToChannel(channel)
+        if !pendingSubscriptions.isEmpty {
+            print("Faye: Resubscribing to \(pendingSubscriptions.count) pending subscriptions")
+            
+            for channel in pendingSubscriptions {
+                removeChannelFromPendingSubscriptions(channel.subscription)
+                subscribeToChannel(channel)
+            }
         }
     }
     

@@ -29,16 +29,17 @@ internal class WebsocketTransport: Transport, WebSocketDelegate, WebSocketPongDe
       webSocket.pongDelegate = self
       webSocket.connect()
         
-      print("Faye: Opening connection")
+      print("Faye: Opening connection with \(self.urlString)")
     }
   }
   
   func closeConnection() {
-    print("Faye: Closing connection")
-    
     if let webSocket = self.webSocket {
+      print("Faye: Closing connection")
+        
       webSocket.delegate = nil
       webSocket.disconnect(forceTimeout: 0)
+      
       self.webSocket = nil
     }
   }

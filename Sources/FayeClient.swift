@@ -36,7 +36,8 @@ public class FayeClient : TransportDelegate {
   public weak var delegate:FayeClientDelegate?
   
   var transport:WebsocketTransport?
-  var fayeConnected:Bool? {
+  
+  public internal(set) var fayeConnected:Bool? {
     didSet {
       if fayeConnected == false {
         unsubscribeAllSubscriptions()

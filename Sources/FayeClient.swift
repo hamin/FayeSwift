@@ -295,9 +295,13 @@ private extension FayeClient {
     if let headerDict = messageHeaderDict {
         headerDict.forEach { dict[$0 as! String] = $1 }
     }
-    if let string = JSON(dict).rawString() {
-      self.transport?.writeString(string)
-      self.pendingSubscriptions.insert(channel)
+    do {
+        if let string = JSON(dict).rawString() {
+          self.transport?.writeString(string)
+          self.pendingSubscriptions.insert(channel)
+        }
+    } catch (Exception as err) {
+        print(err)
     }
   }
 

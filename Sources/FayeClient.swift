@@ -38,13 +38,15 @@ public class FayeClient : TransportDelegate {
   private var queuedSubscriptions = Set<String>()
   private var pendingSubscriptions = Set<String>()
   private var openSubscriptions = Set<String>()
+    
+  private var messageHeaderDict : NSDictionary?
 
   private var channelSubscriptionBlocks = Dictionary<String,ChannelSubscriptionBlock>()
 
   public init(aFayeURLString:String, channel:String?) {
     self.fayeURLString = aFayeURLString
     self.fayeConnected = false;
-
+    print("Connecting to faye url \(aFayeURLString)")
     self.transport = WebsocketTransport(url: aFayeURLString)
     self.transport!.delegate = self;
 
@@ -68,6 +70,10 @@ public class FayeClient : TransportDelegate {
 
   public func disconnectFromServer() {
     self.disconnect()
+  }
+    
+  public func setHeaderDictionary(headerDict : NSDictionary) {
+    self.messageHeaderDict = headerDict
   }
 
   public func sendMessage(messageDict: NSDictionary, channel:String) {
@@ -104,7 +110,15 @@ public class FayeClient : TransportDelegate {
   }
 
   public func isSubscribedToChannel(channel:String) -> (Bool) {
-    return self.openSubscriptions.contains(channel)
+    
+    // subscribed channels could be using **
+    for subscription : String in self.openSubscriptions {
+        if channel.containsString(subscription.stringByReplacingOccurrencesOfString("**", withString: "")) {
+            return true
+        }
+    }
+    
+    return false
   }
 
   public func isTransportConnected() -> (Bool) {
@@ -127,6 +141,7 @@ extension FayeClient {
   }
 
   public func didFailConnection(error: NSError?) {
+    print("FayeClient failed to connect. \(error)")
     self.delegate?.connectionFailed(self)
     self.connectionInitiated = false
     self.fayeConnected = false
@@ -261,9 +276,12 @@ private extension FayeClient {
   // "channel": "/meta/disconnect",
   // "clientId": "Un1q31d3nt1f13r"
   func disconnect() {
-    let dict:[String:AnyObject] = ["channel": BayeuxChannel.Disconnect.rawValue, "clientId": self.fayeClientId!, "connectionType": "websocket"]
-    if let string = JSON(dict).rawString() {
-      self.transport?.writeString(string)
+    // found crash when connecting/disconnecting quickly
+    if let fayeClientId = self.fayeClientId {
+        let dict:[String:AnyObject] = ["channel": BayeuxChannel.Disconnect.rawValue, "clientId": fayeClientId, "connectionType": "websocket"]
+        if let string = JSON(dict).rawString() {
+          self.transport?.writeString(string)
+        }
     }
   }
 
@@ -272,10 +290,17 @@ private extension FayeClient {
   // "clientId": "Un1q31d3nt1f13r",
   // "subscription": "/foo/**"
   func subscribe(channel:String) {
-    let dict:[String:AnyObject] = ["channel": BayeuxChannel.Subscribe.rawValue, "clientId": self.fayeClientId!, "subscription": channel]
-    if let string = JSON(dict).rawString() {
-      self.transport?.writeString(string)
-      self.pendingSubscriptions.insert(channel)
+    var dict:[String:AnyObject] = ["channel": BayeuxChannel.Subscribe.rawValue, "clientId": self.fayeClientId!, "subscription": channel]
+    // added optional extra header information to every message sent on channel 
+    if let headerDict = messageHeaderDict {
+        headerDict.forEach { dict[$0 as! String] = $1 }
+    }
+    do {
+        if let string = JSON(dict).rawString() {
+          self.transport?.writeString(string)
+          self.pendingSubscriptions.insert(channel)
+        }
+    } catch {
     }
   }
 

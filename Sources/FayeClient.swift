@@ -300,8 +300,7 @@ private extension FayeClient {
           self.transport?.writeString(string)
           self.pendingSubscriptions.insert(channel)
         }
-    } catch (Exception as err) {
-        print(err)
+    } catch {
     }
   }
 

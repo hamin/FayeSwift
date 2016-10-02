@@ -17,6 +17,9 @@ class ViewController: UIViewController, UITextFieldDelegate, FayeClientDelegate 
   /// Example FayeClient
   let client:FayeClient = FayeClient(aFayeURLString: "ws://localhost:5222/faye", channel: "/cool")
   
+  // MARK:
+  // MARK: Lifecycle
+    
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -29,16 +32,21 @@ class ViewController: UIViewController, UITextFieldDelegate, FayeClientDelegate 
     }
     client.subscribeToChannel("/awesome", block: channelBlock)
     
-    
-    
-    let delayTime = dispatch_time(DISPATCH_TIME_NOW,
-      Int64(3 * Double(NSEC_PER_SEC)))
+    let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(5 * Double(NSEC_PER_SEC)))
     dispatch_after(delayTime, dispatch_get_main_queue()) {
       self.client.unsubscribeFromChannel("/awesome")
     }
     
-    dispatch_after(delayTime, dispatch_get_main_queue()) { 
-      self.client.subscribeToChannel("/awesome", block: channelBlock)
+    dispatch_after(delayTime, dispatch_get_main_queue()) {
+      let model = FayeSubscriptionModel(subscription: "/awesome", clientId: nil)
+        
+      self.client.subscribeToChannel(model, block: { [unowned self] messages in
+        print("awesome response: \(messages)")
+        
+        self.client.sendPing("Ping".dataUsingEncoding(NSUTF8StringEncoding)!, completion: {
+          print("got pong")
+        })
+      })
     }
   }
     
@@ -46,13 +54,12 @@ class ViewController: UIViewController, UITextFieldDelegate, FayeClientDelegate 
   // MARK: TextfieldDelegate
 
   func textFieldShouldReturn(textField: UITextField) -> Bool {
-    // client.sendMessage(["text": textField.text], channel: "/cool")
     client.sendMessage(["text" : textField.text as! AnyObject], channel: "/cool")
     return false;
   }
     
   // MARK:
-  // MARK: TextfieldDelegate
+  // MARK: FayeClientDelegate
   
   func connectedtoser(client: FayeClient) {
     print("Connected to Faye server")
@@ -74,15 +81,16 @@ class ViewController: UIViewController, UITextFieldDelegate, FayeClientDelegate 
     print("Unsubscribed from channel \(channel)")
   }
   
-  func subscriptionFailedWithError(client: FayeClient, error: String) {
+  func subscriptionFailedWithError(client: FayeClient, error: subscriptionError) {
     print("Subscription failed")
   }
   
   func messageReceived(client: FayeClient, messageDict: NSDictionary, channel: String) {
     let text: AnyObject? = messageDict["text"]
     print("Here is the message: \(text)")
-//        self.client.subscribeToChannel("/newchannelbaby")
-//        self.client.unsubscribeFromChannel(channel)
+  }
+  
+  func pongReceived(client: FayeClient) {
+    print("pong")
   }
 }
-

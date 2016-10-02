@@ -9,33 +9,47 @@
 import Foundation
 import Starscream
 
-internal class WebsocketTransport: Transport, WebSocketDelegate {
+internal class WebsocketTransport: Transport, WebSocketDelegate, WebSocketPongDelegate {
   var urlString:String?
   var webSocket:WebSocket?
   internal weak var delegate:TransportDelegate?
   
   convenience required internal init(url: String) {
     self.init()
+    
     self.urlString = url
   }
   
   func openConnection() {
     self.closeConnection()
     self.webSocket = WebSocket(url: NSURL(string:self.urlString!)!)
-    self.webSocket!.delegate = self;
-    self.webSocket!.connect()
+    
+    if let webSocket = self.webSocket {
+      webSocket.delegate = self
+      webSocket.pongDelegate = self
+      webSocket.connect()
+        
+      print("Faye: Opening connection with \(self.urlString)")
+    }
   }
   
   func closeConnection() {
-    if self.webSocket != nil {
-      self.webSocket!.delegate = nil
-      self.webSocket!.disconnect()
-      self.webSocket = nil;
+    if let webSocket = self.webSocket {
+      print("Faye: Closing connection")
+        
+      webSocket.delegate = nil
+      webSocket.disconnect(forceTimeout: 0)
+      
+      self.webSocket = nil
     }
   }
   
   func writeString(aString:String) {
     self.webSocket?.writeString(aString)
+  }
+  
+  func sendPing(data: NSData, completion: (() -> ())? = nil) {
+    self.webSocket?.writePing(data, completion: completion)
   }
   
   func isConnected() -> (Bool) {
@@ -61,7 +75,12 @@ internal class WebsocketTransport: Transport, WebSocketDelegate {
   
   // MARK: TODO
   internal func websocketDidReceiveData(socket: WebSocket, data: NSData) {
-    print("got some data: \(data.length)")
+    print("Faye: Received data: \(data.length)")
     //self.socket.writeData(data)
+  }
+
+  // MARK: WebSocket Pong Delegate
+  internal func websocketDidReceivePong(socket: WebSocket) {
+    self.delegate?.didReceivePong()
   }
 }

@@ -1,5 +1,8 @@
 source 'https://github.com/CocoaPods/Specs.git'
+
 use_frameworks!
+inhibit_all_warnings!
+platform :ios, '8.0'
 
 target 'FayeSwift_Example', :exclusive => true do
   pod 'FayeSwift', :path => '../'
@@ -7,6 +10,4 @@ end
 
 target 'FayeSwift_Tests', :exclusive => true do
   pod 'FayeSwift', :path => '../'
-
-  
 end

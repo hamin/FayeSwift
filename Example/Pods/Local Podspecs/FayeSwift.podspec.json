@@ -22,10 +22,10 @@
   "source_files": "Sources/*.swift",
   "dependencies": {
     "Starscream": [
-
+      "~> 2.0"
     ],
     "SwiftyJSON": [
-
+      "~> 3.1"
     ]
   }
 }

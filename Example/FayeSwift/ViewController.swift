@@ -27,23 +27,24 @@ class ViewController: UIViewController, UITextFieldDelegate, FayeClientDelegate 
     client.connectToServer()
     
     let channelBlock:ChannelSubscriptionBlock = {(messageDict) -> Void in
-      let text: AnyObject? = messageDict["text"]
-      print("Here is the Block message: \(text)")
+      if let text = messageDict["text"] {
+        print("Here is the Block message: \(text)")
+      }
     }
-    client.subscribeToChannel("/awesome", block: channelBlock)
+    _ = client.subscribeToChannel("/awesome", block: channelBlock)
     
-    let delayTime = dispatch_time(DISPATCH_TIME_NOW, Int64(5 * Double(NSEC_PER_SEC)))
-    dispatch_after(delayTime, dispatch_get_main_queue()) {
+    let delayTime = DispatchTime.now() + Double(Int64(5 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
+    DispatchQueue.main.asyncAfter(deadline: delayTime) {
       self.client.unsubscribeFromChannel("/awesome")
     }
     
-    dispatch_after(delayTime, dispatch_get_main_queue()) {
+    DispatchQueue.main.asyncAfter(deadline: delayTime) {
       let model = FayeSubscriptionModel(subscription: "/awesome", clientId: nil)
         
-      self.client.subscribeToChannel(model, block: { [unowned self] messages in
+      _ = self.client.subscribeToChannel(model, block: { [unowned self] messages in
         print("awesome response: \(messages)")
         
-        self.client.sendPing("Ping".dataUsingEncoding(NSUTF8StringEncoding)!, completion: {
+        self.client.sendPing("Ping".data(using: String.Encoding.utf8)!, completion: {
           print("got pong")
         })
       })
@@ -53,44 +54,45 @@ class ViewController: UIViewController, UITextFieldDelegate, FayeClientDelegate 
   // MARK:
   // MARK: TextfieldDelegate
 
-  func textFieldShouldReturn(textField: UITextField) -> Bool {
-    client.sendMessage(["text" : textField.text as! AnyObject], channel: "/cool")
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    client.sendMessage(["text" : textField.text!], channel: "/cool")
     return false;
   }
     
   // MARK:
   // MARK: FayeClientDelegate
   
-  func connectedtoser(client: FayeClient) {
+  func connectedtoser(_ client: FayeClient) {
     print("Connected to Faye server")
   }
   
-  func connectionFailed(client: FayeClient) {
+  func connectionFailed(_ client: FayeClient) {
     print("Failed to connect to Faye server!")
   }
   
-  func disconnectedFromServer(client: FayeClient) {
+  func disconnectedFromServer(_ client: FayeClient) {
     print("Disconnected from Faye server")
   }
   
-  func didSubscribeToChannel(client: FayeClient, channel: String) {
+  func didSubscribeToChannel(_ client: FayeClient, channel: String) {
     print("Subscribed to channel \(channel)")
   }
   
-  func didUnsubscribeFromChannel(client: FayeClient, channel: String) {
+  func didUnsubscribeFromChannel(_ client: FayeClient, channel: String) {
     print("Unsubscribed from channel \(channel)")
   }
   
-  func subscriptionFailedWithError(client: FayeClient, error: subscriptionError) {
+  func subscriptionFailedWithError(_ client: FayeClient, error: subscriptionError) {
     print("Subscription failed")
   }
   
-  func messageReceived(client: FayeClient, messageDict: NSDictionary, channel: String) {
-    let text: AnyObject? = messageDict["text"]
-    print("Here is the message: \(text)")
+  func messageReceived(_ client: FayeClient, messageDict: NSDictionary, channel: String) {
+    if let text = messageDict["text"] {
+      print("Here is the message: \(text)")
+    }
   }
   
-  func pongReceived(client: FayeClient) {
+  func pongReceived(_ client: FayeClient) {
     print("pong")
   }
 }

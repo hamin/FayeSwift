@@ -15,23 +15,23 @@ extension FayeClient {
         self.handshake()
     }
     
-    public func didDisconnect(error: NSError?) {
+    public func didDisconnect(_ error: NSError?) {
         self.delegate?.disconnectedFromServer(self)
         self.connectionInitiated = false
         self.fayeConnected = false
     }
     
-    public func didFailConnection(error: NSError?) {
+    public func didFailConnection(_ error: NSError?) {
         self.delegate?.connectionFailed(self)
         self.connectionInitiated = false
         self.fayeConnected = false
     }
     
-    public func didWriteError(error: NSError?) {
-        self.delegate?.fayeClientError(self, error: error ?? NSError(error: .TransportWrite))
+    public func didWriteError(_ error: NSError?) {
+        self.delegate?.fayeClientError(self, error: error ?? NSError(error: .transportWrite))
     }
     
-    public func didReceiveMessage(text: String) {
+    public func didReceiveMessage(_ text: String) {
         self.receive(text)
     }
     

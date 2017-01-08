@@ -40,17 +40,17 @@ extension FayeClient {
     // MARK:
     // MARK: Send/Receive
 
-    func send(message: NSDictionary) {
-        dispatch_async(writeOperationQueue) { [unowned self] in
+    func send(_ message: NSDictionary) {
+        writeOperationQueue.async { [unowned self] in
             if let string = JSON(message).rawString() {
                 self.transport?.writeString(string)
             }
         }
     }
     
-    func receive(message: String) {
-        dispatch_sync(readOperationQueue) { [unowned self] in
-            if let jsonData = message.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false) {
+    func receive(_ message: String) {
+        readOperationQueue.sync { [unowned self] in
+            if let jsonData = message.data(using: String.Encoding.utf8, allowLossyConversion: false) {
                 let json = JSON(data: jsonData)
                 
                 self.parseFayeMessage(json)
@@ -71,14 +71,14 @@ extension FayeClient {
     // MARK:
     // MARK: Subscriptions
     
-    func removeChannelFromQueuedSubscriptions(channel: String) -> Bool {
+    func removeChannelFromQueuedSubscriptions(_ channel: String) -> Bool {
         objc_sync_enter(self.queuedSubscriptions)
         defer { objc_sync_exit(self.queuedSubscriptions) }
         
-        let index = self.queuedSubscriptions.indexOf { $0.subscription == channel }
+        let index = self.queuedSubscriptions.index { $0.subscription == channel }
         
         if let index = index {
-            self.queuedSubscriptions.removeAtIndex(index)
+            self.queuedSubscriptions.remove(at: index)
             
             return true
         }
@@ -86,14 +86,14 @@ extension FayeClient {
         return false
     }
     
-    func removeChannelFromPendingSubscriptions(channel: String) -> Bool {
+    func removeChannelFromPendingSubscriptions(_ channel: String) -> Bool {
         objc_sync_enter(self.pendingSubscriptions)
         defer { objc_sync_exit(self.pendingSubscriptions) }
         
-        let index = self.pendingSubscriptions.indexOf { $0.subscription == channel }
+        let index = self.pendingSubscriptions.index { $0.subscription == channel }
         
         if let index = index {
-            self.pendingSubscriptions.removeAtIndex(index)
+            self.pendingSubscriptions.remove(at: index)
             
             return true
         }
@@ -101,14 +101,14 @@ extension FayeClient {
         return false
     }
     
-    func removeChannelFromOpenSubscriptions(channel: String) -> Bool {
+    func removeChannelFromOpenSubscriptions(_ channel: String) -> Bool {
         objc_sync_enter(self.pendingSubscriptions)
         defer { objc_sync_exit(self.pendingSubscriptions) }
         
-        let index = self.openSubscriptions.indexOf { $0.subscription == channel }
+        let index = self.openSubscriptions.index { $0.subscription == channel }
         
         if let index = index {
-            self.openSubscriptions.removeAtIndex(index)
+            self.openSubscriptions.remove(at: index)
             
             return true
         }

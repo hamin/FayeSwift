@@ -14,7 +14,7 @@ extension FayeClient {
     // MARK:
     // MARK: Parsing
 
-    func parseFayeMessage(messageJSON:JSON) {
+    func parseFayeMessage(_ messageJSON:JSON) {
         let messageDict = messageJSON[0]
         if let channel = messageDict[Bayeux.Channel.rawValue].string {
             
@@ -28,7 +28,7 @@ extension FayeClient {
                         self.fayeConnected = true;
                         self.connect()
                         self.subscribeQueuedSubscriptions()
-                        pendingSubscriptionSchedule.valid
+                        pendingSubscriptionSchedule.isValid
                     } else {
                         // OOPS
                     }
@@ -48,7 +48,7 @@ extension FayeClient {
                         // OOPS
                     }
                 case .Subscribe:
-                    if let success = messageJSON[0][Bayeux.Successful.rawValue].int where success == 1 {
+                    if let success = messageJSON[0][Bayeux.Successful.rawValue].int, success == 1 {
                         if let subscription = messageJSON[0][Bayeux.Subscription.rawValue].string {
                             removeChannelFromPendingSubscriptions(subscription)
                             
@@ -60,7 +60,7 @@ extension FayeClient {
                     } else {
                         // Subscribe Failed
                         if let error = messageJSON[0][Bayeux.Error.rawValue].string,
-                            subscription = messageJSON[0][Bayeux.Subscription.rawValue].string {
+                            let subscription = messageJSON[0][Bayeux.Subscription.rawValue].string {
                             removeChannelFromPendingSubscriptions(subscription)
                             
                             self.delegate?.subscriptionFailedWithError(
@@ -81,7 +81,7 @@ extension FayeClient {
                 // Handle Client Channel
                 if self.isSubscribedToChannel(channel) {
                     if messageJSON[0][Bayeux.Data.rawValue] != JSON.null {
-                        let data: AnyObject = messageJSON[0][Bayeux.Data.rawValue].object
+                        let data: AnyObject = messageJSON[0][Bayeux.Data.rawValue].object as AnyObject
                         
                         if let channelBlock = self.channelSubscriptionBlocks[channel] {
                             channelBlock(data as! NSDictionary)

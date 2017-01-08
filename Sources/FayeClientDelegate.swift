@@ -8,31 +8,31 @@
 
 import Foundation
 
-public enum subscriptionError: ErrorType {
+public enum subscriptionError: Error {
     case error(subscription: String, error: String)
 }
 
 // MARK: FayeClientDelegate Protocol
 public protocol FayeClientDelegate: NSObjectProtocol {
-  func messageReceived(client:FayeClient, messageDict: NSDictionary, channel: String)
-  func pongReceived(client:FayeClient)
-  func connectedToServer(client:FayeClient)
-  func disconnectedFromServer(client:FayeClient)
-  func connectionFailed(client:FayeClient)
-  func didSubscribeToChannel(client:FayeClient, channel:String)
-  func didUnsubscribeFromChannel(client:FayeClient, channel:String)
-  func subscriptionFailedWithError(client:FayeClient, error:subscriptionError)
-  func fayeClientError(client:FayeClient, error:NSError)
+  func messageReceived(_ client:FayeClient, messageDict: NSDictionary, channel: String)
+  func pongReceived(_ client:FayeClient)
+  func connectedToServer(_ client:FayeClient)
+  func disconnectedFromServer(_ client:FayeClient)
+  func connectionFailed(_ client:FayeClient)
+  func didSubscribeToChannel(_ client:FayeClient, channel:String)
+  func didUnsubscribeFromChannel(_ client:FayeClient, channel:String)
+  func subscriptionFailedWithError(_ client:FayeClient, error:subscriptionError)
+  func fayeClientError(_ client:FayeClient, error:NSError)
 }
 
 public extension FayeClientDelegate {
-  func messageReceived(client:FayeClient, messageDict: NSDictionary, channel: String){}
-  func pongReceived(client:FayeClient){}
-  func connectedToServer(client:FayeClient){}
-  func disconnectedFromServer(client:FayeClient){}
-  func connectionFailed(client:FayeClient){}
-  func didSubscribeToChannel(client:FayeClient, channel:String){}
-  func didUnsubscribeFromChannel(client:FayeClient, channel:String){}
-  func subscriptionFailedWithError(client:FayeClient, error:subscriptionError){}
-  func fayeClientError(client:FayeClient, error:NSError){}
+  func messageReceived(_ client:FayeClient, messageDict: NSDictionary, channel: String){}
+  func pongReceived(_ client:FayeClient){}
+  func connectedToServer(_ client:FayeClient){}
+  func disconnectedFromServer(_ client:FayeClient){}
+  func connectionFailed(_ client:FayeClient){}
+  func didSubscribeToChannel(_ client:FayeClient, channel:String){}
+  func didUnsubscribeFromChannel(_ client:FayeClient, channel:String){}
+  func subscriptionFailedWithError(_ client:FayeClient, error:subscriptionError){}
+  func fayeClientError(_ client:FayeClient, error:NSError){}
 }

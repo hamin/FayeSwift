@@ -9,7 +9,7 @@
 import Foundation
 
 public enum FayeSocketError {
-    case LostConnection, TransportWrite
+    case lostConnection, transportWrite
 }
 
 public extension NSError {

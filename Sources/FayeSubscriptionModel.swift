@@ -9,28 +9,28 @@
 import Foundation
 import SwiftyJSON
 
-public enum FayeSubscriptionModelError: ErrorType {
-    case ConversationError
-    case ClientIdNotValid
+public enum FayeSubscriptionModelError: Error {
+    case conversationError
+    case clientIdNotValid
 }
 
 // MARK:
 // MARK: FayeSubscriptionModel
 
 ///  Subscription Model
-public class FayeSubscriptionModel {
+open class FayeSubscriptionModel {
     
     /// Subscription URL
-    public let subscription: String
+    open let subscription: String
     
     /// Channel type for request
-    public let channel: BayeuxChannel
+    open let channel: BayeuxChannel
     
     /// Uniqle client id for socket
-    public var clientId: String?
+    open var clientId: String?
     
     /// Model must conform to Hashable
-    public var hashValue: Int {
+    open var hashValue: Int {
         return subscription.hashValue
     }
     
@@ -47,15 +47,15 @@ public class FayeSubscriptionModel {
     // MARK: JSON
     
     ///  Return Json string from model
-    public func jsonString() throws -> String {
+    open func jsonString() throws -> String {
         do {
             guard let model = try JSON(toDictionary()).rawString() else {
-                throw FayeSubscriptionModelError.ConversationError
+                throw FayeSubscriptionModelError.conversationError
             }
             
             return model
         } catch {
-            throw FayeSubscriptionModelError.ClientIdNotValid
+            throw FayeSubscriptionModelError.clientIdNotValid
         }
     }
     
@@ -63,14 +63,14 @@ public class FayeSubscriptionModel {
     // MARK: Helper
     
     ///  Create dictionary of model object, Subclasses should override method to return custom model
-    public func toDictionary() throws -> [String: AnyObject] {
+    open func toDictionary() throws -> [String: AnyObject] {
         guard let clientId = clientId else {
-            throw FayeSubscriptionModelError.ClientIdNotValid
+            throw FayeSubscriptionModelError.clientIdNotValid
         }
         
-        return [Bayeux.Channel.rawValue: channel.rawValue,
-                Bayeux.ClientId.rawValue: clientId,
-                Bayeux.Subscription.rawValue: subscription]
+        return [Bayeux.Channel.rawValue: channel.rawValue as AnyObject,
+                Bayeux.ClientId.rawValue: clientId as AnyObject,
+                Bayeux.Subscription.rawValue: subscription as AnyObject]
     }
 }
 

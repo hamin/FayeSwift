@@ -16,7 +16,7 @@ extension String {
   func encodedString() -> String {
     // UTF 8 str from original
     // NSData! type returned (optional)
-    guard let utf8str = self.dataUsingEncoding(NSUTF8StringEncoding) else {
+    guard let utf8str = self.data(using: String.Encoding.utf8) else {
         return ""
     }
     
@@ -24,15 +24,15 @@ extension String {
     // fromRaw(0) is equivalent to objc 'base64EncodedStringWithOptions:0'
     // Notice the unwrapping given the NSData! optional
     // NSString! returned (optional)
-    let base64Encoded = utf8str.base64EncodedStringWithOptions(NSDataBase64EncodingOptions())
+    let base64Encoded = utf8str.base64EncodedString(options: NSData.Base64EncodingOptions())
     
     // Base64 Decode (go back the other way)
     // Notice the unwrapping given the NSString! optional
     // NSData returned
-    guard let data = NSData(
-        base64EncodedString: base64Encoded,
-        options: NSDataBase64DecodingOptions()),
-    base64Decoded = NSString(data: data, encoding: NSUTF8StringEncoding) else {
+    guard let data = Data(
+        base64Encoded: base64Encoded,
+        options: NSData.Base64DecodingOptions()),
+    let base64Decoded = NSString(data: data, encoding: String.Encoding.utf8.rawValue) else {
             return ""
     }
     

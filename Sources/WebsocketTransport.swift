@@ -22,7 +22,7 @@ internal class WebsocketTransport: Transport, WebSocketDelegate, WebSocketPongDe
   
   func openConnection() {
     self.closeConnection()
-    self.webSocket = WebSocket(url: NSURL(string:self.urlString!)!)
+    self.webSocket = WebSocket(url: URL(string:self.urlString!)!)
     
     if let webSocket = self.webSocket {
       webSocket.delegate = self
@@ -44,12 +44,12 @@ internal class WebsocketTransport: Transport, WebSocketDelegate, WebSocketPongDe
     }
   }
   
-  func writeString(aString:String) {
-    self.webSocket?.writeString(aString)
+  func writeString(_ aString:String) {
+    self.webSocket?.write(string: aString)
   }
   
-  func sendPing(data: NSData, completion: (() -> ())? = nil) {
-    self.webSocket?.writePing(data, completion: completion)
+  func sendPing(_ data: Data, completion: (() -> ())? = nil) {
+    self.webSocket?.write(ping: data, completion: completion)
   }
   
   func isConnected() -> (Bool) {
@@ -63,7 +63,7 @@ internal class WebsocketTransport: Transport, WebSocketDelegate, WebSocketPongDe
   
   internal func websocketDidDisconnect(socket: WebSocket, error: NSError?) {
     if error == nil {
-      self.delegate?.didDisconnect(NSError(error: .LostConnection))
+      self.delegate?.didDisconnect(NSError(error: .lostConnection))
     } else {
       self.delegate?.didFailConnection(error)
     }
@@ -74,13 +74,17 @@ internal class WebsocketTransport: Transport, WebSocketDelegate, WebSocketPongDe
   }
   
   // MARK: TODO
-  internal func websocketDidReceiveData(socket: WebSocket, data: NSData) {
-    print("Faye: Received data: \(data.length)")
+  internal func websocketDidReceiveData(socket: WebSocket, data: Data) {
+    print("Faye: Received data: \(data.count)")
     //self.socket.writeData(data)
   }
 
   // MARK: WebSocket Pong Delegate
-  internal func websocketDidReceivePong(socket: WebSocket) {
+  internal func websocketDidReceivePong(_ socket: WebSocket) {
+    self.delegate?.didReceivePong()
+  }
+    
+  func websocketDidReceivePong(socket: WebSocket, data: Data?) {
     self.delegate?.didReceivePong()
   }
 }

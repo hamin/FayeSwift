@@ -12,7 +12,7 @@ extension FayeClient {
     
     // MARK: Private - Timer Action
     @objc
-    func pendingSubscriptionsAction(timer: NSTimer) {
+    func pendingSubscriptionsAction(_ timer: Timer) {
         guard fayeConnected == true else {
             print("Faye: Failed to resubscribe to all pending channels, socket disconnected")
             

@@ -7,7 +7,7 @@
 //
 
 public protocol Transport {
-  func writeString(aString:String)
+  func writeString(_ aString:String)
   func openConnection()
   func closeConnection()
   func isConnected() -> (Bool)
@@ -15,9 +15,9 @@ public protocol Transport {
 
 public protocol TransportDelegate: class {
   func didConnect()
-  func didFailConnection(error:NSError?)
-  func didDisconnect(error: NSError?)
-  func didWriteError(error:NSError?)
-  func didReceiveMessage(text:String)
+  func didFailConnection(_ error:NSError?)
+  func didDisconnect(_ error: NSError?)
+  func didWriteError(_ error:NSError?)
+  func didReceiveMessage(_ text:String)
   func didReceivePong()
 }

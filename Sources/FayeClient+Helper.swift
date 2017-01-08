@@ -13,7 +13,7 @@ public extension FayeClient {
     // MARK: Helper
     
     ///  Validate whatever a subscription has been subscribed correctly 
-    public func isSubscribedToChannel(channel:String) -> Bool {
+    public func isSubscribedToChannel(_ channel:String) -> Bool {
         return self.openSubscriptions.contains { $0.subscription == channel }
     }
     

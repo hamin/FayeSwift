@@ -130,7 +130,6 @@ extension FayeClient {
     // "clientId": "Un1q31d3nt1f13r",
     // "subscription": "/foo/**"
     func subscribe(_ model:FayeSubscriptionModel) {
-        var model = model
         writeOperationQueue.sync { [unowned self] in
             do {
                 let json = try model.jsonString()
@@ -141,6 +140,7 @@ extension FayeClient {
                 
             } catch FayeSubscriptionModelError.clientIdNotValid
                 where self.fayeClientId?.characters.count > 0 {
+                    var model = model
                     model.clientId = self.fayeClientId
                     self.subscribe(model)
             } catch {

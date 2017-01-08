@@ -15,8 +15,8 @@ extension FayeClient {
     func subscribeQueuedSubscriptions() {
         // if there are any outstanding open subscriptions resubscribe
         for channel in self.queuedSubscriptions {
-            removeChannelFromQueuedSubscriptions(channel.subscription)
-            subscribeToChannel(channel)
+            _ = removeChannelFromQueuedSubscriptions(channel.subscription)
+            _ = subscribeToChannel(channel)
         }
     }
     
@@ -25,8 +25,8 @@ extension FayeClient {
             print("Faye: Resubscribing to \(pendingSubscriptions.count) pending subscriptions")
             
             for channel in pendingSubscriptions {
-                removeChannelFromPendingSubscriptions(channel.subscription)
-                subscribeToChannel(channel)
+                _ = removeChannelFromPendingSubscriptions(channel.subscription)
+                _ = subscribeToChannel(channel)
             }
         }
     }

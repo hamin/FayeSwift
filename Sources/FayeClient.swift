@@ -155,12 +155,12 @@ open class FayeClient : TransportDelegate {
   }
     
   open func unsubscribeFromChannel(_ channel:String) {
-    removeChannelFromQueuedSubscriptions(channel)
+    _ = removeChannelFromQueuedSubscriptions(channel)
     
     self.unsubscribe(channel)
     self.channelSubscriptionBlocks[channel] = nil;
     
-    removeChannelFromOpenSubscriptions(channel)
-    removeChannelFromPendingSubscriptions(channel)
+    _ = removeChannelFromOpenSubscriptions(channel)
+    _ = removeChannelFromPendingSubscriptions(channel)
   }
 }

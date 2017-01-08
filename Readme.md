@@ -9,6 +9,8 @@ A simple Swift client library for the [Faye](http://faye.jcoglan.com/) publish-s
 
 It was heavily inspired by the Objective-C client found here: [FayeObjc](https://github.com/pcrawfor/FayeObjC)
 
+___**Note**: For Swift 2.2 please use FayeSwift 0.2.0___
+
 ## Example
 
 ### Installation

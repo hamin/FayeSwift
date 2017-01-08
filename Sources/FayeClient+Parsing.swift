@@ -28,7 +28,7 @@ extension FayeClient {
                         self.fayeConnected = true;
                         self.connect()
                         self.subscribeQueuedSubscriptions()
-                        pendingSubscriptionSchedule.isValid
+                        _ = pendingSubscriptionSchedule.isValid
                     } else {
                         // OOPS
                     }
@@ -50,7 +50,7 @@ extension FayeClient {
                 case .Subscribe:
                     if let success = messageJSON[0][Bayeux.Successful.rawValue].int, success == 1 {
                         if let subscription = messageJSON[0][Bayeux.Subscription.rawValue].string {
-                            removeChannelFromPendingSubscriptions(subscription)
+                            _ = removeChannelFromPendingSubscriptions(subscription)
                             
                             self.openSubscriptions.append(FayeSubscriptionModel(subscription: subscription, clientId: fayeClientId))
                             self.delegate?.didSubscribeToChannel(self, channel: subscription)
@@ -61,7 +61,7 @@ extension FayeClient {
                         // Subscribe Failed
                         if let error = messageJSON[0][Bayeux.Error.rawValue].string,
                             let subscription = messageJSON[0][Bayeux.Subscription.rawValue].string {
-                            removeChannelFromPendingSubscriptions(subscription)
+                            _ = removeChannelFromPendingSubscriptions(subscription)
                             
                             self.delegate?.subscriptionFailedWithError(
                                 self,
@@ -71,7 +71,7 @@ extension FayeClient {
                     }
                 case .Unsubscibe:
                     if let subscription = messageJSON[0][Bayeux.Subscription.rawValue].string {
-                        removeChannelFromOpenSubscriptions(subscription)
+                        _ = removeChannelFromOpenSubscriptions(subscription)
                         self.delegate?.didUnsubscribeFromChannel(self, channel: subscription)
                     } else {
                         print("Faye: Missing subscription for Unsubscribe")

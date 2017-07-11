@@ -12,6 +12,7 @@ import Starscream
 internal class WebsocketTransport: Transport, WebSocketDelegate, WebSocketPongDelegate {
   var urlString:String?
   var webSocket:WebSocket?
+  var headers: [String: String]? = nil
   internal weak var delegate:TransportDelegate?
   
   convenience required internal init(url: String) {
@@ -27,8 +28,13 @@ internal class WebsocketTransport: Transport, WebSocketDelegate, WebSocketPongDe
     if let webSocket = self.webSocket {
       webSocket.delegate = self
       webSocket.pongDelegate = self
+      if let headers = self.headers {
+        for (key, value) in headers {
+          webSocket.headers[key] = headers[key]
+        }
+      }
       webSocket.connect()
-        
+
       print("Faye: Opening connection with \(self.urlString)")
     }
   }

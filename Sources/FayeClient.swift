@@ -36,6 +36,13 @@ open class FayeClient : TransportDelegate {
   open weak var delegate:FayeClientDelegate?
   
   var transport:WebsocketTransport?
+    open var transportHeaders: [String: String]? = nil {
+        didSet {
+            if let transport = self.transport {
+                transport.headers = self.transportHeaders
+            }
+        }
+    }
   
   open internal(set) var fayeConnected:Bool? {
     didSet {
@@ -77,6 +84,7 @@ open class FayeClient : TransportDelegate {
     self.timeOut = timeoutAdvice
     
     self.transport = WebsocketTransport(url: aFayeURLString)
+    self.transport!.headers = self.transportHeaders
     self.transport!.delegate = self;
 
     if let channel = channel {

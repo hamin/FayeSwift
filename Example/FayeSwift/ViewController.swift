@@ -24,6 +24,7 @@ class ViewController: UIViewController, UITextFieldDelegate, FayeClientDelegate 
     super.viewDidLoad()
     
     client.delegate = self;
+    client.transportHeaders = ["X-Custom-Header": "Custom Value"]
     client.connectToServer()
     
     let channelBlock:ChannelSubscriptionBlock = {(messageDict) -> Void in

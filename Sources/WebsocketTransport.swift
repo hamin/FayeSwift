@@ -30,7 +30,7 @@ internal class WebsocketTransport: Transport, WebSocketDelegate, WebSocketPongDe
       webSocket.pongDelegate = self
       if let headers = self.headers {
         for (key, value) in headers {
-          webSocket.headers[key] = headers[key]
+          webSocket.headers[key] = headers[value]
         }
       }
       webSocket.connect()

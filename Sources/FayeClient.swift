@@ -76,6 +76,9 @@ open class FayeClient : TransportDelegate {
 
   let readOperationQueue = DispatchQueue(label: "com.hamin.fayeclient.read", attributes: [])
   let writeOperationQueue = DispatchQueue(label: "com.hamin.fayeclient.write", attributes: DispatchQueue.Attributes.concurrent)
+  let queuedSubsLockQueue = DispatchQueue(label:"com.fayeclient.queuedSubscriptionsLockQueue")
+  let pendingSubsLockQueue = DispatchQueue(label:"com.fayeclient.pendingSubscriptionsLockQueue")
+  let openSubsLockQueue = DispatchQueue(label:"com.fayeclient.openSubscriptionsLockQueue")
     
   // MARK: Init
   public init(aFayeURLString:String, channel:String?, timeoutAdvice:Int=10000) {

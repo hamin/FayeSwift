@@ -46,5 +46,4 @@ extension FayeClient: TransportDelegate {
     public func didReceivePing() {
         self.delegate?.pingReceived(self)
     }
-
 }

@@ -91,7 +91,7 @@ open class FayeClient {
     self.transport!.delegate = self;
 
     if let channel = channel {
-      self.queuedSubscriptions.append(FayeSubscriptionModel(subscription: channel, clientId: fayeClientId))
+        self.queuedSubscriptions.append(FayeSubscriptionModel(subscription: channel, channel: .Subscribe, clientId: fayeClientId))
     }
   }
 
@@ -160,7 +160,7 @@ open class FayeClient {
     
   open func subscribeToChannel(_ channel:String, block:ChannelSubscriptionBlock?=nil) -> FayeSubscriptionState {
     return subscribeToChannel(
-        FayeSubscriptionModel(subscription: channel, clientId: fayeClientId),
+        FayeSubscriptionModel(subscription: channel, channel: .Subscribe, clientId: fayeClientId),
         block: block
     )
   }

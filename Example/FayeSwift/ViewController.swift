@@ -40,7 +40,7 @@ class ViewController: UIViewController, UITextFieldDelegate, FayeClientDelegate 
         }
 
         DispatchQueue.main.asyncAfter(deadline: delayTime) {
-            let model = FayeSubscriptionModel(subscription: "/awesome", clientId: nil)
+            let model = FayeSubscriptionModel(subscription: "/awesome", channel: .Subscribe, clientId: nil)
 
             _ = self.client.subscribeToChannel(model, block: { [unowned self] messages in
                 print("awesome response: \(messages)")
@@ -90,6 +90,10 @@ class ViewController: UIViewController, UITextFieldDelegate, FayeClientDelegate 
 
     func pongReceived(_ client: FayeClient) {
         print("pong")
+    }
+
+    func pingReceived(_ client: FayeClient) {
+        print("ping")
     }
 
     func connectedToServer(_ client: FayeClient) {

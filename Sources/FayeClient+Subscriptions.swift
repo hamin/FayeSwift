@@ -56,6 +56,15 @@ extension FayeClient {
             }
         }
     }
+
+    func receive(_ data: Data) {
+        readOperationQueue.sync { [unowned self] in
+            if let json = try? JSON(data: data) {
+                // TODO: Add an error here to forward on for failed to decode
+                self.parseFayeMessage(json)
+            }
+        }
+    }
     
     func nextMessageId() -> String {
         self.messageNumber += 1
@@ -64,10 +73,9 @@ extension FayeClient {
             messageNumber = 0
         }
         
-        return "\(self.messageNumber)".encodedString()
+        return "\(self.messageNumber)".encodeToBase64()
     }
     
-    // MARK:
     // MARK: Subscriptions
     
     func removeChannelFromQueuedSubscriptions(_ channel: String) -> Bool {
@@ -113,5 +121,11 @@ extension FayeClient {
         }
         
         return result
+    }
+}
+
+extension String {
+    func encodeToBase64() -> String {
+        return Data(self.utf8).base64EncodedString()
     }
 }

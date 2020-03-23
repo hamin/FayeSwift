@@ -9,7 +9,7 @@
 import Foundation
 
 // MARK: Transport Delegate
-extension FayeClient {
+extension FayeClient: TransportDelegate {
     public func didConnect() {
         self.connectionInitiated = false;
         self.handshake()
@@ -40,11 +40,11 @@ extension FayeClient {
     }
 
     public func didReceiveData(_ data: Data) {
-
+        self.receive(data)
     }
 
     public func didReceivePing() {
-
+        self.delegate?.pingReceived(self)
     }
 
 }

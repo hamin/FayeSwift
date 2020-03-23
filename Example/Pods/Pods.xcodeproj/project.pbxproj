@@ -40,7 +40,6 @@
 		93524EF16C1EA133AD0893B6FF138B30 /* Compression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C37037450A0EE0FE805222E3D06860 /* Compression.swift */; };
 		97DA4510146BCEF10BD53BD5CC1459CA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66EA249AA70B465C88C66219B7321C29 /* Foundation.framework */; };
 		99CABBFF5653DCB301C355A857599B58 /* SwiftyJSON-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = E2A1A11E7E2791CA11238F8D5DAE8CF9 /* SwiftyJSON-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		9A53B97806A9E67FEFEB65DEB5588FFA /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F163C80416CBEB02EC0187B8CCEFD1 /* StringExtensions.swift */; };
 		A100344FC632242FDEAA4BFC0FC01534 /* NativeEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452981AACA89768F38D52BB70DD1B039 /* NativeEngine.swift */; };
 		A29DCC96E5AB5067E8BED0CFD06FA96B /* Transport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43DDE165ACA21A32D774483DB2F479AB /* Transport.swift */; };
 		B471CF5E4D5068291D4CC54CBF89E964 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B16C9ED6E7FCC8D4050702D608260E2 /* SwiftyJSON.swift */; };
@@ -124,7 +123,6 @@
 		069177BE7826C9136A198CC69773FD40 /* FayeClient+Helper.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "FayeClient+Helper.swift"; path = "Sources/FayeClient+Helper.swift"; sourceTree = "<group>"; };
 		0CE6FA5482976941A66FC4AFA9500F62 /* FayeClient+Action.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "FayeClient+Action.swift"; path = "Sources/FayeClient+Action.swift"; sourceTree = "<group>"; };
 		0D63390A10E9F170D263AF3988B24124 /* FoundationTransport.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FoundationTransport.swift; path = Sources/Transport/FoundationTransport.swift; sourceTree = "<group>"; };
-		13F163C80416CBEB02EC0187B8CCEFD1 /* StringExtensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = StringExtensions.swift; path = Sources/StringExtensions.swift; sourceTree = "<group>"; };
 		13F871721477871167420E510E6E3742 /* Pods_FayeSwift_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FayeSwift_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1549E6DACFD1AD6DFA697BF29A35B3A4 /* FayeSwift-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FayeSwift-prefix.pch"; sourceTree = "<group>"; };
 		2284F917EDE4B4457277DD95423DF758 /* FoundationHTTPServerHandler.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FoundationHTTPServerHandler.swift; path = Sources/Framer/FoundationHTTPServerHandler.swift; sourceTree = "<group>"; };
@@ -263,7 +261,6 @@
 				4774D40300A83D28AF7A51F2EDE29F03 /* FayeClientDelegate.swift */,
 				B08378535C2930A252AEEFDBFA39B511 /* FayeSubscriptionModel.swift */,
 				FC12CA60D73C4047FA83C85996DDB5FA /* NSError+Helper.swift */,
-				13F163C80416CBEB02EC0187B8CCEFD1 /* StringExtensions.swift */,
 				4239408D88CF436217DE67140C09B171 /* Transport.swift */,
 				5367C70F66CFB6BB4E79FBF49B27B57F /* WebsocketTransport.swift */,
 				40047F383137CF9AC56349BEA6616949 /* Pod */,
@@ -738,7 +735,6 @@
 				BFF0B7845AD87F28D8FA3B9D2B209A26 /* FayeSubscriptionModel.swift in Sources */,
 				45C838EF6C400BF9A4FA6330DCA8FF98 /* FayeSwift-dummy.m in Sources */,
 				62FCD7F0DA368198F57272D1682DD66A /* NSError+Helper.swift in Sources */,
-				9A53B97806A9E67FEFEB65DEB5588FFA /* StringExtensions.swift in Sources */,
 				52C2F5AA0D179F742394477ECF98BBFD /* Transport.swift in Sources */,
 				1EBC62F41CC90D12AFBF45BA5FCD976E /* WebsocketTransport.swift in Sources */,
 			);

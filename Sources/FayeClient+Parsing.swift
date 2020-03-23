@@ -10,10 +10,8 @@ import Foundation
 import SwiftyJSON
 
 extension FayeClient {
-   
-    // MARK:
-    // MARK: Parsing
 
+    // MARK: Parsing
     func parseFayeMessage(_ messageJSON:JSON) {
         let messageDict = messageJSON[0]
         if let channel = messageDict[Bayeux.Channel.rawValue].string {
@@ -79,30 +77,35 @@ extension FayeClient {
                 }
             } else {
                 // Handle Client Channel
-                if self.isSubscribedToChannel(channel) {
-                    if messageJSON[0][Bayeux.Data.rawValue] != JSON.null {
-                        let data: AnyObject = messageJSON[0][Bayeux.Data.rawValue].object as AnyObject
-                        
-                        if let channelBlock = self.channelSubscriptionBlocks[channel] {
-                            channelBlock(data as! NSDictionary)
-                        } else {
-                            print("Faye: Failed to get channel block for : \(channel)")
-                        }
-                        
-                        self.delegate?.messageReceived(
-                            self,
-                            messageDict: data as! NSDictionary,
-                            channel: channel
-                        )
-                    } else {
-                        print("Faye: For some reason data is nil for channel: \(channel)")
-                    }
-                } else {
-                    print("Faye: Weird channel that not been set to subscribed: \(channel)")
-                }
+                handleMessageReceived(messageDict, channel: channel)
             }
         } else {
             print("Faye: Missing channel for \(messageDict)")
+        }
+    }
+
+    private func handleMessageReceived(_ messageDict: JSON, channel: String) {
+        // Handle Client Channel
+        if self.isSubscribedToChannel(channel) {
+            if messageDict[0][Bayeux.Data.rawValue] != JSON.null {
+                let data: AnyObject = messageDict[0][Bayeux.Data.rawValue].object as AnyObject
+
+                if let channelBlock = self.channelSubscriptionBlocks[channel] {
+                    channelBlock(data as! NSDictionary)
+                } else {
+                    print("Faye: Failed to get channel block for : \(channel)")
+                }
+
+                self.delegate?.messageReceived(
+                    self,
+                    messageDict: data as! NSDictionary,
+                    channel: channel
+                )
+            } else {
+                print("Faye: For some reason data is nil for channel: \(channel)")
+            }
+        } else {
+            print("Faye: Weird channel that not been set to subscribed: \(channel)")
         }
     }
 }

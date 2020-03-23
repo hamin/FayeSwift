@@ -23,7 +23,7 @@ public typealias ChannelSubscriptionBlock = (NSDictionary) -> Void
 
 
 // MARK: FayeClient
-open class FayeClient : TransportDelegate {
+open class FayeClient {
   open var fayeURLString:String {
     didSet {
       if let transport = self.transport {
@@ -124,7 +124,7 @@ open class FayeClient : TransportDelegate {
     self.publish(messageDict as! Dictionary, channel: channel)
   }
 
-  open func sendMessage(_ messageDict:[String:AnyObject], channel:String) {
+  open func sendMessage(_ messageDict: [String:AnyObject], channel:String) {
     self.publish(messageDict, channel: channel)
   }
     

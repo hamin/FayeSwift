@@ -50,9 +50,8 @@ extension FayeClient {
     
     func receive(_ message: String) {
         readOperationQueue.sync { [unowned self] in
-            if let jsonData = message.data(using: String.Encoding.utf8, allowLossyConversion: false) {
-                let json = JSON(data: jsonData)
-                
+            if let jsonData = message.data(using: String.Encoding.utf8, allowLossyConversion: false),
+                let json = try? JSON(data: jsonData) {
                 self.parseFayeMessage(json)
             }
         }

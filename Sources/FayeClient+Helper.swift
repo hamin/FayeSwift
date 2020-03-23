@@ -19,6 +19,6 @@ public extension FayeClient {
     
     ///  Validate faye transport is connected
     public func isTransportConnected() -> Bool {
-        return self.transport!.isConnected()
+        return self.transport?.isConnected ?? false
     }
 }

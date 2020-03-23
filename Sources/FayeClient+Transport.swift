@@ -15,12 +15,6 @@ extension FayeClient {
         self.handshake()
     }
     
-    public func didDisconnect(_ error: NSError?) {
-        self.delegate?.disconnectedFromServer(self)
-        self.connectionInitiated = false
-        self.fayeConnected = false
-    }
-    
     public func didFailConnection(_ error: NSError?) {
         self.delegate?.connectionFailed(self)
         self.connectionInitiated = false
@@ -38,4 +32,19 @@ extension FayeClient {
     public func didReceivePong() {
         self.delegate?.pongReceived(self)
     }
+
+    public func didDisconnect(_ type: DisconnectionType?) {
+        self.delegate?.disconnectedFromServer(self)
+        self.connectionInitiated = false
+        self.fayeConnected = false
+    }
+
+    public func didReceiveData(_ data: Data) {
+
+    }
+
+    public func didReceivePing() {
+
+    }
+
 }

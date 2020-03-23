@@ -139,7 +139,7 @@ extension FayeClient {
             } catch FayeSubscriptionModelError.conversationError {
                 
             } catch FayeSubscriptionModelError.clientIdNotValid
-                where self.fayeClientId?.characters.count > 0 {
+                where self.fayeClientId?.count > 0 {
                     var model = model
                     model.clientId = self.fayeClientId
                     self.subscribe(model)

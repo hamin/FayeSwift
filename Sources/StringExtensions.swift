@@ -9,7 +9,7 @@
 // MARK: Custom Extensions
 extension String {
   subscript (i: Int) -> String {
-    return String(Array(self.characters)[i])
+    return String(Array(self)[i])
   }
   
   // http://iosdevelopertips.com/swift-code/base64-encode-decode-swift.html

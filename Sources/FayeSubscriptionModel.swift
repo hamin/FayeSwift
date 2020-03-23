@@ -21,16 +21,16 @@ public enum FayeSubscriptionModelError: Error {
 open class FayeSubscriptionModel {
     
     /// Subscription URL
-    open let subscription: String
+    let subscription: String
     
     /// Channel type for request
-    open let channel: BayeuxChannel
+    let channel: BayeuxChannel
     
     /// Uniqle client id for socket
-    open var clientId: String?
+    var clientId: String?
     
     /// Model must conform to Hashable
-    open var hashValue: Int {
+    var hashValue: Int {
         return subscription.hashValue
     }
     

@@ -1,22 +1,27 @@
 PODS:
-  - FayeSwift (0.2.0):
-    - Starscream (~> 2.0)
-    - SwiftyJSON (~> 3.1)
-  - Starscream (2.0.2)
-  - SwiftyJSON (3.1.3)
+  - FayeSwift (0.4.0):
+    - Starscream (~> 4.0.0)
+    - SwiftyJSON (~> 5.0.0)
+  - Starscream (4.0.0)
+  - SwiftyJSON (5.0.0)
 
 DEPENDENCIES:
   - FayeSwift (from `../`)
+
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - Starscream
+    - SwiftyJSON
 
 EXTERNAL SOURCES:
   FayeSwift:
     :path: "../"
 
 SPEC CHECKSUMS:
-  FayeSwift: b7889c3df7d9b37fa88253a4c9fbb6fcb4404993
-  Starscream: 6c135a34e0a6e60cedaa0b30db67a4c05cf7cd38
-  SwiftyJSON: 38a8ea2006779c0fc4c310cb2ee8195327740faf
+  FayeSwift: ec422983037b3f9d46fb10328497cf6b413128af
+  Starscream: 04b26f02727e10a002e6b5d21b188ba0d049910b
+  SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
 
 PODFILE CHECKSUM: cda739a33c3a43c81b405d9eee2a84c5b9d19f1b
 
-COCOAPODS: 1.1.1
+COCOAPODS: 1.8.4

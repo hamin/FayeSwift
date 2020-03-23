@@ -7,539 +7,560 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		01491BBA557B2F18B2A77192743E3E55 /* SwiftyJSON-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6DCD25231745CBB7A0DE8AE144F32C35 /* SwiftyJSON-dummy.m */; };
-		026017E12DAB48A922244C71A63253D0 /* Starscream-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = D47E6B74B427A4904D75990D1C34E829 /* Starscream-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		12A2D6DEF558554F285FBB6A2196E202 /* Pods-FayeSwift_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 06B16C30B7CF62C246F4DD2B6BA325D2 /* Pods-FayeSwift_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		16C3627510AB6B698291B30407553A5D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF83ABEF1A458CAE5372C3E2E46D918F /* Foundation.framework */; };
-		1AF8A2644E64066D72B7AE1ED35E042E /* FayeClient+Parsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD6E1ADC55716BEA0CA275460382B07D /* FayeClient+Parsing.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		2140E1D04E961AF703FD04D54FF8C740 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF83ABEF1A458CAE5372C3E2E46D918F /* Foundation.framework */; };
-		2641943D2AB25D845A907E751D0D4A0E /* FayeClient+Transport.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDECAEB5EE9FA1ABB438BF7BFA54A873 /* FayeClient+Transport.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		372A1E8811704945874EB18F7BD1309F /* FayeClientDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C951632446E53D8608098AA9AE5EDEA /* FayeClientDelegate.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		4395CC6B51E36E7FA9DF24986CB85D58 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DA424137F7F26626CB88BD77A99423B /* StringExtensions.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		53956DED61FE62732C9218A7A387BC00 /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A1314F41D4AF302873CCAE4DF95096E /* SwiftyJSON.framework */; };
-		5C79AABB8B872CDFC3596A03DA50F50F /* FayeSwift-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = D3A7795CDA243AB07B1664FEE1544038 /* FayeSwift-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		603A236E27FDBCDDDC245C7949FAC4AB /* Pods-FayeSwift_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1DCE2224000629085D044E4A5FDB2710 /* Pods-FayeSwift_Tests-dummy.m */; };
-		630775D47B4762F060BF09A7AD3AD9F2 /* SwiftyJSON-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 6B923F40E09322629BC57536AFBDAB00 /* SwiftyJSON-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		66F8B4E224873FB0B03A14FF6D5055DA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF83ABEF1A458CAE5372C3E2E46D918F /* Foundation.framework */; };
-		819CD987E43CF9B00A0BE165B3144C21 /* Pods-FayeSwift_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 2FE9E957D59ADA0A662E4B8C1A7BD7E2 /* Pods-FayeSwift_Example-dummy.m */; };
-		888BD35738BB6F56062233497B82CEA4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF83ABEF1A458CAE5372C3E2E46D918F /* Foundation.framework */; };
-		8F7F7274F17B1CF2A00BED441F5CFD67 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AF83ABEF1A458CAE5372C3E2E46D918F /* Foundation.framework */; };
-		9590095A7427348F72D50958E6DF569D /* FayeClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3144C4726BB0EB476A794EEFC0B2F26 /* FayeClient.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		97E28C082763F8A1B9DF116332FE45A5 /* FayeSwift-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F23ED994CFBB0F9B07BF334EA7FF240 /* FayeSwift-dummy.m */; };
-		A3F622749F008AB61E99EF439E3B7551 /* WebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D64F48FA18233694918281C87E0266 /* WebSocket.swift */; settings = {COMPILER_FLAGS = "-fno-objc-arc -w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		AC29BC38767C449B4173F44C53632135 /* Pods-FayeSwift_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 10E4A21EDDC41F94B30C17F38403E413 /* Pods-FayeSwift_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B4F045C4EB5BA94B75966419EB72662A /* SSLSecurity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A444149F18F886FD0A1E23B45D6671 /* SSLSecurity.swift */; settings = {COMPILER_FLAGS = "-fno-objc-arc -w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		B715F8A02147DC9AF882D4E8B8CA03A5 /* WebsocketTransport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DA092BAC435FAC54B26652A4967BBC2 /* WebsocketTransport.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		BD0EEEBB061534E4B0AA21C29937F7E9 /* FayeClient+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 040DEA860EC7FF25C6B8F9F0C5AE8073 /* FayeClient+Helper.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		C96024BA34EFE5DFB81CAA301E6CBF9D /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0813DA1F91E6465D940389B245DB41E4 /* SwiftyJSON.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		D7C3BD0F56BE895E0425738268F11494 /* NSError+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24295EB91477AACF5542D54C350C5715 /* NSError+Helper.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		D82013AA00D169E2324113D1EA177494 /* FayeClient+Bayuex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00691AB4D533EDE30C5370EEE0AE7074 /* FayeClient+Bayuex.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		DB619B3DA5D1A31A839B17491D9AB6CF /* Starscream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E94F4BAAE418F28A0730CC56D7FACFF /* Starscream.framework */; };
-		DF00F790990FE2A87CACDD519DA5FAA2 /* FayeSubscriptionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E2414E53B957CFF4E6F6E82CECEFA47 /* FayeSubscriptionModel.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		EA58C7FB9E131FA20044D726C8634078 /* FayeClient+Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0DE0C357228154269715152013E357E /* FayeClient+Action.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		F13620786093149885BC1C94F8AE9FB9 /* Transport.swift in Sources */ = {isa = PBXBuildFile; fileRef = C0700FD7F6575455C46E83723884C015 /* Transport.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		F9073136443690E223D545CD2FF138B0 /* FayeClient+Subscriptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AC895133B34E9D0675395BA526347A6 /* FayeClient+Subscriptions.swift */; settings = {COMPILER_FLAGS = "-w -Xanalyzer -analyzer-disable-all-checks"; }; };
-		FED7F96749B4ACB6DAF206513C945CA9 /* Starscream-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C6718FA411202146721CBD6539BA6A /* Starscream-dummy.m */; };
+		138B028F2781F34FC2CB743BA8963FA8 /* WSEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9291D7459E9475773F86717440A1B570 /* WSEngine.swift */; };
+		1E50A2A08E2D38A9DE964FF9AA2422D3 /* WSCompression.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6866B4BC5E8089A90860474310D09EB /* WSCompression.swift */; };
+		1EBC62F41CC90D12AFBF45BA5FCD976E /* WebsocketTransport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5367C70F66CFB6BB4E79FBF49B27B57F /* WebsocketTransport.swift */; };
+		1F3635C339655885D10797FC8ABD7E8A /* StringHTTPHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97B9A815FED0F98082C88F39C2DCC16 /* StringHTTPHandler.swift */; };
+		26D0D7BAFEB2991FF2645D209ADE0BC3 /* Pods-FayeSwift_Example-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = B0D1A2F55D87666017D56F16D5671E34 /* Pods-FayeSwift_Example-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		35628E6BE1E430358FD214EB19AF2E38 /* Framer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE3BADB9F72A00BC29B511C3B31D7ED /* Framer.swift */; };
+		371AE48204C97C939981924FBB3E3C70 /* Data+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F089C81661E3F832DA85D9A4C24F37E7 /* Data+Extensions.swift */; };
+		3D40950A2A032BF1E7C484F9F74A2A27 /* Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = E0B3F16BB5051B23600F71BEEF64D3C2 /* Server.swift */; };
+		3E0613C79EDFB2F6526B335205C961D2 /* WebSocketServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D453DF1230F5C8CAD026CFC66D7DB03D /* WebSocketServer.swift */; };
+		45C838EF6C400BF9A4FA6330DCA8FF98 /* FayeSwift-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 8B9DF075CA123A3D24B0E5ECB58DB651 /* FayeSwift-dummy.m */; };
+		4F3FFB2EBD058878FCE7BECC5CB31523 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66EA249AA70B465C88C66219B7321C29 /* Foundation.framework */; };
+		52C2F5AA0D179F742394477ECF98BBFD /* Transport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4239408D88CF436217DE67140C09B171 /* Transport.swift */; };
+		5B0CD91FE8FAC97D47C421C11DAA0422 /* FayeSwift-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 97AE7933EE429B53986BE66276747A7D /* FayeSwift-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		5DF3DF5AB474D53CAFC036C1CB4B4B66 /* FoundationTransport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D63390A10E9F170D263AF3988B24124 /* FoundationTransport.swift */; };
+		5FB5546CB2F4BAA36E9A2146FB4D75DB /* SwiftyJSON-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = E71E4634080D7347CEE1F8B45E5726F5 /* SwiftyJSON-dummy.m */; };
+		62FCD7F0DA368198F57272D1682DD66A /* NSError+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC12CA60D73C4047FA83C85996DDB5FA /* NSError+Helper.swift */; };
+		65101ADC15F4CCE85719A1A6E438A35F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66EA249AA70B465C88C66219B7321C29 /* Foundation.framework */; };
+		7404C01D26E709ECEA13C96FC15D75EB /* FayeClient+Parsing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FD52700FD56692EECED74AF62C80105 /* FayeClient+Parsing.swift */; };
+		74AD214F3F2B356268F80DD79EF54C6C /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C711AEE2DA04D0B11F5F008AD6A452CD /* SwiftyJSON.framework */; };
+		74C67375E014FEE93E343794C340DAE4 /* FoundationSecurity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AF28D7727DECA3DF165670D85218455 /* FoundationSecurity.swift */; };
+		7865C7456AC8DDA986065CB404EBD506 /* Pods-FayeSwift_Tests-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 74CF4E2A192377428C5F06ECC9E8FA6C /* Pods-FayeSwift_Tests-dummy.m */; };
+		7A01B7C3FFA07FB1B99E7766CD20DFAA /* Pods-FayeSwift_Tests-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 5408A92C70DD1D719AD288C51BA3EDE7 /* Pods-FayeSwift_Tests-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7A8AA475862499E7D1525843B24CAA1E /* Security.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DDF7F939EF2E868A4339802A4E74E8 /* Security.swift */; };
+		7D2A8514AF1C3A71622C4FE05D18E0A6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66EA249AA70B465C88C66219B7321C29 /* Foundation.framework */; };
+		7F969E29E261561AEA1DECCD39F67B60 /* TCPTransport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95193F6C731DF4303C720E68223AEBF4 /* TCPTransport.swift */; };
+		85C2B16BF2F5A22ACB57013708514FC2 /* Starscream-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 7EC6BAA2521124F6C3438AC3490FF0F6 /* Starscream-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		88B54AC18FE3E221B13D26B428D189B9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66EA249AA70B465C88C66219B7321C29 /* Foundation.framework */; };
+		893EA64D6F55C8DA8ED037570777326E /* FayeClient+Action.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CE6FA5482976941A66FC4AFA9500F62 /* FayeClient+Action.swift */; };
+		8D64DF55AB5B232EEA58818B56EBE442 /* FrameCollector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A3F370C91A8918B8939E859D36DEDE0 /* FrameCollector.swift */; };
+		90F965102E8A76F689A8E19C2463FB3B /* FoundationHTTPServerHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2284F917EDE4B4457277DD95423DF758 /* FoundationHTTPServerHandler.swift */; };
+		93524EF16C1EA133AD0893B6FF138B30 /* Compression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C37037450A0EE0FE805222E3D06860 /* Compression.swift */; };
+		97DA4510146BCEF10BD53BD5CC1459CA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 66EA249AA70B465C88C66219B7321C29 /* Foundation.framework */; };
+		99CABBFF5653DCB301C355A857599B58 /* SwiftyJSON-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = E2A1A11E7E2791CA11238F8D5DAE8CF9 /* SwiftyJSON-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		9A53B97806A9E67FEFEB65DEB5588FFA /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 13F163C80416CBEB02EC0187B8CCEFD1 /* StringExtensions.swift */; };
+		A100344FC632242FDEAA4BFC0FC01534 /* NativeEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452981AACA89768F38D52BB70DD1B039 /* NativeEngine.swift */; };
+		A29DCC96E5AB5067E8BED0CFD06FA96B /* Transport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43DDE165ACA21A32D774483DB2F479AB /* Transport.swift */; };
+		B471CF5E4D5068291D4CC54CBF89E964 /* SwiftyJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B16C9ED6E7FCC8D4050702D608260E2 /* SwiftyJSON.swift */; };
+		BFF0B7845AD87F28D8FA3B9D2B209A26 /* FayeSubscriptionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B08378535C2930A252AEEFDBFA39B511 /* FayeSubscriptionModel.swift */; };
+		C02A130EB04E7E29FC9A3EE23466800C /* FayeClient+Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 069177BE7826C9136A198CC69773FD40 /* FayeClient+Helper.swift */; };
+		C154B9ECABD19498F2889B7FBA47BB47 /* FayeClientDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4774D40300A83D28AF7A51F2EDE29F03 /* FayeClientDelegate.swift */; };
+		C174E2114D6ABFF21E319E9888DB4748 /* FayeClient+Bayuex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8085E6D289A0BC51A9B3BCBDB249E5FB /* FayeClient+Bayuex.swift */; };
+		C23A7A32046CDBACD4A677F7BDAA5277 /* FayeClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BFCD2001216A446370F22004C8B04F6 /* FayeClient.swift */; };
+		CEA89811A22FE7A4CE7A1BC79A130B1D /* FayeClient+Subscriptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566A7570853E6C4829C983097F00E0FC /* FayeClient+Subscriptions.swift */; };
+		D4BB4F9AF3D954C2245DDC091A7033C5 /* WebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F61B7552579C7E6B4CE4D3586ADC56C /* WebSocket.swift */; };
+		D9145515CFF4ED198150DDB0C292AC93 /* FayeClient+Transport.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F3A1B0223B0F48607E8F114F99B78C /* FayeClient+Transport.swift */; };
+		D9BF66AB4DA1FE122DE361C31ED25D69 /* Pods-FayeSwift_Example-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 702ED4E00C35B47376D617A4E4BF3CE9 /* Pods-FayeSwift_Example-dummy.m */; };
+		DD19B0C6316FB9E71A9CF15665A2D2D9 /* Starscream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ABDA9325CBAA97E4B84F8490D5ECA6C8 /* Starscream.framework */; };
+		F51ECAF8CB23CF31DF912528E378BC81 /* Engine.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1EB2C369F945AADA040808B80FC1D5 /* Engine.swift */; };
+		F8849D114B30E7BD395FE77F7A60CFDB /* FoundationHTTPHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 295461D7A108B8E011D0B1D178C1C40C /* FoundationHTTPHandler.swift */; };
+		FB26CA8C3B66AD625A24452C4065D05E /* Starscream-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A5B43DCA63F646C72A40997AE2185A /* Starscream-dummy.m */; };
+		FE7EFFB6A9757806696A3CD416946F74 /* HTTPHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96645BE7968203D79E751E637A08977F /* HTTPHandler.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		0E2E944578DFD11725AE03E57A2F5E40 /* PBXContainerItemProxy */ = {
+		1421504D71EC0462FF0F6C4BEA7A0E1A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 5C1F57BFFCD92868AF3442E38186A537;
+			remoteGlobalIDString = 9B78EE4AF6AE03E79D88886319853FF7;
+			remoteInfo = Starscream;
+		};
+		1FAF7891B919F509D3138ED028A6BD86 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D118A6A04828FD3CDA8640CD2B6796D2;
 			remoteInfo = SwiftyJSON;
 		};
-		27129EF77D9CAC29F1151EC75DB48940 /* PBXContainerItemProxy */ = {
+		3402497841F54385E8BD13DF35C92B60 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = BCC8AE0600D381881B2B45F29D3A3294;
+			remoteGlobalIDString = 9B78EE4AF6AE03E79D88886319853FF7;
 			remoteInfo = Starscream;
 		};
-		42672EE0E914C25799C038C3FFE417CC /* PBXContainerItemProxy */ = {
+		4FDADCE46294D8AFCFF8EE03B8B981FB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = BCC8AE0600D381881B2B45F29D3A3294;
+			remoteGlobalIDString = D118A6A04828FD3CDA8640CD2B6796D2;
+			remoteInfo = SwiftyJSON;
+		};
+		5EE3800B516F9A10F65BF1EE1D7E10F8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 9B78EE4AF6AE03E79D88886319853FF7;
 			remoteInfo = Starscream;
 		};
-		5C2824D1A9A59FC7E0807982E563883C /* PBXContainerItemProxy */ = {
+		E95DA7A58C5A5BC45C3E3EAF38E4C7FE /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 5C48D6CAB4FBFA5BB8EFCD0C0947DF9D;
+			remoteGlobalIDString = D118A6A04828FD3CDA8640CD2B6796D2;
+			remoteInfo = SwiftyJSON;
+		};
+		ECA15882AE9508D7355A32ED35005A38 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5E551DD8B190AB276724C510971C365C;
 			remoteInfo = FayeSwift;
 		};
-		663722FA80FCCEA51B761DBCF6962820 /* PBXContainerItemProxy */ = {
+		FC8E37B47A0BE401399B207B9C53A0DF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 5C48D6CAB4FBFA5BB8EFCD0C0947DF9D;
+			remoteGlobalIDString = 5E551DD8B190AB276724C510971C365C;
 			remoteInfo = FayeSwift;
-		};
-		906B0FC7D35C414F5BBE0F7DB11C519B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 5C1F57BFFCD92868AF3442E38186A537;
-			remoteInfo = SwiftyJSON;
-		};
-		B4F58B425B8A192B0B43228D5BBD2FEF /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = BCC8AE0600D381881B2B45F29D3A3294;
-			remoteInfo = Starscream;
-		};
-		EF2196CF5D21430C9E4A6BAD3F790A0F /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 5C1F57BFFCD92868AF3442E38186A537;
-			remoteInfo = SwiftyJSON;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		00691AB4D533EDE30C5370EEE0AE7074 /* FayeClient+Bayuex.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "FayeClient+Bayuex.swift"; sourceTree = "<group>"; };
-		01718434A0A3E9C872093B738FC33F54 /* FayeSwift-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FayeSwift-prefix.pch"; sourceTree = "<group>"; };
-		040DEA860EC7FF25C6B8F9F0C5AE8073 /* FayeClient+Helper.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "FayeClient+Helper.swift"; sourceTree = "<group>"; };
-		06B16C30B7CF62C246F4DD2B6BA325D2 /* Pods-FayeSwift_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-FayeSwift_Example-umbrella.h"; sourceTree = "<group>"; };
-		0813DA1F91E6465D940389B245DB41E4 /* SwiftyJSON.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftyJSON.swift; path = Source/SwiftyJSON.swift; sourceTree = "<group>"; };
-		0AC895133B34E9D0675395BA526347A6 /* FayeClient+Subscriptions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "FayeClient+Subscriptions.swift"; sourceTree = "<group>"; };
-		0DA092BAC435FAC54B26652A4967BBC2 /* WebsocketTransport.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = WebsocketTransport.swift; sourceTree = "<group>"; };
-		0F0AD0445D068E37E1C8498A3BF6150D /* SwiftyJSON-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftyJSON-prefix.pch"; sourceTree = "<group>"; };
-		10E4A21EDDC41F94B30C17F38403E413 /* Pods-FayeSwift_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-FayeSwift_Tests-umbrella.h"; sourceTree = "<group>"; };
-		14B7C4FE824293ABEEF592A7E71C4AFC /* Pods-FayeSwift_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-FayeSwift_Example-frameworks.sh"; sourceTree = "<group>"; };
-		154C747E02B1DCBD4885645B5878477F /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		15765D47A6F3AC9E1A1D641D8B2ADB93 /* Pods-FayeSwift_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-FayeSwift_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
-		18C6718FA411202146721CBD6539BA6A /* Starscream-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Starscream-dummy.m"; sourceTree = "<group>"; };
-		1DCE2224000629085D044E4A5FDB2710 /* Pods-FayeSwift_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-FayeSwift_Tests-dummy.m"; sourceTree = "<group>"; };
-		1EC0280E5CCCCD96F81E63B562E157DD /* SwiftyJSON.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftyJSON.xcconfig; sourceTree = "<group>"; };
-		24295EB91477AACF5542D54C350C5715 /* NSError+Helper.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "NSError+Helper.swift"; sourceTree = "<group>"; };
-		2692C5A026D6876DF0B8ED238232F2E6 /* Pods-FayeSwift_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-FayeSwift_Example.release.xcconfig"; sourceTree = "<group>"; };
-		2A14E4E75C0921B8190FF7805BDB1994 /* SwiftyJSON.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = SwiftyJSON.modulemap; sourceTree = "<group>"; };
-		2D4EF06156597B9C0C9800347C3343FC /* Pods-FayeSwift_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-FayeSwift_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
-		2FE9E957D59ADA0A662E4B8C1A7BD7E2 /* Pods-FayeSwift_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-FayeSwift_Example-dummy.m"; sourceTree = "<group>"; };
-		37D9B4C012C932EED434E89C515FA960 /* Pods-FayeSwift_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-FayeSwift_Example.modulemap"; sourceTree = "<group>"; };
-		38A444149F18F886FD0A1E23B45D6671 /* SSLSecurity.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SSLSecurity.swift; path = Source/SSLSecurity.swift; sourceTree = "<group>"; };
-		3E94F4BAAE418F28A0730CC56D7FACFF /* Starscream.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Starscream.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		4471A15D81938B6C2CE6A161EC41FEED /* Pods-FayeSwift_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-FayeSwift_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
-		47C7E36F0C36BF6A9B7F26250E6F35CA /* Starscream-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Starscream-prefix.pch"; sourceTree = "<group>"; };
-		47C81FB96686C0BE581D0FC3090AFC0D /* Starscream.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Starscream.xcconfig; sourceTree = "<group>"; };
-		4885D84AE492246F7B92A35D5F4C2787 /* Pods-FayeSwift_Example-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-FayeSwift_Example-resources.sh"; sourceTree = "<group>"; };
-		4AB2D41C9043F185BD735AC2476F72C6 /* Pods-FayeSwift_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-FayeSwift_Tests.release.xcconfig"; sourceTree = "<group>"; };
-		4E2414E53B957CFF4E6F6E82CECEFA47 /* FayeSubscriptionModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FayeSubscriptionModel.swift; sourceTree = "<group>"; };
-		502DCC2B2A3C577BB0E225CE04E63571 /* Pods_FayeSwift_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_FayeSwift_Tests.framework; path = "Pods-FayeSwift_Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		5927E4C39F2970C28F9060D5EDF137B9 /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6B923F40E09322629BC57536AFBDAB00 /* SwiftyJSON-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftyJSON-umbrella.h"; sourceTree = "<group>"; };
-		6DA424137F7F26626CB88BD77A99423B /* StringExtensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
-		6DCD25231745CBB7A0DE8AE144F32C35 /* SwiftyJSON-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SwiftyJSON-dummy.m"; sourceTree = "<group>"; };
-		6E1FB52B709CB783F4109CA61174C28B /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6F23ED994CFBB0F9B07BF334EA7FF240 /* FayeSwift-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "FayeSwift-dummy.m"; sourceTree = "<group>"; };
-		6FA9ABBAFE65EA53C5AECD4FEF5902DE /* Pods_FayeSwift_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_FayeSwift_Example.framework; path = "Pods-FayeSwift_Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
-		7B3AAC1CAA0FD33A1665A6CF0609129E /* FayeSwift.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = FayeSwift.xcconfig; sourceTree = "<group>"; };
-		7C951632446E53D8608098AA9AE5EDEA /* FayeClientDelegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FayeClientDelegate.swift; sourceTree = "<group>"; };
-		8617DDEB1D97E8945A823BA19722DD99 /* Starscream.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Starscream.framework; path = Starscream.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		87D64F48FA18233694918281C87E0266 /* WebSocket.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WebSocket.swift; path = Source/WebSocket.swift; sourceTree = "<group>"; };
-		93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		9A1314F41D4AF302873CCAE4DF95096E /* SwiftyJSON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyJSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9C1D30B972C48AC8BD0E88DA4DB9F743 /* FayeSwift.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = FayeSwift.modulemap; sourceTree = "<group>"; };
-		AF83ABEF1A458CAE5372C3E2E46D918F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS10.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		B29C7FFE8D08A56E77C644C03000FC94 /* Pods-FayeSwift_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-FayeSwift_Example-acknowledgements.plist"; sourceTree = "<group>"; };
-		B3144C4726BB0EB476A794EEFC0B2F26 /* FayeClient.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = FayeClient.swift; sourceTree = "<group>"; };
-		B661AAF1FC01F5B9EB53567F4990C215 /* Pods-FayeSwift_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-FayeSwift_Example.debug.xcconfig"; sourceTree = "<group>"; };
-		B9AF00E1C38081852D6E23B7C286C779 /* SwiftyJSON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SwiftyJSON.framework; path = SwiftyJSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B9BD316B84610E564DEC11C4F736BD36 /* Pods-FayeSwift_Tests-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-FayeSwift_Tests-resources.sh"; sourceTree = "<group>"; };
-		BC51989923EA37E862F09C698F868947 /* FayeSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = FayeSwift.framework; path = FayeSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		C0700FD7F6575455C46E83723884C015 /* Transport.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = Transport.swift; sourceTree = "<group>"; };
-		C0DE0C357228154269715152013E357E /* FayeClient+Action.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "FayeClient+Action.swift"; sourceTree = "<group>"; };
-		CFB3E404A66EE13E14582416D200A72C /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D26B5E2282A330BE919FE4EFDFB738B3 /* Pods-FayeSwift_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-FayeSwift_Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		D3A7795CDA243AB07B1664FEE1544038 /* FayeSwift-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FayeSwift-umbrella.h"; sourceTree = "<group>"; };
-		D47E6B74B427A4904D75990D1C34E829 /* Starscream-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Starscream-umbrella.h"; sourceTree = "<group>"; };
-		DD6E1ADC55716BEA0CA275460382B07D /* FayeClient+Parsing.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "FayeClient+Parsing.swift"; sourceTree = "<group>"; };
-		DDECAEB5EE9FA1ABB438BF7BFA54A873 /* FayeClient+Transport.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = "FayeClient+Transport.swift"; sourceTree = "<group>"; };
-		E4E07C18061452192A8755C57422BE93 /* Pods-FayeSwift_Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-FayeSwift_Tests-frameworks.sh"; sourceTree = "<group>"; };
-		E6671F9532A947F40918CF9A0D44F70F /* Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		ED0A84AABA966E6DE908E1D84ABB429E /* Starscream.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = Starscream.modulemap; sourceTree = "<group>"; };
-		F3FCAA0DF279AAE5F2E8878F0749DD44 /* Pods-FayeSwift_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; path = "Pods-FayeSwift_Tests.modulemap"; sourceTree = "<group>"; };
+		047BEEE8CFD1EAE8DACBFC2ABF95425D /* FayeSwift.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = FayeSwift.xcconfig; sourceTree = "<group>"; };
+		069177BE7826C9136A198CC69773FD40 /* FayeClient+Helper.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "FayeClient+Helper.swift"; path = "Sources/FayeClient+Helper.swift"; sourceTree = "<group>"; };
+		0CE6FA5482976941A66FC4AFA9500F62 /* FayeClient+Action.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "FayeClient+Action.swift"; path = "Sources/FayeClient+Action.swift"; sourceTree = "<group>"; };
+		0D63390A10E9F170D263AF3988B24124 /* FoundationTransport.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FoundationTransport.swift; path = Sources/Transport/FoundationTransport.swift; sourceTree = "<group>"; };
+		13F163C80416CBEB02EC0187B8CCEFD1 /* StringExtensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = StringExtensions.swift; path = Sources/StringExtensions.swift; sourceTree = "<group>"; };
+		13F871721477871167420E510E6E3742 /* Pods_FayeSwift_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_FayeSwift_Example.framework; path = "Pods-FayeSwift_Example.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		1549E6DACFD1AD6DFA697BF29A35B3A4 /* FayeSwift-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FayeSwift-prefix.pch"; sourceTree = "<group>"; };
+		2284F917EDE4B4457277DD95423DF758 /* FoundationHTTPServerHandler.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FoundationHTTPServerHandler.swift; path = Sources/Framer/FoundationHTTPServerHandler.swift; sourceTree = "<group>"; };
+		25DDF7F939EF2E868A4339802A4E74E8 /* Security.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Security.swift; path = Sources/Security/Security.swift; sourceTree = "<group>"; };
+		295461D7A108B8E011D0B1D178C1C40C /* FoundationHTTPHandler.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FoundationHTTPHandler.swift; path = Sources/Framer/FoundationHTTPHandler.swift; sourceTree = "<group>"; };
+		3AEF750F8F7E21E3076A277B4255C6ED /* FayeSwift.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = FayeSwift.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		3C4DB29DDFF56CBEA832B464F25EBF18 /* SwiftyJSON-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "SwiftyJSON-Info.plist"; sourceTree = "<group>"; };
+		40F3A1B0223B0F48607E8F114F99B78C /* FayeClient+Transport.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "FayeClient+Transport.swift"; path = "Sources/FayeClient+Transport.swift"; sourceTree = "<group>"; };
+		4239408D88CF436217DE67140C09B171 /* Transport.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Transport.swift; path = Sources/Transport.swift; sourceTree = "<group>"; };
+		4332EFEC58B0E82FBA4FFBF1D8CD44A6 /* FayeSwift.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = FayeSwift.modulemap; sourceTree = "<group>"; };
+		43DDE165ACA21A32D774483DB2F479AB /* Transport.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Transport.swift; path = Sources/Transport/Transport.swift; sourceTree = "<group>"; };
+		452981AACA89768F38D52BB70DD1B039 /* NativeEngine.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = NativeEngine.swift; path = Sources/Engine/NativeEngine.swift; sourceTree = "<group>"; };
+		4774D40300A83D28AF7A51F2EDE29F03 /* FayeClientDelegate.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FayeClientDelegate.swift; path = Sources/FayeClientDelegate.swift; sourceTree = "<group>"; };
+		4ACEB46250C0224BA1C71DD8289E5BA1 /* Starscream-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Starscream-prefix.pch"; sourceTree = "<group>"; };
+		4AF28D7727DECA3DF165670D85218455 /* FoundationSecurity.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FoundationSecurity.swift; path = Sources/Security/FoundationSecurity.swift; sourceTree = "<group>"; };
+		528FBBFFC84FFBEF0E7DDF0982562E0B /* Pods-FayeSwift_Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-FayeSwift_Tests.release.xcconfig"; sourceTree = "<group>"; };
+		5367C70F66CFB6BB4E79FBF49B27B57F /* WebsocketTransport.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WebsocketTransport.swift; path = Sources/WebsocketTransport.swift; sourceTree = "<group>"; };
+		5408A92C70DD1D719AD288C51BA3EDE7 /* Pods-FayeSwift_Tests-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-FayeSwift_Tests-umbrella.h"; sourceTree = "<group>"; };
+		566A7570853E6C4829C983097F00E0FC /* FayeClient+Subscriptions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "FayeClient+Subscriptions.swift"; path = "Sources/FayeClient+Subscriptions.swift"; sourceTree = "<group>"; };
+		5B16C9ED6E7FCC8D4050702D608260E2 /* SwiftyJSON.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SwiftyJSON.swift; path = Source/SwiftyJSON/SwiftyJSON.swift; sourceTree = "<group>"; };
+		5E6CC62AB0D140277E579CE5E18F1508 /* Pods-FayeSwift_Example-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-FayeSwift_Example-frameworks.sh"; sourceTree = "<group>"; };
+		5F7F3D733E01300A4E277E94D7A39D09 /* Pods-FayeSwift_Tests-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-FayeSwift_Tests-frameworks.sh"; sourceTree = "<group>"; };
+		61A186D3CE6BBEC53C9E22FA3FD7E19D /* SwiftyJSON-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftyJSON-prefix.pch"; sourceTree = "<group>"; };
+		66EA249AA70B465C88C66219B7321C29 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS12.2.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		6E810AE5C04F854E8DFC92ACC290FA50 /* Pods-FayeSwift_Example-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-FayeSwift_Example-acknowledgements.markdown"; sourceTree = "<group>"; };
+		6FD52700FD56692EECED74AF62C80105 /* FayeClient+Parsing.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "FayeClient+Parsing.swift"; path = "Sources/FayeClient+Parsing.swift"; sourceTree = "<group>"; };
+		702ED4E00C35B47376D617A4E4BF3CE9 /* Pods-FayeSwift_Example-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-FayeSwift_Example-dummy.m"; sourceTree = "<group>"; };
+		71526644235E827D44173B4DA305C392 /* Readme.md */ = {isa = PBXFileReference; includeInIndex = 1; path = Readme.md; sourceTree = "<group>"; };
+		74CF4E2A192377428C5F06ECC9E8FA6C /* Pods-FayeSwift_Tests-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-FayeSwift_Tests-dummy.m"; sourceTree = "<group>"; };
+		7AC274A9B8EA3D455EE4B6D35B3131B0 /* SwiftyJSON.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SwiftyJSON.xcconfig; sourceTree = "<group>"; };
+		7BFCD2001216A446370F22004C8B04F6 /* FayeClient.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FayeClient.swift; path = Sources/FayeClient.swift; sourceTree = "<group>"; };
+		7DAD9B664EF4965431CCE924B1A86027 /* Pods-FayeSwift_Tests-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-FayeSwift_Tests-acknowledgements.plist"; sourceTree = "<group>"; };
+		7DCFC525E0C4FB7B05B9DD90891FD2E9 /* Pods-FayeSwift_Tests-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-FayeSwift_Tests-acknowledgements.markdown"; sourceTree = "<group>"; };
+		7EC6BAA2521124F6C3438AC3490FF0F6 /* Starscream-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Starscream-umbrella.h"; sourceTree = "<group>"; };
+		803B043628E27E9B05B3949999D24303 /* Pods_FayeSwift_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Pods_FayeSwift_Tests.framework; path = "Pods-FayeSwift_Tests.framework"; sourceTree = BUILT_PRODUCTS_DIR; };
+		8085E6D289A0BC51A9B3BCBDB249E5FB /* FayeClient+Bayuex.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "FayeClient+Bayuex.swift"; path = "Sources/FayeClient+Bayuex.swift"; sourceTree = "<group>"; };
+		891B2270823847ED23F2ECFC28F935EC /* Starscream.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Starscream.framework; path = Starscream.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8A3F370C91A8918B8939E859D36DEDE0 /* FrameCollector.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FrameCollector.swift; path = Sources/Framer/FrameCollector.swift; sourceTree = "<group>"; };
+		8B9DF075CA123A3D24B0E5ECB58DB651 /* FayeSwift-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "FayeSwift-dummy.m"; sourceTree = "<group>"; };
+		914513F39CD8B4AE7093613132643ABC /* FayeSwift-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "FayeSwift-Info.plist"; sourceTree = "<group>"; };
+		9291D7459E9475773F86717440A1B570 /* WSEngine.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WSEngine.swift; path = Sources/Engine/WSEngine.swift; sourceTree = "<group>"; };
+		92B45F50B2100AC6E199BE823EB478C5 /* Pods-FayeSwift_Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-FayeSwift_Tests.debug.xcconfig"; sourceTree = "<group>"; };
+		95193F6C731DF4303C720E68223AEBF4 /* TCPTransport.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = TCPTransport.swift; path = Sources/Transport/TCPTransport.swift; sourceTree = "<group>"; };
+		95C37037450A0EE0FE805222E3D06860 /* Compression.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Compression.swift; path = Sources/Compression/Compression.swift; sourceTree = "<group>"; };
+		96645BE7968203D79E751E637A08977F /* HTTPHandler.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HTTPHandler.swift; path = Sources/Framer/HTTPHandler.swift; sourceTree = "<group>"; };
+		97AE7933EE429B53986BE66276747A7D /* FayeSwift-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "FayeSwift-umbrella.h"; sourceTree = "<group>"; };
+		9CDA2A0B34EDB5063A8EBF3868D88867 /* FayeSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = FayeSwift.framework; path = FayeSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9F61B7552579C7E6B4CE4D3586ADC56C /* WebSocket.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WebSocket.swift; path = Sources/Starscream/WebSocket.swift; sourceTree = "<group>"; };
+		A334613D59552A1553E912C4E2814646 /* Pods-FayeSwift_Tests-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-FayeSwift_Tests-Info.plist"; sourceTree = "<group>"; };
+		A35C786F187E0EDCF9002FFF106F6C57 /* Pods-FayeSwift_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-FayeSwift_Example.debug.xcconfig"; sourceTree = "<group>"; };
+		A7619E8DC7E2EDC39E19C3D22F298A83 /* Pods-FayeSwift_Example-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-FayeSwift_Example-acknowledgements.plist"; sourceTree = "<group>"; };
+		ABDA9325CBAA97E4B84F8490D5ECA6C8 /* Starscream.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Starscream.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		ACC1C7B10209A713905FE58E50BFF4F6 /* Starscream.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Starscream.modulemap; sourceTree = "<group>"; };
+		B08378535C2930A252AEEFDBFA39B511 /* FayeSubscriptionModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = FayeSubscriptionModel.swift; path = Sources/FayeSubscriptionModel.swift; sourceTree = "<group>"; };
+		B0D1A2F55D87666017D56F16D5671E34 /* Pods-FayeSwift_Example-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-FayeSwift_Example-umbrella.h"; sourceTree = "<group>"; };
+		B46A5A95935228E00C289D459B6A52CB /* Pods-FayeSwift_Tests.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-FayeSwift_Tests.modulemap"; sourceTree = "<group>"; };
+		B647A46F2B10AA8E07E8E3E7501A8832 /* License */ = {isa = PBXFileReference; includeInIndex = 1; path = License; sourceTree = "<group>"; };
+		BEC86F6E4914D08D02F45B8563B29D66 /* Pods-FayeSwift_Example-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-FayeSwift_Example-Info.plist"; sourceTree = "<group>"; };
+		BFE3BADB9F72A00BC29B511C3B31D7ED /* Framer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Framer.swift; path = Sources/Framer/Framer.swift; sourceTree = "<group>"; };
+		C3A5B43DCA63F646C72A40997AE2185A /* Starscream-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Starscream-dummy.m"; sourceTree = "<group>"; };
+		C711AEE2DA04D0B11F5F008AD6A452CD /* SwiftyJSON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = SwiftyJSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CA1EB2C369F945AADA040808B80FC1D5 /* Engine.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Engine.swift; path = Sources/Engine/Engine.swift; sourceTree = "<group>"; };
+		CC09C6A1CD1691C8FE27E54FC92DC1A1 /* Pods-FayeSwift_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-FayeSwift_Example.release.xcconfig"; sourceTree = "<group>"; };
+		D453DF1230F5C8CAD026CFC66D7DB03D /* WebSocketServer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WebSocketServer.swift; path = Sources/Server/WebSocketServer.swift; sourceTree = "<group>"; };
+		D6866B4BC5E8089A90860474310D09EB /* WSCompression.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WSCompression.swift; path = Sources/Compression/WSCompression.swift; sourceTree = "<group>"; };
+		E0B3F16BB5051B23600F71BEEF64D3C2 /* Server.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Server.swift; path = Sources/Server/Server.swift; sourceTree = "<group>"; };
+		E23C076BA70925415F490FEDB215DA92 /* SwiftyJSON.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = SwiftyJSON.framework; path = SwiftyJSON.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E2A1A11E7E2791CA11238F8D5DAE8CF9 /* SwiftyJSON-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SwiftyJSON-umbrella.h"; sourceTree = "<group>"; };
+		E65418FB140C77BE75B9A283CA15DCE7 /* Starscream-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Starscream-Info.plist"; sourceTree = "<group>"; };
+		E71E4634080D7347CEE1F8B45E5726F5 /* SwiftyJSON-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SwiftyJSON-dummy.m"; sourceTree = "<group>"; };
+		EDDFD60C0DAAACDB4AFCD8105DA64B01 /* Starscream.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Starscream.xcconfig; sourceTree = "<group>"; };
+		F089C81661E3F832DA85D9A4C24F37E7 /* Data+Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Data+Extensions.swift"; path = "Sources/DataBytes/Data+Extensions.swift"; sourceTree = "<group>"; };
+		F27B991812255571739E16170D9D9096 /* SwiftyJSON.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = SwiftyJSON.modulemap; sourceTree = "<group>"; };
+		F97B9A815FED0F98082C88F39C2DCC16 /* StringHTTPHandler.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = StringHTTPHandler.swift; path = Sources/Framer/StringHTTPHandler.swift; sourceTree = "<group>"; };
+		FC12CA60D73C4047FA83C85996DDB5FA /* NSError+Helper.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "NSError+Helper.swift"; path = "Sources/NSError+Helper.swift"; sourceTree = "<group>"; };
+		FE0C7154FB2910C429E0C8C92035FE9F /* Pods-FayeSwift_Example.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-FayeSwift_Example.modulemap"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		4EDDF933F2400C2E4D59159875DE4F19 /* Frameworks */ = {
+		6E51509313B97489D45CA53879AE83B6 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				888BD35738BB6F56062233497B82CEA4 /* Foundation.framework in Frameworks */,
+				97DA4510146BCEF10BD53BD5CC1459CA /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		55482E57D69A6BEE3AB08D61E8D44F5A /* Frameworks */ = {
+		78D91398C910DDF469A29167087A5939 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				16C3627510AB6B698291B30407553A5D /* Foundation.framework in Frameworks */,
+				65101ADC15F4CCE85719A1A6E438A35F /* Foundation.framework in Frameworks */,
+				DD19B0C6316FB9E71A9CF15665A2D2D9 /* Starscream.framework in Frameworks */,
+				74AD214F3F2B356268F80DD79EF54C6C /* SwiftyJSON.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		9AE92D03ECEE8678AEF5195F0D5F65A7 /* Frameworks */ = {
+		B07D86D2D0DF9A5C12E7433AB7E53B4C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8F7F7274F17B1CF2A00BED441F5CFD67 /* Foundation.framework in Frameworks */,
+				4F3FFB2EBD058878FCE7BECC5CB31523 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		AC8BC9D4F3FD3DEC442EFCF527C2C4B2 /* Frameworks */ = {
+		C60B5F74066F4476ED3CF495EE1A8649 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				66F8B4E224873FB0B03A14FF6D5055DA /* Foundation.framework in Frameworks */,
-				DB619B3DA5D1A31A839B17491D9AB6CF /* Starscream.framework in Frameworks */,
-				53956DED61FE62732C9218A7A387BC00 /* SwiftyJSON.framework in Frameworks */,
+				88B54AC18FE3E221B13D26B428D189B9 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		C6EA43D132CFBD43EBC704B9E9E413DF /* Frameworks */ = {
+		F8B35DEC1CEE6B460BDFE60770E928AB /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2140E1D04E961AF703FD04D54FF8C740 /* Foundation.framework in Frameworks */,
+				7D2A8514AF1C3A71622C4FE05D18E0A6 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		000A61D7F0D0221F20F470656F297E70 /* Targets Support Files */ = {
+		0BF2AF36AF7EDC51BA144CC111EDB658 /* FayeSwift */ = {
 			isa = PBXGroup;
 			children = (
-				AEC58E9B2FE610C5D55CBB2FA4D34F2A /* Pods-FayeSwift_Example */,
-				0A3C1A1DE210D08A1510BD9669BDF551 /* Pods-FayeSwift_Tests */,
-			);
-			name = "Targets Support Files";
-			sourceTree = "<group>";
-		};
-		0A3C1A1DE210D08A1510BD9669BDF551 /* Pods-FayeSwift_Tests */ = {
-			isa = PBXGroup;
-			children = (
-				154C747E02B1DCBD4885645B5878477F /* Info.plist */,
-				F3FCAA0DF279AAE5F2E8878F0749DD44 /* Pods-FayeSwift_Tests.modulemap */,
-				2D4EF06156597B9C0C9800347C3343FC /* Pods-FayeSwift_Tests-acknowledgements.markdown */,
-				15765D47A6F3AC9E1A1D641D8B2ADB93 /* Pods-FayeSwift_Tests-acknowledgements.plist */,
-				1DCE2224000629085D044E4A5FDB2710 /* Pods-FayeSwift_Tests-dummy.m */,
-				E4E07C18061452192A8755C57422BE93 /* Pods-FayeSwift_Tests-frameworks.sh */,
-				B9BD316B84610E564DEC11C4F736BD36 /* Pods-FayeSwift_Tests-resources.sh */,
-				10E4A21EDDC41F94B30C17F38403E413 /* Pods-FayeSwift_Tests-umbrella.h */,
-				D26B5E2282A330BE919FE4EFDFB738B3 /* Pods-FayeSwift_Tests.debug.xcconfig */,
-				4AB2D41C9043F185BD735AC2476F72C6 /* Pods-FayeSwift_Tests.release.xcconfig */,
-			);
-			name = "Pods-FayeSwift_Tests";
-			path = "Target Support Files/Pods-FayeSwift_Tests";
-			sourceTree = "<group>";
-		};
-		0C03422930E80D7BB92C5C859589F09F /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				B60722EF6A0F9DCD2D7C6D03F8B362CD /* Starscream */,
-				48BC61B70DBB2FA057A57FF358488F76 /* SwiftyJSON */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
-		0DB5BD81DCAEB161F8916282ABFD3340 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				3E94F4BAAE418F28A0730CC56D7FACFF /* Starscream.framework */,
-				9A1314F41D4AF302873CCAE4DF95096E /* SwiftyJSON.framework */,
-				FD9348BF3D0247517870C91A35D015B9 /* iOS */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		142346D50CBE4F37FCCAE9D64C36FDC1 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				BC51989923EA37E862F09C698F868947 /* FayeSwift.framework */,
-				6FA9ABBAFE65EA53C5AECD4FEF5902DE /* Pods_FayeSwift_Example.framework */,
-				502DCC2B2A3C577BB0E225CE04E63571 /* Pods_FayeSwift_Tests.framework */,
-				8617DDEB1D97E8945A823BA19722DD99 /* Starscream.framework */,
-				B9AF00E1C38081852D6E23B7C286C779 /* SwiftyJSON.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		1F6C69005CE5773E87D416DED050CEA8 /* Development Pods */ = {
-			isa = PBXGroup;
-			children = (
-				7BECE1B843E487DAEB4272B5E771533E /* FayeSwift */,
-			);
-			name = "Development Pods";
-			sourceTree = "<group>";
-		};
-		48BC61B70DBB2FA057A57FF358488F76 /* SwiftyJSON */ = {
-			isa = PBXGroup;
-			children = (
-				0813DA1F91E6465D940389B245DB41E4 /* SwiftyJSON.swift */,
-				9BE8F84C840D474BB60E62D4A8259C63 /* Support Files */,
-			);
-			name = SwiftyJSON;
-			path = SwiftyJSON;
-			sourceTree = "<group>";
-		};
-		57072CFE2F97B4E7645A18D9267BA425 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				CFB3E404A66EE13E14582416D200A72C /* Info.plist */,
-				ED0A84AABA966E6DE908E1D84ABB429E /* Starscream.modulemap */,
-				47C81FB96686C0BE581D0FC3090AFC0D /* Starscream.xcconfig */,
-				18C6718FA411202146721CBD6539BA6A /* Starscream-dummy.m */,
-				47C7E36F0C36BF6A9B7F26250E6F35CA /* Starscream-prefix.pch */,
-				D47E6B74B427A4904D75990D1C34E829 /* Starscream-umbrella.h */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/Starscream";
-			sourceTree = "<group>";
-		};
-		7BECE1B843E487DAEB4272B5E771533E /* FayeSwift */ = {
-			isa = PBXGroup;
-			children = (
-				8036FC47B43C006D2E5847AA468D6316 /* Sources */,
-				9ACEECA4EA200705374D27971C0A3EAE /* Support Files */,
+				7BFCD2001216A446370F22004C8B04F6 /* FayeClient.swift */,
+				0CE6FA5482976941A66FC4AFA9500F62 /* FayeClient+Action.swift */,
+				8085E6D289A0BC51A9B3BCBDB249E5FB /* FayeClient+Bayuex.swift */,
+				069177BE7826C9136A198CC69773FD40 /* FayeClient+Helper.swift */,
+				6FD52700FD56692EECED74AF62C80105 /* FayeClient+Parsing.swift */,
+				566A7570853E6C4829C983097F00E0FC /* FayeClient+Subscriptions.swift */,
+				40F3A1B0223B0F48607E8F114F99B78C /* FayeClient+Transport.swift */,
+				4774D40300A83D28AF7A51F2EDE29F03 /* FayeClientDelegate.swift */,
+				B08378535C2930A252AEEFDBFA39B511 /* FayeSubscriptionModel.swift */,
+				FC12CA60D73C4047FA83C85996DDB5FA /* NSError+Helper.swift */,
+				13F163C80416CBEB02EC0187B8CCEFD1 /* StringExtensions.swift */,
+				4239408D88CF436217DE67140C09B171 /* Transport.swift */,
+				5367C70F66CFB6BB4E79FBF49B27B57F /* WebsocketTransport.swift */,
+				40047F383137CF9AC56349BEA6616949 /* Pod */,
+				FC2A4AE8D292AB9D5BA8BF8CD5B00B93 /* Support Files */,
 			);
 			name = FayeSwift;
 			path = ../..;
 			sourceTree = "<group>";
 		};
-		7DB346D0F39D3F0E887471402A8071AB = {
+		30766D3E84E4F5B5C2B022D75830F833 /* SwiftyJSON */ = {
 			isa = PBXGroup;
 			children = (
-				93A4A3777CF96A4AAC1D13BA6DCCEA73 /* Podfile */,
-				1F6C69005CE5773E87D416DED050CEA8 /* Development Pods */,
-				0DB5BD81DCAEB161F8916282ABFD3340 /* Frameworks */,
-				0C03422930E80D7BB92C5C859589F09F /* Pods */,
-				142346D50CBE4F37FCCAE9D64C36FDC1 /* Products */,
-				000A61D7F0D0221F20F470656F297E70 /* Targets Support Files */,
+				5B16C9ED6E7FCC8D4050702D608260E2 /* SwiftyJSON.swift */,
+				68AB257207B5C4A2FCF34E7C13E6A678 /* Support Files */,
 			);
+			name = SwiftyJSON;
+			path = SwiftyJSON;
 			sourceTree = "<group>";
 		};
-		8036FC47B43C006D2E5847AA468D6316 /* Sources */ = {
+		40047F383137CF9AC56349BEA6616949 /* Pod */ = {
 			isa = PBXGroup;
 			children = (
-				B3144C4726BB0EB476A794EEFC0B2F26 /* FayeClient.swift */,
-				C0DE0C357228154269715152013E357E /* FayeClient+Action.swift */,
-				00691AB4D533EDE30C5370EEE0AE7074 /* FayeClient+Bayuex.swift */,
-				040DEA860EC7FF25C6B8F9F0C5AE8073 /* FayeClient+Helper.swift */,
-				DD6E1ADC55716BEA0CA275460382B07D /* FayeClient+Parsing.swift */,
-				0AC895133B34E9D0675395BA526347A6 /* FayeClient+Subscriptions.swift */,
-				DDECAEB5EE9FA1ABB438BF7BFA54A873 /* FayeClient+Transport.swift */,
-				7C951632446E53D8608098AA9AE5EDEA /* FayeClientDelegate.swift */,
-				4E2414E53B957CFF4E6F6E82CECEFA47 /* FayeSubscriptionModel.swift */,
-				24295EB91477AACF5542D54C350C5715 /* NSError+Helper.swift */,
-				6DA424137F7F26626CB88BD77A99423B /* StringExtensions.swift */,
-				C0700FD7F6575455C46E83723884C015 /* Transport.swift */,
-				0DA092BAC435FAC54B26652A4967BBC2 /* WebsocketTransport.swift */,
+				3AEF750F8F7E21E3076A277B4255C6ED /* FayeSwift.podspec */,
+				B647A46F2B10AA8E07E8E3E7501A8832 /* License */,
+				71526644235E827D44173B4DA305C392 /* Readme.md */,
 			);
-			name = Sources;
-			path = Sources;
+			name = Pod;
 			sourceTree = "<group>";
 		};
-		9ACEECA4EA200705374D27971C0A3EAE /* Support Files */ = {
+		654C335B770E0E274747D663493D3A57 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				9C1D30B972C48AC8BD0E88DA4DB9F743 /* FayeSwift.modulemap */,
-				7B3AAC1CAA0FD33A1665A6CF0609129E /* FayeSwift.xcconfig */,
-				6F23ED994CFBB0F9B07BF334EA7FF240 /* FayeSwift-dummy.m */,
-				01718434A0A3E9C872093B738FC33F54 /* FayeSwift-prefix.pch */,
-				D3A7795CDA243AB07B1664FEE1544038 /* FayeSwift-umbrella.h */,
-				5927E4C39F2970C28F9060D5EDF137B9 /* Info.plist */,
+				ACC1C7B10209A713905FE58E50BFF4F6 /* Starscream.modulemap */,
+				EDDFD60C0DAAACDB4AFCD8105DA64B01 /* Starscream.xcconfig */,
+				C3A5B43DCA63F646C72A40997AE2185A /* Starscream-dummy.m */,
+				E65418FB140C77BE75B9A283CA15DCE7 /* Starscream-Info.plist */,
+				4ACEB46250C0224BA1C71DD8289E5BA1 /* Starscream-prefix.pch */,
+				7EC6BAA2521124F6C3438AC3490FF0F6 /* Starscream-umbrella.h */,
 			);
 			name = "Support Files";
-			path = "Example/Pods/Target Support Files/FayeSwift";
+			path = "../Target Support Files/Starscream";
 			sourceTree = "<group>";
 		};
-		9BE8F84C840D474BB60E62D4A8259C63 /* Support Files */ = {
+		6563A60F5A5BF11CB0170B4878038DFF /* Pods-FayeSwift_Example */ = {
 			isa = PBXGroup;
 			children = (
-				E6671F9532A947F40918CF9A0D44F70F /* Info.plist */,
-				2A14E4E75C0921B8190FF7805BDB1994 /* SwiftyJSON.modulemap */,
-				1EC0280E5CCCCD96F81E63B562E157DD /* SwiftyJSON.xcconfig */,
-				6DCD25231745CBB7A0DE8AE144F32C35 /* SwiftyJSON-dummy.m */,
-				0F0AD0445D068E37E1C8498A3BF6150D /* SwiftyJSON-prefix.pch */,
-				6B923F40E09322629BC57536AFBDAB00 /* SwiftyJSON-umbrella.h */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/SwiftyJSON";
-			sourceTree = "<group>";
-		};
-		AEC58E9B2FE610C5D55CBB2FA4D34F2A /* Pods-FayeSwift_Example */ = {
-			isa = PBXGroup;
-			children = (
-				6E1FB52B709CB783F4109CA61174C28B /* Info.plist */,
-				37D9B4C012C932EED434E89C515FA960 /* Pods-FayeSwift_Example.modulemap */,
-				4471A15D81938B6C2CE6A161EC41FEED /* Pods-FayeSwift_Example-acknowledgements.markdown */,
-				B29C7FFE8D08A56E77C644C03000FC94 /* Pods-FayeSwift_Example-acknowledgements.plist */,
-				2FE9E957D59ADA0A662E4B8C1A7BD7E2 /* Pods-FayeSwift_Example-dummy.m */,
-				14B7C4FE824293ABEEF592A7E71C4AFC /* Pods-FayeSwift_Example-frameworks.sh */,
-				4885D84AE492246F7B92A35D5F4C2787 /* Pods-FayeSwift_Example-resources.sh */,
-				06B16C30B7CF62C246F4DD2B6BA325D2 /* Pods-FayeSwift_Example-umbrella.h */,
-				B661AAF1FC01F5B9EB53567F4990C215 /* Pods-FayeSwift_Example.debug.xcconfig */,
-				2692C5A026D6876DF0B8ED238232F2E6 /* Pods-FayeSwift_Example.release.xcconfig */,
+				FE0C7154FB2910C429E0C8C92035FE9F /* Pods-FayeSwift_Example.modulemap */,
+				6E810AE5C04F854E8DFC92ACC290FA50 /* Pods-FayeSwift_Example-acknowledgements.markdown */,
+				A7619E8DC7E2EDC39E19C3D22F298A83 /* Pods-FayeSwift_Example-acknowledgements.plist */,
+				702ED4E00C35B47376D617A4E4BF3CE9 /* Pods-FayeSwift_Example-dummy.m */,
+				5E6CC62AB0D140277E579CE5E18F1508 /* Pods-FayeSwift_Example-frameworks.sh */,
+				BEC86F6E4914D08D02F45B8563B29D66 /* Pods-FayeSwift_Example-Info.plist */,
+				B0D1A2F55D87666017D56F16D5671E34 /* Pods-FayeSwift_Example-umbrella.h */,
+				A35C786F187E0EDCF9002FFF106F6C57 /* Pods-FayeSwift_Example.debug.xcconfig */,
+				CC09C6A1CD1691C8FE27E54FC92DC1A1 /* Pods-FayeSwift_Example.release.xcconfig */,
 			);
 			name = "Pods-FayeSwift_Example";
 			path = "Target Support Files/Pods-FayeSwift_Example";
 			sourceTree = "<group>";
 		};
-		B60722EF6A0F9DCD2D7C6D03F8B362CD /* Starscream */ = {
+		68AB257207B5C4A2FCF34E7C13E6A678 /* Support Files */ = {
 			isa = PBXGroup;
 			children = (
-				38A444149F18F886FD0A1E23B45D6671 /* SSLSecurity.swift */,
-				87D64F48FA18233694918281C87E0266 /* WebSocket.swift */,
-				57072CFE2F97B4E7645A18D9267BA425 /* Support Files */,
+				F27B991812255571739E16170D9D9096 /* SwiftyJSON.modulemap */,
+				7AC274A9B8EA3D455EE4B6D35B3131B0 /* SwiftyJSON.xcconfig */,
+				E71E4634080D7347CEE1F8B45E5726F5 /* SwiftyJSON-dummy.m */,
+				3C4DB29DDFF56CBEA832B464F25EBF18 /* SwiftyJSON-Info.plist */,
+				61A186D3CE6BBEC53C9E22FA3FD7E19D /* SwiftyJSON-prefix.pch */,
+				E2A1A11E7E2791CA11238F8D5DAE8CF9 /* SwiftyJSON-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/SwiftyJSON";
+			sourceTree = "<group>";
+		};
+		85422BCB99D41B108592CBC36D07C319 /* Pods-FayeSwift_Tests */ = {
+			isa = PBXGroup;
+			children = (
+				B46A5A95935228E00C289D459B6A52CB /* Pods-FayeSwift_Tests.modulemap */,
+				7DCFC525E0C4FB7B05B9DD90891FD2E9 /* Pods-FayeSwift_Tests-acknowledgements.markdown */,
+				7DAD9B664EF4965431CCE924B1A86027 /* Pods-FayeSwift_Tests-acknowledgements.plist */,
+				74CF4E2A192377428C5F06ECC9E8FA6C /* Pods-FayeSwift_Tests-dummy.m */,
+				5F7F3D733E01300A4E277E94D7A39D09 /* Pods-FayeSwift_Tests-frameworks.sh */,
+				A334613D59552A1553E912C4E2814646 /* Pods-FayeSwift_Tests-Info.plist */,
+				5408A92C70DD1D719AD288C51BA3EDE7 /* Pods-FayeSwift_Tests-umbrella.h */,
+				92B45F50B2100AC6E199BE823EB478C5 /* Pods-FayeSwift_Tests.debug.xcconfig */,
+				528FBBFFC84FFBEF0E7DDF0982562E0B /* Pods-FayeSwift_Tests.release.xcconfig */,
+			);
+			name = "Pods-FayeSwift_Tests";
+			path = "Target Support Files/Pods-FayeSwift_Tests";
+			sourceTree = "<group>";
+		};
+		A3762543793836511D559E05A4FF4E9F /* Development Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0BF2AF36AF7EDC51BA144CC111EDB658 /* FayeSwift */,
+			);
+			name = "Development Pods";
+			sourceTree = "<group>";
+		};
+		AADEC59BC2C46A2EB4239F071A12322F /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				6563A60F5A5BF11CB0170B4878038DFF /* Pods-FayeSwift_Example */,
+				85422BCB99D41B108592CBC36D07C319 /* Pods-FayeSwift_Tests */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		B790EF8E7CC4CAAC5C6FE7555D513C65 /* Starscream */ = {
+			isa = PBXGroup;
+			children = (
+				95C37037450A0EE0FE805222E3D06860 /* Compression.swift */,
+				F089C81661E3F832DA85D9A4C24F37E7 /* Data+Extensions.swift */,
+				CA1EB2C369F945AADA040808B80FC1D5 /* Engine.swift */,
+				295461D7A108B8E011D0B1D178C1C40C /* FoundationHTTPHandler.swift */,
+				2284F917EDE4B4457277DD95423DF758 /* FoundationHTTPServerHandler.swift */,
+				4AF28D7727DECA3DF165670D85218455 /* FoundationSecurity.swift */,
+				0D63390A10E9F170D263AF3988B24124 /* FoundationTransport.swift */,
+				8A3F370C91A8918B8939E859D36DEDE0 /* FrameCollector.swift */,
+				BFE3BADB9F72A00BC29B511C3B31D7ED /* Framer.swift */,
+				96645BE7968203D79E751E637A08977F /* HTTPHandler.swift */,
+				452981AACA89768F38D52BB70DD1B039 /* NativeEngine.swift */,
+				25DDF7F939EF2E868A4339802A4E74E8 /* Security.swift */,
+				E0B3F16BB5051B23600F71BEEF64D3C2 /* Server.swift */,
+				F97B9A815FED0F98082C88F39C2DCC16 /* StringHTTPHandler.swift */,
+				95193F6C731DF4303C720E68223AEBF4 /* TCPTransport.swift */,
+				43DDE165ACA21A32D774483DB2F479AB /* Transport.swift */,
+				9F61B7552579C7E6B4CE4D3586ADC56C /* WebSocket.swift */,
+				D453DF1230F5C8CAD026CFC66D7DB03D /* WebSocketServer.swift */,
+				D6866B4BC5E8089A90860474310D09EB /* WSCompression.swift */,
+				9291D7459E9475773F86717440A1B570 /* WSEngine.swift */,
+				654C335B770E0E274747D663493D3A57 /* Support Files */,
 			);
 			name = Starscream;
 			path = Starscream;
 			sourceTree = "<group>";
 		};
-		FD9348BF3D0247517870C91A35D015B9 /* iOS */ = {
+		CB1BBFCAB1161547233ABDD1062A1F53 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				AF83ABEF1A458CAE5372C3E2E46D918F /* Foundation.framework */,
+				9CDA2A0B34EDB5063A8EBF3868D88867 /* FayeSwift.framework */,
+				13F871721477871167420E510E6E3742 /* Pods_FayeSwift_Example.framework */,
+				803B043628E27E9B05B3949999D24303 /* Pods_FayeSwift_Tests.framework */,
+				891B2270823847ED23F2ECFC28F935EC /* Starscream.framework */,
+				E23C076BA70925415F490FEDB215DA92 /* SwiftyJSON.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CF1408CF629C7361332E53B88F7BD30C = {
+			isa = PBXGroup;
+			children = (
+				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
+				A3762543793836511D559E05A4FF4E9F /* Development Pods */,
+				E3E72319A78626B3AF9B593F1E512E66 /* Frameworks */,
+				EAC52A2681AD500197BE49D61C92AC0D /* Pods */,
+				CB1BBFCAB1161547233ABDD1062A1F53 /* Products */,
+				AADEC59BC2C46A2EB4239F071A12322F /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		E361081A39C3319842F67AE805995D4E /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				66EA249AA70B465C88C66219B7321C29 /* Foundation.framework */,
 			);
 			name = iOS;
+			sourceTree = "<group>";
+		};
+		E3E72319A78626B3AF9B593F1E512E66 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				ABDA9325CBAA97E4B84F8490D5ECA6C8 /* Starscream.framework */,
+				C711AEE2DA04D0B11F5F008AD6A452CD /* SwiftyJSON.framework */,
+				E361081A39C3319842F67AE805995D4E /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EAC52A2681AD500197BE49D61C92AC0D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				B790EF8E7CC4CAAC5C6FE7555D513C65 /* Starscream */,
+				30766D3E84E4F5B5C2B022D75830F833 /* SwiftyJSON */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		FC2A4AE8D292AB9D5BA8BF8CD5B00B93 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				4332EFEC58B0E82FBA4FFBF1D8CD44A6 /* FayeSwift.modulemap */,
+				047BEEE8CFD1EAE8DACBFC2ABF95425D /* FayeSwift.xcconfig */,
+				8B9DF075CA123A3D24B0E5ECB58DB651 /* FayeSwift-dummy.m */,
+				914513F39CD8B4AE7093613132643ABC /* FayeSwift-Info.plist */,
+				1549E6DACFD1AD6DFA697BF29A35B3A4 /* FayeSwift-prefix.pch */,
+				97AE7933EE429B53986BE66276747A7D /* FayeSwift-umbrella.h */,
+			);
+			name = "Support Files";
+			path = "Example/Pods/Target Support Files/FayeSwift";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		2FC285EE7B23BCF4838AE10E22CF15F1 /* Headers */ = {
+		250C2D38CD5700967B320BCE882D223F /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				026017E12DAB48A922244C71A63253D0 /* Starscream-umbrella.h in Headers */,
+				5B0CD91FE8FAC97D47C421C11DAA0422 /* FayeSwift-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5699FAC57A3070BF159F2901B70EBFDA /* Headers */ = {
+		6B8DEE41A4E3D722F7A5401A457CB358 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AC29BC38767C449B4173F44C53632135 /* Pods-FayeSwift_Tests-umbrella.h in Headers */,
+				99CABBFF5653DCB301C355A857599B58 /* SwiftyJSON-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5A448ADB59E0771F30851C17B3AC70A9 /* Headers */ = {
+		8958001054F2B2D469FE2AC845996A42 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				12A2D6DEF558554F285FBB6A2196E202 /* Pods-FayeSwift_Example-umbrella.h in Headers */,
+				85C2B16BF2F5A22ACB57013708514FC2 /* Starscream-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		BD236EDC7B51F8AE166BA91FADC49449 /* Headers */ = {
+		B2EC5A947F2079BEC2B28CE4B32FA566 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				630775D47B4762F060BF09A7AD3AD9F2 /* SwiftyJSON-umbrella.h in Headers */,
+				7A01B7C3FFA07FB1B99E7766CD20DFAA /* Pods-FayeSwift_Tests-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D21C478503F6EB3CC30702FFC62C1545 /* Headers */ = {
+		DBDC11BE5E8C3F188EEA96CEA1A00BC6 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5C79AABB8B872CDFC3596A03DA50F50F /* FayeSwift-umbrella.h in Headers */,
+				26D0D7BAFEB2991FF2645D209ADE0BC3 /* Pods-FayeSwift_Example-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		5C1F57BFFCD92868AF3442E38186A537 /* SwiftyJSON */ = {
+		46036F5F450724505F8F5A3535561A93 /* Pods-FayeSwift_Example */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D7B51E188C37F41CEC46650465F4DA2E /* Build configuration list for PBXNativeTarget "SwiftyJSON" */;
+			buildConfigurationList = 92CE793E190A4CB79F9EE04FEEFE16FD /* Build configuration list for PBXNativeTarget "Pods-FayeSwift_Example" */;
 			buildPhases = (
-				14562C9FE587649D1E1A8ECCC1121CB6 /* Sources */,
-				9AE92D03ECEE8678AEF5195F0D5F65A7 /* Frameworks */,
-				BD236EDC7B51F8AE166BA91FADC49449 /* Headers */,
+				DBDC11BE5E8C3F188EEA96CEA1A00BC6 /* Headers */,
+				C30301AEA2DCA5DD2FC607A58E99A0A8 /* Sources */,
+				F8B35DEC1CEE6B460BDFE60770E928AB /* Frameworks */,
+				EB8B1DAE4E79045A142597C4E5047C0F /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-			);
-			name = SwiftyJSON;
-			productName = SwiftyJSON;
-			productReference = B9AF00E1C38081852D6E23B7C286C779 /* SwiftyJSON.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		5C48D6CAB4FBFA5BB8EFCD0C0947DF9D /* FayeSwift */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 3BC677F1AB4B06206649C8ADA8DD1440 /* Build configuration list for PBXNativeTarget "FayeSwift" */;
-			buildPhases = (
-				3DE001A80C8B89B645180EEA8628E7AC /* Sources */,
-				AC8BC9D4F3FD3DEC442EFCF527C2C4B2 /* Frameworks */,
-				D21C478503F6EB3CC30702FFC62C1545 /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				1C30892F0FF517727036E27CDF81C663 /* PBXTargetDependency */,
-				0B624098DDC63EDF2E66E333C47201F1 /* PBXTargetDependency */,
-			);
-			name = FayeSwift;
-			productName = FayeSwift;
-			productReference = BC51989923EA37E862F09C698F868947 /* FayeSwift.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		90E7E0DDBF3230E4EE01FAA926FC8C1C /* Pods-FayeSwift_Example */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 2C37015467BCB2CAD2C5683C1D3C7897 /* Build configuration list for PBXNativeTarget "Pods-FayeSwift_Example" */;
-			buildPhases = (
-				A2EEF6DF48EB857F89E15025ADB08D0C /* Sources */,
-				55482E57D69A6BEE3AB08D61E8D44F5A /* Frameworks */,
-				5A448ADB59E0771F30851C17B3AC70A9 /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				513B4CE355F9033A8A9BBC57A2C7FFD1 /* PBXTargetDependency */,
-				543AAD42A1D98CF875D74C50362FEC99 /* PBXTargetDependency */,
-				2434201F5B0A7997E2922AE89413EEE1 /* PBXTargetDependency */,
+				7230AEF5B5D5A25A2F7CC7B486B751E1 /* PBXTargetDependency */,
+				DB9CB4192C3BAEB984EA576B1C796F3E /* PBXTargetDependency */,
+				64C5B360762037EC80DB6C7BAAFA3D99 /* PBXTargetDependency */,
 			);
 			name = "Pods-FayeSwift_Example";
 			productName = "Pods-FayeSwift_Example";
-			productReference = 6FA9ABBAFE65EA53C5AECD4FEF5902DE /* Pods_FayeSwift_Example.framework */;
+			productReference = 13F871721477871167420E510E6E3742 /* Pods_FayeSwift_Example.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		BC253BAFB43EC448547D4A2394ACD810 /* Pods-FayeSwift_Tests */ = {
+		5E551DD8B190AB276724C510971C365C /* FayeSwift */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 81D03CD0D35971BA49F91CC378F0381D /* Build configuration list for PBXNativeTarget "Pods-FayeSwift_Tests" */;
+			buildConfigurationList = 401A35C3B8F4524E534F5AF43DF7FD01 /* Build configuration list for PBXNativeTarget "FayeSwift" */;
 			buildPhases = (
-				64B715524D7BA41EE9474DB446B5E935 /* Sources */,
-				C6EA43D132CFBD43EBC704B9E9E413DF /* Frameworks */,
-				5699FAC57A3070BF159F2901B70EBFDA /* Headers */,
+				250C2D38CD5700967B320BCE882D223F /* Headers */,
+				BB45C3174DC438ECCBB37C1B6E9BF19B /* Sources */,
+				78D91398C910DDF469A29167087A5939 /* Frameworks */,
+				FDDF3494F0A5EA50D141860CB110E52D /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				37304380EF1AE699643886697C6B633D /* PBXTargetDependency */,
-				E42065487BF3D5CC9F09CB18C7F14F01 /* PBXTargetDependency */,
-				57B2902E0642C8E5BA1F9DADFE441377 /* PBXTargetDependency */,
+				E260F2A103167C679FC9DB55176D5F4F /* PBXTargetDependency */,
+				C4DEEE3CB6E159A9250950E7D872046E /* PBXTargetDependency */,
 			);
-			name = "Pods-FayeSwift_Tests";
-			productName = "Pods-FayeSwift_Tests";
-			productReference = 502DCC2B2A3C577BB0E225CE04E63571 /* Pods_FayeSwift_Tests.framework */;
+			name = FayeSwift;
+			productName = FayeSwift;
+			productReference = 9CDA2A0B34EDB5063A8EBF3868D88867 /* FayeSwift.framework */;
 			productType = "com.apple.product-type.framework";
 		};
-		BCC8AE0600D381881B2B45F29D3A3294 /* Starscream */ = {
+		9B78EE4AF6AE03E79D88886319853FF7 /* Starscream */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = E86FDF27E9DCFAAFE67D7E62F35E9AB0 /* Build configuration list for PBXNativeTarget "Starscream" */;
+			buildConfigurationList = 42D005F3EC3848C7036D975473A0B599 /* Build configuration list for PBXNativeTarget "Starscream" */;
 			buildPhases = (
-				E9E1339796C8B15F79531589B9E53575 /* Sources */,
-				4EDDF933F2400C2E4D59159875DE4F19 /* Frameworks */,
-				2FC285EE7B23BCF4838AE10E22CF15F1 /* Headers */,
+				8958001054F2B2D469FE2AC845996A42 /* Headers */,
+				82F5E749CB23C9695CB98119AFAA9CF7 /* Sources */,
+				6E51509313B97489D45CA53879AE83B6 /* Frameworks */,
+				1FEAE774856B8E9DA235365984A12325 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -547,564 +568,686 @@
 			);
 			name = Starscream;
 			productName = Starscream;
-			productReference = 8617DDEB1D97E8945A823BA19722DD99 /* Starscream.framework */;
+			productReference = 891B2270823847ED23F2ECFC28F935EC /* Starscream.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		D118A6A04828FD3CDA8640CD2B6796D2 /* SwiftyJSON */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F729EFA373196875F38F5325B7B83897 /* Build configuration list for PBXNativeTarget "SwiftyJSON" */;
+			buildPhases = (
+				6B8DEE41A4E3D722F7A5401A457CB358 /* Headers */,
+				6B2AB3B6BD3E620BF898D8A606FDC208 /* Sources */,
+				C60B5F74066F4476ED3CF495EE1A8649 /* Frameworks */,
+				BA17E256F0AC109369BE2D434570C704 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SwiftyJSON;
+			productName = SwiftyJSON;
+			productReference = E23C076BA70925415F490FEDB215DA92 /* SwiftyJSON.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		D363A9BDF4C1ECA78CDF5B83FC9C13F0 /* Pods-FayeSwift_Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D837C3410A68BB77EACA27DD71189414 /* Build configuration list for PBXNativeTarget "Pods-FayeSwift_Tests" */;
+			buildPhases = (
+				B2EC5A947F2079BEC2B28CE4B32FA566 /* Headers */,
+				6B17BBAFCFC87CEFEBBCA0135CE47C82 /* Sources */,
+				B07D86D2D0DF9A5C12E7433AB7E53B4C /* Frameworks */,
+				C8CE6D8E64F85F4CD573C4B1B5D1F1D1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				67EB9351DFE3C2E9DA971B723BA4865D /* PBXTargetDependency */,
+				B1E8BFCB48DDBD8475AA24CCB92204C4 /* PBXTargetDependency */,
+				22E504E28A10C4398709B34D180FA8C9 /* PBXTargetDependency */,
+			);
+			name = "Pods-FayeSwift_Tests";
+			productName = "Pods-FayeSwift_Tests";
+			productReference = 803B043628E27E9B05B3949999D24303 /* Pods_FayeSwift_Tests.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		D41D8CD98F00B204E9800998ECF8427E /* Project object */ = {
+		BFDFE7DC352907FC980B868725387E98 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0700;
+				LastSwiftUpdateCheck = 1100;
+				LastUpgradeCheck = 1100;
 			};
-			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
+			buildConfigurationList = 4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
-			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
-			productRefGroup = 142346D50CBE4F37FCCAE9D64C36FDC1 /* Products */;
+			mainGroup = CF1408CF629C7361332E53B88F7BD30C;
+			productRefGroup = CB1BBFCAB1161547233ABDD1062A1F53 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				5C48D6CAB4FBFA5BB8EFCD0C0947DF9D /* FayeSwift */,
-				90E7E0DDBF3230E4EE01FAA926FC8C1C /* Pods-FayeSwift_Example */,
-				BC253BAFB43EC448547D4A2394ACD810 /* Pods-FayeSwift_Tests */,
-				BCC8AE0600D381881B2B45F29D3A3294 /* Starscream */,
-				5C1F57BFFCD92868AF3442E38186A537 /* SwiftyJSON */,
+				5E551DD8B190AB276724C510971C365C /* FayeSwift */,
+				46036F5F450724505F8F5A3535561A93 /* Pods-FayeSwift_Example */,
+				D363A9BDF4C1ECA78CDF5B83FC9C13F0 /* Pods-FayeSwift_Tests */,
+				9B78EE4AF6AE03E79D88886319853FF7 /* Starscream */,
+				D118A6A04828FD3CDA8640CD2B6796D2 /* SwiftyJSON */,
 			);
 		};
 /* End PBXProject section */
 
+/* Begin PBXResourcesBuildPhase section */
+		1FEAE774856B8E9DA235365984A12325 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BA17E256F0AC109369BE2D434570C704 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C8CE6D8E64F85F4CD573C4B1B5D1F1D1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EB8B1DAE4E79045A142597C4E5047C0F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FDDF3494F0A5EA50D141860CB110E52D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
-		14562C9FE587649D1E1A8ECCC1121CB6 /* Sources */ = {
+		6B17BBAFCFC87CEFEBBCA0135CE47C82 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				01491BBA557B2F18B2A77192743E3E55 /* SwiftyJSON-dummy.m in Sources */,
-				C96024BA34EFE5DFB81CAA301E6CBF9D /* SwiftyJSON.swift in Sources */,
+				7865C7456AC8DDA986065CB404EBD506 /* Pods-FayeSwift_Tests-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		3DE001A80C8B89B645180EEA8628E7AC /* Sources */ = {
+		6B2AB3B6BD3E620BF898D8A606FDC208 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EA58C7FB9E131FA20044D726C8634078 /* FayeClient+Action.swift in Sources */,
-				D82013AA00D169E2324113D1EA177494 /* FayeClient+Bayuex.swift in Sources */,
-				BD0EEEBB061534E4B0AA21C29937F7E9 /* FayeClient+Helper.swift in Sources */,
-				1AF8A2644E64066D72B7AE1ED35E042E /* FayeClient+Parsing.swift in Sources */,
-				F9073136443690E223D545CD2FF138B0 /* FayeClient+Subscriptions.swift in Sources */,
-				2641943D2AB25D845A907E751D0D4A0E /* FayeClient+Transport.swift in Sources */,
-				9590095A7427348F72D50958E6DF569D /* FayeClient.swift in Sources */,
-				372A1E8811704945874EB18F7BD1309F /* FayeClientDelegate.swift in Sources */,
-				DF00F790990FE2A87CACDD519DA5FAA2 /* FayeSubscriptionModel.swift in Sources */,
-				97E28C082763F8A1B9DF116332FE45A5 /* FayeSwift-dummy.m in Sources */,
-				D7C3BD0F56BE895E0425738268F11494 /* NSError+Helper.swift in Sources */,
-				4395CC6B51E36E7FA9DF24986CB85D58 /* StringExtensions.swift in Sources */,
-				F13620786093149885BC1C94F8AE9FB9 /* Transport.swift in Sources */,
-				B715F8A02147DC9AF882D4E8B8CA03A5 /* WebsocketTransport.swift in Sources */,
+				5FB5546CB2F4BAA36E9A2146FB4D75DB /* SwiftyJSON-dummy.m in Sources */,
+				B471CF5E4D5068291D4CC54CBF89E964 /* SwiftyJSON.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		64B715524D7BA41EE9474DB446B5E935 /* Sources */ = {
+		82F5E749CB23C9695CB98119AFAA9CF7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				603A236E27FDBCDDDC245C7949FAC4AB /* Pods-FayeSwift_Tests-dummy.m in Sources */,
+				93524EF16C1EA133AD0893B6FF138B30 /* Compression.swift in Sources */,
+				371AE48204C97C939981924FBB3E3C70 /* Data+Extensions.swift in Sources */,
+				F51ECAF8CB23CF31DF912528E378BC81 /* Engine.swift in Sources */,
+				F8849D114B30E7BD395FE77F7A60CFDB /* FoundationHTTPHandler.swift in Sources */,
+				90F965102E8A76F689A8E19C2463FB3B /* FoundationHTTPServerHandler.swift in Sources */,
+				74C67375E014FEE93E343794C340DAE4 /* FoundationSecurity.swift in Sources */,
+				5DF3DF5AB474D53CAFC036C1CB4B4B66 /* FoundationTransport.swift in Sources */,
+				8D64DF55AB5B232EEA58818B56EBE442 /* FrameCollector.swift in Sources */,
+				35628E6BE1E430358FD214EB19AF2E38 /* Framer.swift in Sources */,
+				FE7EFFB6A9757806696A3CD416946F74 /* HTTPHandler.swift in Sources */,
+				A100344FC632242FDEAA4BFC0FC01534 /* NativeEngine.swift in Sources */,
+				7A8AA475862499E7D1525843B24CAA1E /* Security.swift in Sources */,
+				3D40950A2A032BF1E7C484F9F74A2A27 /* Server.swift in Sources */,
+				FB26CA8C3B66AD625A24452C4065D05E /* Starscream-dummy.m in Sources */,
+				1F3635C339655885D10797FC8ABD7E8A /* StringHTTPHandler.swift in Sources */,
+				7F969E29E261561AEA1DECCD39F67B60 /* TCPTransport.swift in Sources */,
+				A29DCC96E5AB5067E8BED0CFD06FA96B /* Transport.swift in Sources */,
+				D4BB4F9AF3D954C2245DDC091A7033C5 /* WebSocket.swift in Sources */,
+				3E0613C79EDFB2F6526B335205C961D2 /* WebSocketServer.swift in Sources */,
+				1E50A2A08E2D38A9DE964FF9AA2422D3 /* WSCompression.swift in Sources */,
+				138B028F2781F34FC2CB743BA8963FA8 /* WSEngine.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A2EEF6DF48EB857F89E15025ADB08D0C /* Sources */ = {
+		BB45C3174DC438ECCBB37C1B6E9BF19B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				819CD987E43CF9B00A0BE165B3144C21 /* Pods-FayeSwift_Example-dummy.m in Sources */,
+				893EA64D6F55C8DA8ED037570777326E /* FayeClient+Action.swift in Sources */,
+				C174E2114D6ABFF21E319E9888DB4748 /* FayeClient+Bayuex.swift in Sources */,
+				C02A130EB04E7E29FC9A3EE23466800C /* FayeClient+Helper.swift in Sources */,
+				7404C01D26E709ECEA13C96FC15D75EB /* FayeClient+Parsing.swift in Sources */,
+				CEA89811A22FE7A4CE7A1BC79A130B1D /* FayeClient+Subscriptions.swift in Sources */,
+				D9145515CFF4ED198150DDB0C292AC93 /* FayeClient+Transport.swift in Sources */,
+				C23A7A32046CDBACD4A677F7BDAA5277 /* FayeClient.swift in Sources */,
+				C154B9ECABD19498F2889B7FBA47BB47 /* FayeClientDelegate.swift in Sources */,
+				BFF0B7845AD87F28D8FA3B9D2B209A26 /* FayeSubscriptionModel.swift in Sources */,
+				45C838EF6C400BF9A4FA6330DCA8FF98 /* FayeSwift-dummy.m in Sources */,
+				62FCD7F0DA368198F57272D1682DD66A /* NSError+Helper.swift in Sources */,
+				9A53B97806A9E67FEFEB65DEB5588FFA /* StringExtensions.swift in Sources */,
+				52C2F5AA0D179F742394477ECF98BBFD /* Transport.swift in Sources */,
+				1EBC62F41CC90D12AFBF45BA5FCD976E /* WebsocketTransport.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E9E1339796C8B15F79531589B9E53575 /* Sources */ = {
+		C30301AEA2DCA5DD2FC607A58E99A0A8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B4F045C4EB5BA94B75966419EB72662A /* SSLSecurity.swift in Sources */,
-				FED7F96749B4ACB6DAF206513C945CA9 /* Starscream-dummy.m in Sources */,
-				A3F622749F008AB61E99EF439E3B7551 /* WebSocket.swift in Sources */,
+				D9BF66AB4DA1FE122DE361C31ED25D69 /* Pods-FayeSwift_Example-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		0B624098DDC63EDF2E66E333C47201F1 /* PBXTargetDependency */ = {
+		22E504E28A10C4398709B34D180FA8C9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = SwiftyJSON;
-			target = 5C1F57BFFCD92868AF3442E38186A537 /* SwiftyJSON */;
-			targetProxy = 0E2E944578DFD11725AE03E57A2F5E40 /* PBXContainerItemProxy */;
+			target = D118A6A04828FD3CDA8640CD2B6796D2 /* SwiftyJSON */;
+			targetProxy = 1FAF7891B919F509D3138ED028A6BD86 /* PBXContainerItemProxy */;
 		};
-		1C30892F0FF517727036E27CDF81C663 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = Starscream;
-			target = BCC8AE0600D381881B2B45F29D3A3294 /* Starscream */;
-			targetProxy = 27129EF77D9CAC29F1151EC75DB48940 /* PBXContainerItemProxy */;
-		};
-		2434201F5B0A7997E2922AE89413EEE1 /* PBXTargetDependency */ = {
+		64C5B360762037EC80DB6C7BAAFA3D99 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = SwiftyJSON;
-			target = 5C1F57BFFCD92868AF3442E38186A537 /* SwiftyJSON */;
-			targetProxy = EF2196CF5D21430C9E4A6BAD3F790A0F /* PBXContainerItemProxy */;
+			target = D118A6A04828FD3CDA8640CD2B6796D2 /* SwiftyJSON */;
+			targetProxy = 4FDADCE46294D8AFCFF8EE03B8B981FB /* PBXContainerItemProxy */;
 		};
-		37304380EF1AE699643886697C6B633D /* PBXTargetDependency */ = {
+		67EB9351DFE3C2E9DA971B723BA4865D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = FayeSwift;
-			target = 5C48D6CAB4FBFA5BB8EFCD0C0947DF9D /* FayeSwift */;
-			targetProxy = 663722FA80FCCEA51B761DBCF6962820 /* PBXContainerItemProxy */;
+			target = 5E551DD8B190AB276724C510971C365C /* FayeSwift */;
+			targetProxy = FC8E37B47A0BE401399B207B9C53A0DF /* PBXContainerItemProxy */;
 		};
-		513B4CE355F9033A8A9BBC57A2C7FFD1 /* PBXTargetDependency */ = {
+		7230AEF5B5D5A25A2F7CC7B486B751E1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = FayeSwift;
-			target = 5C48D6CAB4FBFA5BB8EFCD0C0947DF9D /* FayeSwift */;
-			targetProxy = 5C2824D1A9A59FC7E0807982E563883C /* PBXContainerItemProxy */;
+			target = 5E551DD8B190AB276724C510971C365C /* FayeSwift */;
+			targetProxy = ECA15882AE9508D7355A32ED35005A38 /* PBXContainerItemProxy */;
 		};
-		543AAD42A1D98CF875D74C50362FEC99 /* PBXTargetDependency */ = {
+		B1E8BFCB48DDBD8475AA24CCB92204C4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Starscream;
-			target = BCC8AE0600D381881B2B45F29D3A3294 /* Starscream */;
-			targetProxy = B4F58B425B8A192B0B43228D5BBD2FEF /* PBXContainerItemProxy */;
+			target = 9B78EE4AF6AE03E79D88886319853FF7 /* Starscream */;
+			targetProxy = 1421504D71EC0462FF0F6C4BEA7A0E1A /* PBXContainerItemProxy */;
 		};
-		57B2902E0642C8E5BA1F9DADFE441377 /* PBXTargetDependency */ = {
+		C4DEEE3CB6E159A9250950E7D872046E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = SwiftyJSON;
-			target = 5C1F57BFFCD92868AF3442E38186A537 /* SwiftyJSON */;
-			targetProxy = 906B0FC7D35C414F5BBE0F7DB11C519B /* PBXContainerItemProxy */;
+			target = D118A6A04828FD3CDA8640CD2B6796D2 /* SwiftyJSON */;
+			targetProxy = E95DA7A58C5A5BC45C3E3EAF38E4C7FE /* PBXContainerItemProxy */;
 		};
-		E42065487BF3D5CC9F09CB18C7F14F01 /* PBXTargetDependency */ = {
+		DB9CB4192C3BAEB984EA576B1C796F3E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Starscream;
-			target = BCC8AE0600D381881B2B45F29D3A3294 /* Starscream */;
-			targetProxy = 42672EE0E914C25799C038C3FFE417CC /* PBXContainerItemProxy */;
+			target = 9B78EE4AF6AE03E79D88886319853FF7 /* Starscream */;
+			targetProxy = 5EE3800B516F9A10F65BF1EE1D7E10F8 /* PBXContainerItemProxy */;
+		};
+		E260F2A103167C679FC9DB55176D5F4F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Starscream;
+			target = 9B78EE4AF6AE03E79D88886319853FF7 /* Starscream */;
+			targetProxy = 3402497841F54385E8BD13DF35C92B60 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		015A368F878AC3E2CEAE21DDE8026304 /* Debug */ = {
+		05EB42A73E2090F258E16E575E3E9BDD /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7AC274A9B8EA3D455EE4B6D35B3131B0 /* SwiftyJSON.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/SwiftyJSON/SwiftyJSON-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SwiftyJSON/SwiftyJSON-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/SwiftyJSON/SwiftyJSON.modulemap";
+				PRODUCT_MODULE_NAME = SwiftyJSON;
+				PRODUCT_NAME = SwiftyJSON;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		060195FFDBB30400E32DC512A2948E44 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7AC274A9B8EA3D455EE4B6D35B3131B0 /* SwiftyJSON.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/SwiftyJSON/SwiftyJSON-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/SwiftyJSON/SwiftyJSON-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/SwiftyJSON/SwiftyJSON.modulemap";
+				PRODUCT_MODULE_NAME = SwiftyJSON;
+				PRODUCT_NAME = SwiftyJSON;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		0DBDB9B86281CBBF3FDFF7FA9C1FAF19 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 92B45F50B2100AC6E199BE823EB478C5 /* Pods-FayeSwift_Tests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-FayeSwift_Tests/Pods-FayeSwift_Tests-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-FayeSwift_Tests/Pods-FayeSwift_Tests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		311ECE6090A2A6284F79965F1FE32CCA /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CC09C6A1CD1691C8FE27E54FC92DC1A1 /* Pods-FayeSwift_Example.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-FayeSwift_Example/Pods-FayeSwift_Example-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-FayeSwift_Example/Pods-FayeSwift_Example.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		4BE66A09A74FD25164AAB3C2645B9B93 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGNING_REQUIRED = NO;
 				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"POD_CONFIGURATION_RELEASE=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.0;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Release;
+		};
+		510D3213F48D2DA7BEE4F84FCBFBA98C /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = EDDFD60C0DAAACDB4AFCD8105DA64B01 /* Starscream.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/Starscream/Starscream-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Starscream/Starscream-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Starscream/Starscream.modulemap";
+				PRODUCT_MODULE_NAME = Starscream;
+				PRODUCT_NAME = Starscream;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		539B6A9D4E225CE5EE2E5B567196A7E3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = EDDFD60C0DAAACDB4AFCD8105DA64B01 /* Starscream.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/Starscream/Starscream-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Starscream/Starscream-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/Starscream/Starscream.modulemap";
+				PRODUCT_MODULE_NAME = Starscream;
+				PRODUCT_NAME = Starscream;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		713FA7B58E56A02C730C0922DBFF43EB /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 047BEEE8CFD1EAE8DACBFC2ABF95425D /* FayeSwift.xcconfig */;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/FayeSwift/FayeSwift-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/FayeSwift/FayeSwift-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "Target Support Files/FayeSwift/FayeSwift.modulemap";
+				PRODUCT_MODULE_NAME = FayeSwift;
+				PRODUCT_NAME = FayeSwift;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		7C0F01947D66B2F81D2812EB9DA6D6ED /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 528FBBFFC84FFBEF0E7DDF0982562E0B /* Pods-FayeSwift_Tests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = "Target Support Files/Pods-FayeSwift_Tests/Pods-FayeSwift_Tests-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = staticlib;
+				MODULEMAP_FILE = "Target Support Files/Pods-FayeSwift_Tests/Pods-FayeSwift_Tests.modulemap";
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		7EF7227D9B20A1D549000096ACCB23D7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"POD_CONFIGURATION_DEBUG=1",
 					"DEBUG=1",
 					"$(inherited)",
 				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				SYMROOT = "${SRCROOT}/../build";
 			};
 			name = Debug;
 		};
-		1EAF7F917199C4FBC38B65DAB4BC2900 /* Release */ = {
+		DAD28B0A4CFE053EF1E36A9A83BACEAD /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7B3AAC1CAA0FD33A1665A6CF0609129E /* FayeSwift.xcconfig */;
+			baseConfigurationReference = A35C786F187E0EDCF9002FFF106F6C57 /* Pods-FayeSwift_Example.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/FayeSwift/FayeSwift-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/FayeSwift/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/FayeSwift/FayeSwift.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = FayeSwift;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		1FB72A1CE25626A8C0F847E37D5CAEA1 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 4AB2D41C9043F185BD735AC2476F72C6 /* Pods-FayeSwift_Tests.release.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-FayeSwift_Tests/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-FayeSwift_Tests/Pods-FayeSwift_Tests.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_FayeSwift_Tests;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		2F218157924BD15F7EDCAD60E257E3F3 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2692C5A026D6876DF0B8ED238232F2E6 /* Pods-FayeSwift_Example.release.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-FayeSwift_Example/Info.plist";
+				INFOPLIST_FILE = "Target Support Files/Pods-FayeSwift_Example/Pods-FayeSwift_Example-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = staticlib;
 				MODULEMAP_FILE = "Target Support Files/Pods-FayeSwift_Example/Pods-FayeSwift_Example.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
 				OTHER_LDFLAGS = "";
 				OTHER_LIBTOOLFLAGS = "";
 				PODS_ROOT = "$(SRCROOT)";
 				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_FayeSwift_Example;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		35CC6BCA2C91027EB00E1B38C61BE55A /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 47C81FB96686C0BE581D0FC3090AFC0D /* Starscream.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/Starscream/Starscream-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/Starscream/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/Starscream/Starscream.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = Starscream;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		44CDBB6D11DE06DB64D6268622BDC47E /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGNING_REQUIRED = NO;
-				COPY_PHASE_STRIP = YES;
-				ENABLE_NS_ASSERTIONS = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"POD_CONFIGURATION_RELEASE=1",
-					"$(inherited)",
-				);
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				PROVISIONING_PROFILE_SPECIFIER = NO_SIGNING/;
-				STRIP_INSTALLED_PRODUCT = NO;
-				SYMROOT = "${SRCROOT}/../build";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-		51444351DF47F3A9B3368A0D010596D9 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1EC0280E5CCCCD96F81E63B562E157DD /* SwiftyJSON.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/SwiftyJSON/SwiftyJSON-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/SwiftyJSON/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/SwiftyJSON/SwiftyJSON.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = SwiftyJSON;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
 		};
-		731F8E987F620E8D5A676D57ECEEC97C /* Debug */ = {
+		F59AB284691A218FAFE6125238EDFADE /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D26B5E2282A330BE919FE4EFDFB738B3 /* Pods-FayeSwift_Tests.debug.xcconfig */;
+			baseConfigurationReference = 047BEEE8CFD1EAE8DACBFC2ABF95425D /* FayeSwift.xcconfig */;
 			buildSettings = {
+				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
 				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-FayeSwift_Tests/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-FayeSwift_Tests/Pods-FayeSwift_Tests.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_FayeSwift_Tests;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		8C427F0ABBE6E76366CAB4B4A39A33B9 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = B661AAF1FC01F5B9EB53567F4990C215 /* Pods-FayeSwift_Example.debug.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "Target Support Files/Pods-FayeSwift_Example/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MACH_O_TYPE = staticlib;
-				MODULEMAP_FILE = "Target Support Files/Pods-FayeSwift_Example/Pods-FayeSwift_Example.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_BUNDLE_IDENTIFIER = "org.cocoapods.${PRODUCT_NAME:rfc1034identifier}";
-				PRODUCT_NAME = Pods_FayeSwift_Example;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		AA7BBD4CAC0EB5774B764450AF1AC6D9 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7B3AAC1CAA0FD33A1665A6CF0609129E /* FayeSwift.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_PREFIX_HEADER = "Target Support Files/FayeSwift/FayeSwift-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/FayeSwift/Info.plist";
+				INFOPLIST_FILE = "Target Support Files/FayeSwift/FayeSwift-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "Target Support Files/FayeSwift/FayeSwift.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_MODULE_NAME = FayeSwift;
 				PRODUCT_NAME = FayeSwift;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
-		C822BE7915F9D2024FBC9D66464DC56B /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1EC0280E5CCCCD96F81E63B562E157DD /* SwiftyJSON.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/SwiftyJSON/SwiftyJSON-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/SwiftyJSON/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/SwiftyJSON/SwiftyJSON.modulemap";
-				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = SwiftyJSON;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		FD1B0D8FE2F7865658C8D3B65402A2D4 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 47C81FB96686C0BE581D0FC3090AFC0D /* Starscream.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/Starscream/Starscream-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/Starscream/Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				MODULEMAP_FILE = "Target Support Files/Starscream/Starscream.modulemap";
-				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = Starscream;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -1115,61 +1258,61 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2C37015467BCB2CAD2C5683C1D3C7897 /* Build configuration list for PBXNativeTarget "Pods-FayeSwift_Example" */ = {
+		401A35C3B8F4524E534F5AF43DF7FD01 /* Build configuration list for PBXNativeTarget "FayeSwift" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				8C427F0ABBE6E76366CAB4B4A39A33B9 /* Debug */,
-				2F218157924BD15F7EDCAD60E257E3F3 /* Release */,
+				F59AB284691A218FAFE6125238EDFADE /* Debug */,
+				713FA7B58E56A02C730C0922DBFF43EB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
+		42D005F3EC3848C7036D975473A0B599 /* Build configuration list for PBXNativeTarget "Starscream" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				015A368F878AC3E2CEAE21DDE8026304 /* Debug */,
-				44CDBB6D11DE06DB64D6268622BDC47E /* Release */,
+				539B6A9D4E225CE5EE2E5B567196A7E3 /* Debug */,
+				510D3213F48D2DA7BEE4F84FCBFBA98C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3BC677F1AB4B06206649C8ADA8DD1440 /* Build configuration list for PBXNativeTarget "FayeSwift" */ = {
+		4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				AA7BBD4CAC0EB5774B764450AF1AC6D9 /* Debug */,
-				1EAF7F917199C4FBC38B65DAB4BC2900 /* Release */,
+				7EF7227D9B20A1D549000096ACCB23D7 /* Debug */,
+				4BE66A09A74FD25164AAB3C2645B9B93 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		81D03CD0D35971BA49F91CC378F0381D /* Build configuration list for PBXNativeTarget "Pods-FayeSwift_Tests" */ = {
+		92CE793E190A4CB79F9EE04FEEFE16FD /* Build configuration list for PBXNativeTarget "Pods-FayeSwift_Example" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				731F8E987F620E8D5A676D57ECEEC97C /* Debug */,
-				1FB72A1CE25626A8C0F847E37D5CAEA1 /* Release */,
+				DAD28B0A4CFE053EF1E36A9A83BACEAD /* Debug */,
+				311ECE6090A2A6284F79965F1FE32CCA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D7B51E188C37F41CEC46650465F4DA2E /* Build configuration list for PBXNativeTarget "SwiftyJSON" */ = {
+		D837C3410A68BB77EACA27DD71189414 /* Build configuration list for PBXNativeTarget "Pods-FayeSwift_Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				51444351DF47F3A9B3368A0D010596D9 /* Debug */,
-				C822BE7915F9D2024FBC9D66464DC56B /* Release */,
+				0DBDB9B86281CBBF3FDFF7FA9C1FAF19 /* Debug */,
+				7C0F01947D66B2F81D2812EB9DA6D6ED /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		E86FDF27E9DCFAAFE67D7E62F35E9AB0 /* Build configuration list for PBXNativeTarget "Starscream" */ = {
+		F729EFA373196875F38F5325B7B83897 /* Build configuration list for PBXNativeTarget "SwiftyJSON" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				FD1B0D8FE2F7865658C8D3B65402A2D4 /* Debug */,
-				35CC6BCA2C91027EB00E1B38C61BE55A /* Release */,
+				060195FFDBB30400E32DC512A2948E44 /* Debug */,
+				05EB42A73E2090F258E16E575E3E9BDD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+	rootObject = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 }

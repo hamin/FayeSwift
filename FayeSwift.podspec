@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "FayeSwift"
-  s.version          = "0.3.0"
+  s.version          = "0.4.0"
   s.summary          = "A pure Swift Faye (Bayeux) Client"
   s.description      = <<-DESC
                         A Pure Swift Client Library for the Faye (Bayeux/Comet) Pub-Sub messaging server.
@@ -17,6 +17,6 @@ Pod::Spec.new do |s|
   s.ios.deployment_target = "8.0"
   s.tvos.deployment_target = "9.0"
   s.source_files = "Sources/*.swift"
-  s.dependency "Starscream", '~> 2.0'
-  s.dependency "SwiftyJSON", '~> 3.1'
+  s.dependency "Starscream", '~> 4.0.0'
+  s.dependency "SwiftyJSON", '~> 5.0.0'
 end

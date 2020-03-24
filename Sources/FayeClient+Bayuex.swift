@@ -124,7 +124,7 @@ extension FayeClient {
             send(dict)
         }
     }
-    
+
     // Bayeux Subscribe
     // "channel": "/meta/subscribe",
     // "clientId": "Un1q31d3nt1f13r",
@@ -132,22 +132,16 @@ extension FayeClient {
     func subscribe(_ model:FayeSubscriptionModel) {
         writeOperationQueue.sync { [unowned self] in
             do {
-                let json = try JSONEncoder().encode(model)
+                var newModel = model
+                if newModel.clientId == nil { newModel.clientId = self.fayeClientId }
+                let json = try JSONEncoder().encode(newModel)
                 guard let string = String(data: json, encoding: .utf8) else { return }
                 
                 self.transport?.writeString(string)
                 self.pendingSubscriptions.append(model)
 
-                // TODO: fix this
-//            } catch FayeSubscriptionModelError.conversationError {
-//
-//            } catch FayeSubscriptionModelError.clientIdNotValid
-//                where self.fayeClientId?.count > 0 {
-//                    var model = model
-//                    model.clientId = self.fayeClientId
-//                    self.subscribe(model)
             } catch {
-                
+
             }
         }
     }

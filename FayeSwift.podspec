@@ -18,5 +18,4 @@ Pod::Spec.new do |s|
   s.tvos.deployment_target = "9.0"
   s.source_files = "Sources/*.swift"
   s.dependency "Starscream", '~> 4.0.0'
-  s.dependency "SwiftyJSON", '~> 5.0.0'
 end

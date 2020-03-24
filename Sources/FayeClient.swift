@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import SwiftyJSON
 
 // MARK: Subscription State
 public enum FayeSubscriptionState {

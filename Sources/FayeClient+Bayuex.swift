@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import SwiftyJSON
+//import SwiftyJSON
 // FIXME: comparison operators with optionals were removed from the Swift Standard Libary.
 // Consider refactoring the code to use the non-optional operators.
 fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
@@ -118,9 +118,6 @@ extension FayeClient {
             let dict:[String:AnyObject] = [Bayeux.Channel.rawValue: BayeuxChannel.Disconnect.rawValue as AnyObject,
                                            Bayeux.ClientId.rawValue: self.fayeClientId! as AnyObject,
                                            Bayeux.ConnectionType.rawValue: BayeuxConnection.WebSocket.rawValue as AnyObject]
-            if let string = JSON(dict).rawString() {
-                self.transport?.writeString(string)
-            }
             send(dict)
         }
     }
@@ -141,7 +138,7 @@ extension FayeClient {
                 self.pendingSubscriptions.append(model)
 
             } catch {
-
+                // TODO: catch this error
             }
         }
     }

@@ -23,9 +23,6 @@
   "dependencies": {
     "Starscream": [
       "~> 4.0.0"
-    ],
-    "SwiftyJSON": [
-      "~> 5.0.0"
     ]
   }
 }

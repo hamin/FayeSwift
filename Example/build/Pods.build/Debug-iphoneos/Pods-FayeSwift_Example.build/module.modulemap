@@ -1,6 +1,0 @@
-framework module Pods_FayeSwift_Example {
-  umbrella header "Pods-FayeSwift_Example-umbrella.h"
-
-  export *
-  module * { export * }
-}

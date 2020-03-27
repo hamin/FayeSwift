@@ -4,12 +4,12 @@ import PackageDescription
 let package = Package(
     name: "FayeSwift",
     products: [
-        .library(name: "FayeClient", targets: ["Faye"]),
+        .library(name: "FayeClient", targets: ["FayeSwift"]),
     ],
     dependencies: [
         .package(url: "https://github.com/daltoniam/Starscream.git", from: "4.0.0")
     ],
     targets: [
-    .systemLibrary(name: "Faye", path: "Sources", pkgConfig: nil, providers: nil)
+    .systemLibrary(name: "FayeSwift", path: "Example", pkgConfig: nil, providers: nil)
     ]
 )

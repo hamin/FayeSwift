@@ -11,9 +11,6 @@ let package = Package(
     ],
     targets: [
         .target(name: "FayeSwift",
-                dependencies: [._byNameItem(name: "Starscream")],
-                path: ".",
-                exclude: ["Pod", "Example"],
-                sources: ["./Sources"])
+                sources: ["Sources"])
     ]
 )

@@ -10,6 +10,10 @@ let package = Package(
         .package(url: "https://github.com/daltoniam/Starscream.git", from: "4.0.0")
     ],
     targets: [
-        .systemLibrary(name: "FayeSwift", path: "Sources", pkgConfig: nil, providers: nil)
+        .target(name: "FayeSwift",
+                dependencies: [._byNameItem(name: "Starscream")],
+                path: ".",
+                exclude: [],
+                sources: ["Sources"])
     ]
 )

@@ -14,6 +14,6 @@ let package = Package(
                 dependencies: [._byNameItem(name: "Starscream")],
                 path: "./Sources",
                 exclude: [],
-                sources: nil)
+                sources: ["./Sources"])
     ]
 )

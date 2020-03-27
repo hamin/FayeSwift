@@ -1,9 +1,10 @@
+// swift-tools-version:5.0
 import PackageDescription
 
 let package = Package(
     name: "FayeSwift",
-    targets: [],
     dependencies: [
-		.Package(url: "https://github.com/daltoniam/Starscream.git", versions: "4.0.0" ..< Version.max)
-    ]
+        .package(url: "https://github.com/daltoniam/Starscream.git", from: "4.0.0")
+    ],
+    targets: []
 )

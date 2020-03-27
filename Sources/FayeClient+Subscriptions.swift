@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import SwiftyJSON
 
 // MARK: Private Internal methods
 extension FayeClient {
@@ -40,9 +39,10 @@ extension FayeClient {
     // MARK:
     // MARK: Send/Receive
 
-    func send(_ message: NSDictionary) {
+    func send(_ message: [String: Any]) {
         writeOperationQueue.async { [unowned self] in
-            if let string = JSON(message).rawString() {
+            if let data = try? JSONSerialization.data(withJSONObject: message, options: .prettyPrinted),
+                let string = String(data: data, encoding: .utf8) {
                 self.transport?.writeString(string)
             }
         }
@@ -50,10 +50,25 @@ extension FayeClient {
     
     func receive(_ message: String) {
         readOperationQueue.sync { [unowned self] in
-            if let jsonData = message.data(using: String.Encoding.utf8, allowLossyConversion: false) {
-                let json = JSON(data: jsonData)
-                
-                self.parseFayeMessage(json)
+            do {
+                let jsonData = Data(message.utf8)
+                let jsonDictArray = try JSONSerialization.jsonObject(with: jsonData, options: .fragmentsAllowed) as? [Any]
+                guard let jsonDict = jsonDictArray?.first as? [String: Any] else { return }
+                parseFayeJsonDictionaryMessage(jsonDict)
+            } catch {
+                // TODO: Add an error here to forward on for failed to decode
+            }
+        }
+    }
+
+    func receive(_ data: Data) {
+        readOperationQueue.sync { [unowned self] in
+            do {
+                let jsonDictArray = try JSONSerialization.jsonObject(with: data, options: .fragmentsAllowed) as? [Any]
+                guard let jsonDict = jsonDictArray?.first as? [String: Any] else { return }
+                parseFayeJsonDictionaryMessage(jsonDict)
+            } catch {
+                // TODO: Add an error here to forward on for failed to decode
             }
         }
     }
@@ -65,10 +80,9 @@ extension FayeClient {
             messageNumber = 0
         }
         
-        return "\(self.messageNumber)".encodedString()
+        return "\(self.messageNumber)".encodeToBase64()
     }
     
-    // MARK:
     // MARK: Subscriptions
     
     func removeChannelFromQueuedSubscriptions(_ channel: String) -> Bool {
@@ -114,5 +128,11 @@ extension FayeClient {
         }
         
         return result
+    }
+}
+
+extension String {
+    func encodeToBase64() -> String {
+        return Data(self.utf8).base64EncodedString()
     }
 }

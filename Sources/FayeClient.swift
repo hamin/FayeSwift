@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import SwiftyJSON
 
 // MARK: Subscription State
 public enum FayeSubscriptionState {
@@ -23,7 +22,7 @@ public typealias ChannelSubscriptionBlock = (NSDictionary) -> Void
 
 
 // MARK: FayeClient
-open class FayeClient : TransportDelegate {
+open class FayeClient {
   open var fayeURLString:String {
     didSet {
       if let transport = self.transport {
@@ -91,7 +90,7 @@ open class FayeClient : TransportDelegate {
     self.transport!.delegate = self;
 
     if let channel = channel {
-      self.queuedSubscriptions.append(FayeSubscriptionModel(subscription: channel, clientId: fayeClientId))
+        self.queuedSubscriptions.append(FayeSubscriptionModel(subscription: channel, channel: .Subscribe, clientId: fayeClientId))
     }
   }
 
@@ -124,7 +123,7 @@ open class FayeClient : TransportDelegate {
     self.publish(messageDict as! Dictionary, channel: channel)
   }
 
-  open func sendMessage(_ messageDict:[String:AnyObject], channel:String) {
+  open func sendMessage(_ messageDict: [String:AnyObject], channel:String) {
     self.publish(messageDict, channel: channel)
   }
     
@@ -160,7 +159,7 @@ open class FayeClient : TransportDelegate {
     
   open func subscribeToChannel(_ channel:String, block:ChannelSubscriptionBlock?=nil) -> FayeSubscriptionState {
     return subscribeToChannel(
-        FayeSubscriptionModel(subscription: channel, clientId: fayeClientId),
+        FayeSubscriptionModel(subscription: channel, channel: .Subscribe, clientId: fayeClientId),
         block: block
     )
   }

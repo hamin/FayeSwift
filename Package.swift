@@ -12,7 +12,7 @@ let package = Package(
     targets: [
         .target(name: "FayeSwift",
                 dependencies: [._byNameItem(name: "Starscream")],
-                path: ".",
+                path: "./Sources",
                 exclude: [],
                 sources: ["Sources"])
     ]

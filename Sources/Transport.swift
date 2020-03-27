@@ -5,6 +5,7 @@
 //  Created by Haris Amin on 2/20/16.
 //
 //
+import Foundation
 
 public enum DisconnectionType {
     case connectionLost(reason: String, code: UInt16)

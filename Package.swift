@@ -10,7 +10,6 @@ let package = Package(
         .package(url: "https://github.com/daltoniam/Starscream.git", from: "4.0.0")
     ],
     targets: [
-        .target(name: "FayeSwift",
-                path: "Sources")
+        .target(name: "FayeSwift", dependencies: [._byNameItem(name: "Starscream")], path: "Sources")
     ]
 )

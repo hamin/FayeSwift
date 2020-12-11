@@ -13,12 +13,12 @@ public extension FayeClient {
     // MARK: Helper
     
     ///  Validate whatever a subscription has been subscribed correctly 
-    public func isSubscribedToChannel(_ channel:String) -> Bool {
+    func isSubscribedToChannel(_ channel:String) -> Bool {
         return self.openSubscriptions.contains { $0.subscription == channel }
     }
     
     ///  Validate faye transport is connected
-    public func isTransportConnected() -> Bool {
+    func isTransportConnected() -> Bool {
         return self.transport!.isConnected()
     }
 }

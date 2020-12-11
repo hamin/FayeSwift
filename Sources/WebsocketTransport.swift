@@ -9,11 +9,13 @@
 import Foundation
 import Starscream
 
-internal class WebsocketTransport: Transport, WebSocketDelegate, WebSocketPongDelegate {
+internal class WebsocketTransport: Transport, WebSocketDelegate {
+
   var urlString:String?
   var webSocket:WebSocket?
   var headers: [String: String]? = nil
   internal weak var delegate:TransportDelegate?
+  private var socketConnected: Bool = false
   
   convenience required internal init(url: String) {
     self.init()
@@ -23,19 +25,22 @@ internal class WebsocketTransport: Transport, WebSocketDelegate, WebSocketPongDe
   
   func openConnection() {
     self.closeConnection()
-    self.webSocket = WebSocket(url: URL(string:self.urlString!)!)
+    guard let urlString = urlString,
+        let url = URL(string: urlString) else {
+            print("Faye: Invalid url")
+            return
+    }
+    var urlRequest = URLRequest(url: url)
+    if let headers = self.headers {
+        urlRequest.allHTTPHeaderFields = headers
+    }
+    self.webSocket = WebSocket(request: urlRequest)
     
     if let webSocket = self.webSocket {
       webSocket.delegate = self
-      webSocket.pongDelegate = self
-      if let headers = self.headers {
-        for (key, value) in headers {
-          webSocket.headers[key] = headers[value]
-        }
-      }
       webSocket.connect()
 
-      print("Faye: Opening connection with \(self.urlString)")
+        print("Faye: Opening connection with \(String(describing: self.urlString))")
     }
   }
   
@@ -44,7 +49,7 @@ internal class WebsocketTransport: Transport, WebSocketDelegate, WebSocketPongDe
       print("Faye: Closing connection")
         
       webSocket.delegate = nil
-      webSocket.disconnect(forceTimeout: 0)
+        webSocket.disconnect()
       
       self.webSocket = nil
     }
@@ -59,38 +64,38 @@ internal class WebsocketTransport: Transport, WebSocketDelegate, WebSocketPongDe
   }
   
   func isConnected() -> (Bool) {
-    return self.webSocket?.isConnected ?? false
-  }
-  
-  // MARK: Websocket Delegate
-  internal func websocketDidConnect(socket: WebSocket) {
-    self.delegate?.didConnect()
-  }
-  
-  internal func websocketDidDisconnect(socket: WebSocket, error: NSError?) {
-    if error == nil {
-      self.delegate?.didDisconnect(NSError(error: .lostConnection))
-    } else {
-      self.delegate?.didFailConnection(error)
-    }
-  }
-  
-  internal func websocketDidReceiveMessage(socket: WebSocket, text: String) {
-    self.delegate?.didReceiveMessage(text)
-  }
-  
-  // MARK: TODO
-  internal func websocketDidReceiveData(socket: WebSocket, data: Data) {
-    print("Faye: Received data: \(data.count)")
-    //self.socket.writeData(data)
+    return self.socketConnected
   }
 
-  // MARK: WebSocket Pong Delegate
-  internal func websocketDidReceivePong(_ socket: WebSocket) {
-    self.delegate?.didReceivePong()
-  }
-    
-  func websocketDidReceivePong(socket: WebSocket, data: Data?) {
-    self.delegate?.didReceivePong()
-  }
+    func didReceive(event: WebSocketEvent, client: WebSocket) {
+        switch event {
+        case .connected(let headers):
+            print("websocket is connected: \(headers)")
+            socketConnected = true
+            self.delegate?.didConnect()
+        case .disconnected(let reason, let code):
+            socketConnected = false
+            print("websocket is disconnected for reason: \(reason) /n with code: \(code)")
+            //TODO: FIX CODES
+            self.delegate?.didDisconnect(NSError(error: .lostConnection))
+        case .text(let text):
+            self.delegate?.didReceiveMessage(text)
+        case .pong(_):
+            self.delegate?.didReceivePong()
+        case .binary(_):
+            //TODO: ADD THIS
+            break
+        case .error(_):
+            break
+        case .viabilityChanged(_):
+            break
+        case .reconnectSuggested(_):
+            break
+        case .cancelled:
+            break
+        case .ping(_):
+            //TODO: ADD THIS
+            break
+        }
+    }
 }

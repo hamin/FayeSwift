@@ -21,10 +21,10 @@ public enum FayeSubscriptionModelError: Error {
 open class FayeSubscriptionModel {
     
     /// Subscription URL
-    open let subscription: String
+    public let subscription: String
     
     /// Channel type for request
-    open let channel: BayeuxChannel
+    public let channel: BayeuxChannel
     
     /// Uniqle client id for socket
     open var clientId: String?
@@ -80,7 +80,7 @@ open class FayeSubscriptionModel {
 extension FayeSubscriptionModel: CustomStringConvertible {
     
     public var description: String {
-        return "FayeSubscriptionModel: \(try? self.toDictionary())"
+        return "FayeSubscriptionModel: \(String(describing: try? self.toDictionary()))"
     }
 }
 

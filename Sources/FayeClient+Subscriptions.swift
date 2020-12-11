@@ -51,13 +51,16 @@ extension FayeClient {
     func receive(_ message: String) {
         readOperationQueue.sync { [unowned self] in
             if let jsonData = message.data(using: String.Encoding.utf8, allowLossyConversion: false) {
-                let json = JSON(data: jsonData)
-                
-                self.parseFayeMessage(json)
+                do {
+                    let json = try JSON(data: jsonData)
+                    self.parseFayeMessage(json)
+                } catch {
+                    print(error)
+                }
             }
         }
     }
-    
+  
     func nextMessageId() -> String {
         self.messageNumber += 1
         
@@ -74,7 +77,7 @@ extension FayeClient {
     func removeChannelFromQueuedSubscriptions(_ channel: String) -> Bool {
         var result = false
         queuedSubsLockQueue.sync {
-            let index = self.queuedSubscriptions.index { $0.subscription == channel }
+            let index = self.queuedSubscriptions.firstIndex { $0.subscription == channel }
             
             if let index = index {
                 self.queuedSubscriptions.remove(at: index)
@@ -89,7 +92,7 @@ extension FayeClient {
     func removeChannelFromPendingSubscriptions(_ channel: String) -> Bool {
         var result = false
         pendingSubsLockQueue.sync {
-            let index = self.pendingSubscriptions.index { $0.subscription == channel }
+            let index = self.pendingSubscriptions.firstIndex { $0.subscription == channel }
             
             if let index = index {
                 self.pendingSubscriptions.remove(at: index)
@@ -104,7 +107,7 @@ extension FayeClient {
     func removeChannelFromOpenSubscriptions(_ channel: String) -> Bool {
         var result = false
         openSubsLockQueue.sync {
-            let index = self.openSubscriptions.index { $0.subscription == channel }
+            let index = self.openSubscriptions.firstIndex { $0.subscription == channel }
             
             if let index = index {
                 self.openSubscriptions.remove(at: index)

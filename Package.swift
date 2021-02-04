@@ -4,7 +4,7 @@ let package = Package(
     name: "FayeSwift",
     targets: [],
     dependencies: [
-        .Package(url: "https://github.com/SwiftyJSON/SwiftyJSON.git", versions: "2.3.3" ..< Version.max),
-		.Package(url: "https://github.com/daltoniam/Starscream.git", versions: "1.1.3" ..< Version.max)
+        .package(url: "https://github.com/daltoniam/Starscream.git", majorVersion: 4),
+		.package(url: "https://github.com/SwiftyJSON/SwiftyJSON.git", from: "4.0.0"),
     ]
 )

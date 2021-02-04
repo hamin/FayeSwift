@@ -76,14 +76,14 @@ internal class WebsocketTransport: Transport, WebSocketDelegate {
         case .disconnected(let reason, let code):
             socketConnected = false
             print("websocket is disconnected for reason: \(reason) /n with code: \(code)")
-            //TODO: FIX CODES
+            //TODO: maybe here we need to switch from didDisconnect to didFailConnection based on the error
             self.delegate?.didDisconnect(NSError(error: .lostConnection))
         case .text(let text):
             self.delegate?.didReceiveMessage(text)
         case .pong(_):
             self.delegate?.didReceivePong()
         case .binary(_):
-            //TODO: ADD THIS
+            //TODO: Should we implement something with this?
             break
         case .error(_):
             break
@@ -94,7 +94,7 @@ internal class WebsocketTransport: Transport, WebSocketDelegate {
         case .cancelled:
             break
         case .ping(_):
-            //TODO: ADD THIS
+            //do nothing
             break
         }
     }
